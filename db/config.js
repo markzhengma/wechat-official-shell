@@ -9,7 +9,7 @@ const pgp=require('pg-promise')(options);
 function setDatabase(){
     if(process.env.NODE_ENV==='development'||!process.env.NODE_ENV){
         return pgp({
-            database: 'cuevent_dev',
+            database: 'wechat_shell-db',
             port: 5432,
             host: 'localhost',
         })
@@ -26,7 +26,7 @@ module.exports = db;
 
 // if (process.env.NODE_ENV==='development'||!process.env.NODE_ENV){
 //     db = pgp({
-//         database: 'cuevent_dev',
+//         database: 'wechat_shell-db',
 //         port: 5432,
 //         host: 'localhost',
 //     })
