@@ -41,6 +41,8 @@ app.get('/', (req,res) => {
 // app.use('/auth',authRoutes);
 // const userRoutes = require('./routes/user-routes');
 // app.use('/user',userRoutes);
+const recordRoutes = require('./routes/record-routes');
+app.use('/record', recordRoutes);
 
 app.use('*',(req,res) => {
     res.status(400).json({
