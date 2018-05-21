@@ -2,17 +2,21 @@
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-    phone_num VARCHAR(255) UNIQUE NOT NULL,
-    password_digest TEXT NOT NULL,
+    service_num VARCHAR(255) UNIQUE NOT NULL,
+    make VARCHAR(255) NOT NULL,
+    plate VARCHAR(255) UNIQUE NOT NULL,
     driver_name TEXT NOT NULL,
-    plate VARCHAR(255) UNIQUE NOT NULL
+    phone_num VARCHAR(255) UNIQUE NOT NULL,
+    password_digest TEXT
 );
 
 CREATE TABLE IF NOT EXISTS users_records (
     id SERIAL PRIMARY KEY,
     record_time TIMESTAMP,
-    record_location TEXT NOT NULL,
-    record_name TEXT NOT NULL,
+    record_name TEXT,
+    record_milage INTEGER,
+    record_operator TEXT,
+    record_gift TEXT,
     record_detail TEXT,
-    user_id INTEGER REFERENCES users(id)
+    record_id VARCHAR(255) REFERENCES users(service_num)
 );

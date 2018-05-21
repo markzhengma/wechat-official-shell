@@ -1,11 +1,13 @@
 \c wechat_shell_db;
 
 INSERT INTO users
-    (phone_num, password_digest, driver_name, plate)
+    (service_num, make, plate, driver_name, phone_num)
 VALUES
-    ('13804706986', 'kajsdhgaksjdfoaijgh', '林红', '蒙E12345');
+    ('Y0001', '羚羊','蒙EYL572', '赵永刚', '13722012233');
 
 INSERT INTO users_records
-    (record_time, record_location, record_name, record_detail, user_id)
+    (record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id)
 VALUES
-    ('19-MAY-18', '呼伦贝尔市河东金壳润滑油商行', '更换机油', '10W-30', 1);
+    ('12-MAR-13', 'HX3', 172000, '顾丛刚', '', '累计两桶', 'Y0001'),
+    ('23-JAN-13', 'HX3', 165909, '顾丛刚', '毛巾', '', 'Y0001'),
+    ('26-APR-13', '', 176175, '顾丛刚', '', '余油', 'Y0001');

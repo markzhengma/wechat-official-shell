@@ -14,7 +14,7 @@ Record.findByPhoneNum = phone_num => {
             users_records.record_detail,
             users_records.record_location
         FROM users_records
-        LEFT JOIN users
+        INNER JOIN users
         ON users.id=users_records.user_id
         AND users.phone_num = $1;
     `, [phone_num]);
