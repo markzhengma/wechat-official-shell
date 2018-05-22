@@ -1,4 +1,4 @@
-\c wechat_shell_db;
+-- \c wechat_shell_db;
 
 INSERT INTO users
     (service_num, make, plate, driver_name, phone_num)

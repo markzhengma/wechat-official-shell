@@ -1,4 +1,4 @@
-\c wechat_shell_db;
+-- \c wechat_shell_db;
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
