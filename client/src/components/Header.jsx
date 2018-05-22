@@ -7,7 +7,7 @@ class Header extends Component {
             <header>
                 <div className = "app-header">
                     <div className = "header-logo"/>
-                    <h1>呼伦贝尔市壳牌润滑油</h1>
+                    <div className = "header-title"><b>呼伦贝尔市壳牌润滑油</b></div>
                 </div>
             </header>
         )

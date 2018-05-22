@@ -2,6 +2,6 @@ const express = require('express');
 const recordRoutes = express.Router();
 const recordsController = require('../controllers/records-controller');
 
-recordRoutes.get('/:phone_num', recordsController.findByPhoneNum);
+recordRoutes.get('/:plate', recordsController.findByPlate);
 
 module.exports = recordRoutes;

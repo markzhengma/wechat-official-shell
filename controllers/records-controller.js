@@ -2,9 +2,9 @@ const Record = require('../models/record');
 
 const recordsController = {};
 
-recordsController.findByPhoneNum = (req,res) => {
-    console.log(req.params.phone_num);
-    Record.findByPhoneNum(req.params.phone_num)
+recordsController.findByPlate = (req,res) => {
+    console.log(req.params.plate);
+    Record.findByPlate(req.params.plate)
     .then(record => {
         res.json(record);
     })

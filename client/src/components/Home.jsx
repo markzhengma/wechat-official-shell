@@ -14,9 +14,9 @@ class Home extends Component {
         }
         return (
             <div className = "home-content">
-                <h5>使用手机号查询爱车的保养记录</h5>
+                <h5>使用车牌号查询爱车的保养记录</h5>
                 <form onSubmit = {this.props.submitForm}>
-                    <input type = "text" name = "phone_num" value = {this.props.phone_num} placeholder = "请输入手机号" onChange = {this.props.handleInputChange}/>
+                    <input type = "text" name = "plate" value = {this.props.plate} placeholder = "请输入车牌号" onChange = {this.props.handleInputChange}/>
                     <button type = "submit">查询</button>
                 </form>
             </div>

@@ -17,7 +17,7 @@ class App extends Component {
   constructor(){
       super();
       this.state = {
-          phone_num: '',
+          plate: '',
           fireRedirect: false,
           redirect: null,
           recordData: null,
@@ -49,10 +49,10 @@ class App extends Component {
     })
   }
 
-  getRecord (phone_num) {
+  getRecord (plate) {
       console.log("getting record...");
-      axios.get(`/record/${phone_num}`, {
-          phone_num: phone_num,
+      axios.get(`/record/${plate}`, {
+          plate: plate,
       })
       .then(res => {
           this.setState({
@@ -71,7 +71,7 @@ class App extends Component {
         <div className="App">
           <Header />
           <Route exact path = '/' render = {() => <Home
-                                                      phone_num = {this.state.phone_num}
+                                                      plate = {this.state.plate}
                                                       handleInputChange = {this.handleInputChange}
                                                       redirect = {this.state.redirect}
                                                       fireRedirect = {this.state.fireRedirect}
@@ -79,7 +79,7 @@ class App extends Component {
                                                       resetRedirect = {this.resetRedirect}
                                                     />}/>
           <Route exact path = '/record' render = {() => <RecordList
-                                                            phone_num = {this.state.phone_num}
+                                                            plate = {this.state.plate}
                                                             resetRedirect = {this.resetRedirect}
                                                             getRecord = {this.getRecord}
                                                             recordData = {this.state.recordData}
