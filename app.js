@@ -26,7 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use(express.static('public'));
+app.use(express.static('build'));
 
 const PORT = process.env.PORT||3001;
 app.listen(PORT, () => {
@@ -34,7 +34,7 @@ app.listen(PORT, () => {
 });
 
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // const authRoutes = require('./routes/auth-routes');
