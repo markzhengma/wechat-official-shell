@@ -26,7 +26,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use(express.static('build'));
+app.use(express.static('public'));
 
 const PORT = process.env.PORT||3001;
 app.listen(PORT, () => {
@@ -34,7 +34,7 @@ app.listen(PORT, () => {
 });
 
 app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // const authRoutes = require('./routes/auth-routes');
@@ -45,6 +45,7 @@ const recordRoutes = require('./routes/record-routes');
 app.use('/record', recordRoutes);
 
 app.use('*',(req,res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
     res.status(400).json({
         message:'Not found!',
     });
