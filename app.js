@@ -45,7 +45,6 @@ const recordRoutes = require('./routes/record-routes');
 app.use('/record', recordRoutes);
 
 app.use('*',(req,res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
     res.status(400).json({
         message:'Not found!',
     });
