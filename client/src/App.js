@@ -50,7 +50,6 @@ class App extends Component {
   }
 
   getRecord (plate) {
-      console.log("getting record...");
       axios.get(`/record/${plate}`, {
           plate: plate,
       })

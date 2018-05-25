@@ -11,7 +11,7 @@ class RecordList extends Component {
     render(){
         return (
             <div className = "records-content">
-                {this.props.recordData ? 
+                {this.props.recordData != null && this.props.recordData.length >= 1 ? 
                     <div>
                         <h4>欢迎，{this.props.recordData[0].driver_name}</h4>
                         <p>您的车牌号码：{this.props.recordData[0].plate}</p>
@@ -43,7 +43,7 @@ class RecordList extends Component {
                             })}
                         </div>
                     </div>
-                : <h5>正在努力获取您的养护记录...</h5>}
+                : <h5>抱歉，未能找到您的养护记录。请联系我们来更新您的信息。</h5>}
             </div>
         )
     }
