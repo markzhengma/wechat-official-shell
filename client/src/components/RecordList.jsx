@@ -5,7 +5,6 @@ import axios from 'axios';
 class RecordList extends Component {
     componentDidMount(){
         this.props.resetRedirect();
-        this.props.getRecord(this.props.plate);
     }
 
     render(){
@@ -43,7 +42,7 @@ class RecordList extends Component {
                             })}
                         </div>
                     </div>
-                : <h5>抱歉，未能找到您的养护记录。请联系我们来更新您的信息。</h5>}
+                : <h5>正在努力加载您的保养记录...</h5>}
             </div>
         )
     }

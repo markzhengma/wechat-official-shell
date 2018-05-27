@@ -18,9 +18,11 @@ class App extends Component {
       super();
       this.state = {
           plate: '',
+          phone_num: '',
           fireRedirect: false,
           redirect: null,
           recordData: null,
+          inputCorrect: true,
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.submitForm = this.submitForm.bind(this);
@@ -38,9 +40,7 @@ class App extends Component {
 
   submitForm = (e) => {
     e.preventDefault();
-    this.setState({
-      fireRedirect: true,
-    })
+    this.getRecord(this.state.plate, this.state.phone_num);
   }
 
   resetRedirect = () => {
@@ -49,18 +49,31 @@ class App extends Component {
     })
   }
 
-  getRecord (plate) {
+  getRecord (plate, phone_num) {
       axios.get(`/record/${plate}`, {
           plate: plate,
       })
       .then(res => {
-          this.setState({
-              recordData: res.data,
-          })
-          console.log(res.data);
+          if(res.data){
+              if(res.data[0].phone_num == phone_num){
+                  this.setState({
+                      recordData: res.data,
+                      fireRedirect: true,
+                      inputCorrect: true,
+                  })
+                  console.log(res.data);
+              }else{
+                  this.setState({
+                    inputCorrect: false,
+                  })
+              }
+          }
       })
       .catch(err => {
           console.log(err);
+          this.setState({
+            inputCorrect: false,
+          })
       })
   }
 
@@ -71,11 +84,13 @@ class App extends Component {
           <Header />
           <Route exact path = '/' render = {() => <Home
                                                       plate = {this.state.plate}
+                                                      phone_num = {this.state.phone_num}
                                                       handleInputChange = {this.handleInputChange}
                                                       redirect = {this.state.redirect}
                                                       fireRedirect = {this.state.fireRedirect}
                                                       submitForm = {this.submitForm}
                                                       resetRedirect = {this.resetRedirect}
+                                                      inputCorrect = {this.state.inputCorrect}
                                                     />}/>
           <Route exact path = '/record' render = {() => <RecordList
                                                             plate = {this.state.plate}

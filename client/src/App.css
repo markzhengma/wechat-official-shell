@@ -1,14 +1,23 @@
 .App {
   text-align: center;
-  background-color: #F9D148;
+  /* background-color: #F9D148; */
   height: 100vh;
   overflow: scroll;
 }
 header{
   color: #E93224;
+  position: fixed;
+  background-color: #F9D148;
 }
 footer{
-  margin-top: 40px;
+  position: absolute;
+  bottom: 0;
+  background-color: #F9D148;
+  width: 100vw;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 footer a{
   text-decoration: none;
@@ -34,6 +43,8 @@ footer a{
   width: 100vw;
   display: flex;
   justify-content: center;
+  margin-top: 140px;
+  margin-bottom: 40px;
 }
 .record-table{
   display: flex;
