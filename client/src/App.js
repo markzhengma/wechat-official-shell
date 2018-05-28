@@ -22,7 +22,8 @@ class App extends Component {
           fireRedirect: false,
           redirect: null,
           recordData: null,
-          inputCorrect: true,
+          plateMatchesPhoneNum: true,
+          plateExists: true,
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.submitForm = this.submitForm.bind(this);
@@ -59,12 +60,14 @@ class App extends Component {
                   this.setState({
                       recordData: res.data,
                       fireRedirect: true,
-                      inputCorrect: true,
+                      plateMatchesPhoneNum: true,
+                      plateExists: true,
                   })
                   console.log(res.data);
               }else{
                   this.setState({
-                    inputCorrect: false,
+                    plateMatchesPhoneNum: false,
+                    plateExists: true,
                   })
               }
           }
@@ -72,7 +75,8 @@ class App extends Component {
       .catch(err => {
           console.log(err);
           this.setState({
-            inputCorrect: false,
+            plateMatchesPhoneNum: true,
+            plateExists: false,
           })
       })
   }
@@ -90,7 +94,8 @@ class App extends Component {
                                                       fireRedirect = {this.state.fireRedirect}
                                                       submitForm = {this.submitForm}
                                                       resetRedirect = {this.resetRedirect}
-                                                      inputCorrect = {this.state.inputCorrect}
+                                                      plateMatchesPhoneNum = {this.state.plateMatchesPhoneNum}
+                                                      plateExists = {this.state.plateExists}
                                                     />}/>
           <Route exact path = '/record' render = {() => <RecordList
                                                             plate = {this.state.plate}

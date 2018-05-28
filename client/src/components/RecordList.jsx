@@ -19,18 +19,18 @@ class RecordList extends Component {
                         <p>换油证号：{this.props.recordData[0].service_num}</p>
                         <div className = "record-table">
                             <div className = "record-table-head">
-                                <div className = "record-table-head-single">养护时间</div>
-                                <div className = "record-table-head-single">项目名称</div>
-                                <div className = "record-table-head-single">里程记录</div>
-                                <div className = "record-table-head-single">赠品</div>
-                                <div className = "record-table-head-single">详细内容</div>
-                                <div className = "record-table-head-single">负责人</div>
+                                <div className = "record-table-head-single">日期</div>
+                                <div className = "record-table-head-single">产品<br/>名称</div>
+                                <div className = "record-table-head-single">表示<br/>里程</div>
+                                <div className = "record-table-head-single">赠品<br/>情况</div>
+                                <div className = "record-table-head-single">备注</div>
+                                <div className = "record-table-head-single">操作人</div>
                             </div>
                             {this.props.recordData.map(record => {
                                 var date = new Date(record.record_time);
                                 var month = ((date.getMonth() + 1) < 10) ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
                                 return (
-                                    <div className = "record-single" key = {this.props.recordData.indexOf(record)}>
+                                    <div className = "record-single" key = {this.props.recordData.indexOf(record)} style = {this.props.recordData.indexOf(record) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
                                         <div className = "record-single-detail">{date.getFullYear()}年<br/>{month}月{date.getDate()}日</div>
                                         <div className = "record-single-detail">{record.record_name}</div>
                                         <div className = "record-single-detail">{record.record_milage}</div>

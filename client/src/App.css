@@ -1,18 +1,13 @@
 .App {
   text-align: center;
-  /* background-color: #F9D148; */
+  background-color: #F9D148;
   height: 100vh;
   overflow: scroll;
 }
 header{
   color: #E93224;
-  position: fixed;
-  background-color: #F9D148;
 }
 footer{
-  position: absolute;
-  bottom: 0;
-  background-color: #F9D148;
   width: 100vw;
   height: 40px;
   display: flex;
@@ -39,23 +34,49 @@ footer a{
   background-size: contain;
   background-repeat: no-repeat;
 }
+.home-content{
+  /* margin-top: 180px; */
+  margin-bottom: 40px;
+}
+.home-content form{
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: space-around;
+  align-items: center;
+}
+.home-content form input{
+  width: 160px;
+}
+.home-content form button{
+  width: 100px;
+  background-color: #FBE18D;
+  height: 30px;
+  font-size: 16px;
+}
+.banner{
+  color: #E93224;
+  background-color: #FBE18D;
+}
 .records-content{
   width: 100vw;
   display: flex;
   justify-content: center;
-  margin-top: 140px;
+  /* margin-top: 180px; */
   margin-bottom: 40px;
 }
 .record-table{
   display: flex;
   flex-direction: column;
   width: 96vw;
+  min-width: 360px;
   margin-bottom: 20px;
   overflow: scroll;
 }
 .record-table-head{
   display: flex;
   width: 96vw;
+  min-width: 360px;
   height: 50px;
 }
 .record-table-head-single{
@@ -63,6 +84,7 @@ footer a{
   align-items: center;
   justify-content: center;
   width: 16vw;
+  min-width: 60px;
   background-color: #FBE18D;
   color: #CF422B;
   font-weight: 900;
@@ -72,6 +94,7 @@ footer a{
   flex-direction: row;
   height: fit-content;
   width: 96vw;
+  min-width: 360px;
   border-bottom: rgb(231, 188, 182) solid 2px;
   background-color: white;
   display: flex;
@@ -82,4 +105,5 @@ footer a{
   justify-content: center;
   align-content: center;
   width: 16vw;
+  min-width: 60px;
 }

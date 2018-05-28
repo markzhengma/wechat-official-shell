@@ -15,8 +15,11 @@ class Home extends Component {
         return (
             <div className = "home-content">
                 <h5>请使用车牌号和您的手机号码查询爱车的保养记录</h5>
-                {!this.props.inputCorrect ? 
-                    <h5>车牌号和手机号不符，请重新输入或联系我们更新您的信息。</h5>
+                {!this.props.plateMatchesPhoneNum ? 
+                    <h5 className = "banner">车牌号和手机号不符，<br/>请重新输入或联系我们更新您的信息。</h5>
+                : ''}
+                {!this.props.plateExists ? 
+                    <h5 className = "banner">未能找到与您的车牌号对应的记录，<br/>请重新输入或联系我们更新您的信息。</h5>
                 : ''}
                 <form onSubmit = {this.props.submitForm}>
                     <input type = "text" name = "plate" value = {this.props.plate} placeholder = "请输入车牌号" onChange = {this.props.handleInputChange}/>
