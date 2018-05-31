@@ -10,10 +10,11 @@ class Home extends Component {
     }
     render(){
         if(this.props.fireRedirect == true){
-            return <Redirect to = '/record'/>
+            return <Redirect to = {this.props.redirect}/>
         }
         return (
             <div className = "home-content">
+                <Link to = "/new">管理员登录</Link>
                 <h5>请使用车牌号和您的手机号码查询爱车的保养记录</h5>
                 {!this.props.plateMatchesPhoneNum ? 
                     <h5 className = "banner">车牌号和手机号不符，<br/>请重新输入或联系我们更新您的信息。</h5>

@@ -12,6 +12,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import RecordList from './components/RecordList';
+import NewRecord from './components/NewRecord';
 
 class App extends Component {
   constructor(){
@@ -20,15 +21,18 @@ class App extends Component {
           plate: '',
           phone_num: '',
           fireRedirect: false,
-          redirect: null,
+          redirect: '',
           recordData: null,
           plateMatchesPhoneNum: true,
           plateExists: true,
+          createCompleted: null,
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.submitForm = this.submitForm.bind(this);
       this.resetRedirect = this.resetRedirect.bind(this);
       this.getRecord = this.getRecord.bind(this);
+      this.handleNewRecordSubmit = this.handleNewRecordSubmit.bind(this);
+      this.resetCreateCompleted = this.resetCreateCompleted.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -47,6 +51,7 @@ class App extends Component {
   resetRedirect = () => {
     this.setState({
       fireRedirect: false,
+      redirect: '',
     })
   }
 
@@ -60,6 +65,7 @@ class App extends Component {
                   this.setState({
                       recordData: res.data,
                       fireRedirect: true,
+                      redirect: '/record',
                       plateMatchesPhoneNum: true,
                       plateExists: true,
                   })
@@ -81,6 +87,37 @@ class App extends Component {
       })
   }
 
+  handleNewRecordSubmit(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id){
+    e.preventDefault();
+    axios.post("/record/new", {
+      record_time: e.target.record_time.value,
+      record_name: e.target.record_name.value,
+      record_milage: e.target.record_milage.value,
+      record_operator: e.target.record_operator.value,
+      record_gift: e.target.record_gift.value,
+      record_detail: e.target.record_detail.value,
+      record_id: e.target.record_id.value,
+    })
+    .then(res => {
+      console.log(res.data);
+      this.setState({
+        createCompleted: true,
+      })
+    })
+    .catch(err => {
+      console.log(err);
+      this.setState({
+        createCompleted: false,
+      })
+    })
+  }
+
+  resetCreateCompleted(){
+    this.setState({
+      createCompleted: null,
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -90,8 +127,8 @@ class App extends Component {
                                                       plate = {this.state.plate}
                                                       phone_num = {this.state.phone_num}
                                                       handleInputChange = {this.handleInputChange}
-                                                      redirect = {this.state.redirect}
                                                       fireRedirect = {this.state.fireRedirect}
+                                                      redirect = {this.state.redirect}
                                                       submitForm = {this.submitForm}
                                                       resetRedirect = {this.resetRedirect}
                                                       plateMatchesPhoneNum = {this.state.plateMatchesPhoneNum}
@@ -103,6 +140,14 @@ class App extends Component {
                                                             getRecord = {this.getRecord}
                                                             recordData = {this.state.recordData}
                                                           />}/>
+          <Route exact path = '/new' render = {() => <NewRecord
+                                                          resetRedirect = {this.resetRedirect}
+                                                          handleNewRecordSubmit = {this.handleNewRecordSubmit}
+                                                          fireRedirect = {this.state.fireRedirect}
+                                                          redirect = {this.state.redirect}
+                                                          createCompleted = {this.state.createCompleted}
+                                                          resetCreateCompleted = {this.resetCreateCompleted}
+                                                        />}/>
           <Footer />
         </div>
       </Router>

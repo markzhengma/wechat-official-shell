@@ -12,6 +12,25 @@ recordsController.findByPlate = (req,res) => {
         console.log(err);
         res.status(500).json(err);
     })
+};
+
+recordsController.create = (req, res) => {
+    Record.create({
+        record_time: req.body.record_time, 
+        record_name: req.body.record_name, 
+        record_milage: req.body.record_milage, 
+        record_operator: req.body.record_operator, 
+        record_gift: req.body.record_gift, 
+        record_detail: req.body.record_detail, 
+        record_id: req.body.record_id
+    })
+    .then(record => {
+        res.json(record);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
 }
 
 module.exports = recordsController;
