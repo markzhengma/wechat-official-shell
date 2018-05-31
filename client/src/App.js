@@ -18,6 +18,7 @@ class App extends Component {
   constructor(){
       super();
       this.state = {
+          auth: false,
           plate: '',
           phone_num: '',
           fireRedirect: false,
@@ -141,6 +142,7 @@ class App extends Component {
                                                             recordData = {this.state.recordData}
                                                           />}/>
           <Route exact path = '/new' render = {() => <NewRecord
+                                                          auth = {this.state.auth}
                                                           resetRedirect = {this.resetRedirect}
                                                           handleNewRecordSubmit = {this.handleNewRecordSubmit}
                                                           fireRedirect = {this.state.fireRedirect}
