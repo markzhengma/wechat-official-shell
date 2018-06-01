@@ -12,7 +12,7 @@ class RecordList extends Component {
             <div className = "records-content">
                 {this.props.recordData != null && this.props.recordData.length >= 1 ? 
                     <div>
-                        <h4>欢迎，{this.props.recordData[0].driver_name}</h4>
+                        <h4>欢迎，{this.props.recordData[0].driver_name}先生/女士</h4>
                         <p>您的车牌号码：{this.props.recordData[0].plate}</p>
                         <p>车型：{this.props.recordData[0].make}</p>
                         <p>您的电话：{this.props.recordData[0].phone_num}</p>
