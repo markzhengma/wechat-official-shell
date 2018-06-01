@@ -13,9 +13,27 @@ footer{
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 footer a{
   text-decoration: none;
+  color: #E93224;
+}
+footer a:hover{
+  color: white;
+}
+footer button{
+  width: 100px;
+  background-color: #FBE18D;
+  height: 20px;
+  font-size: 10px;
+}
+footer button:hover{
+  background-color: #E93224;
+  color: white;
+  cursor: pointer;
+}
+footer b{
   color: #E93224;
 }
 .app-header{
@@ -35,12 +53,11 @@ footer a{
   background-size: contain;
   background-repeat: no-repeat;
 }
-/* .header-title{
-  position: relative;
-} */
+input:hover{
+  background-color: #FBE18D;
+}
 .home-content{
-  /* margin-top: 180px; */
-  margin-bottom: 40px;
+  margin-bottom: 240px;
 }
 .home-content form{
   display: flex;
@@ -58,6 +75,11 @@ footer a{
   height: 30px;
   font-size: 16px;
 }
+.home-content form button:hover{
+  background-color: #E93224;
+  color: white;
+  cursor: pointer;
+}
 .banner{
   color: #E93224;
   background-color: #FBE18D;
@@ -66,8 +88,9 @@ footer a{
   width: 100vw;
   display: flex;
   justify-content: center;
-  /* margin-top: 180px; */
-  margin-bottom: 40px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 240px;
 }
 .record-table{
   display: flex;
@@ -110,4 +133,53 @@ footer a{
   align-content: center;
   width: 16vw;
   min-width: 60px;
+}
+.back-btn{
+  width: 100px;
+  background-color: #FBE18D;
+  height: 30px;
+  font-size: 16px;
+}
+.back-btn:hover{
+  background-color: #E93224;
+  color: white;
+  cursor: pointer;
+}
+.login-form{
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  justify-content: space-around;
+  align-items: center;
+}
+.login-input{
+  width: 150px;
+  text-align: center;
+}
+.create-page button{
+  width: 100px;
+  background-color: #FBE18D;
+  height: 20px;
+  font-size: 12px;
+}
+.create-page button:hover{
+  background-color: #E93224;
+  color: white;
+  cursor: pointer;
+}
+.create-page{
+  margin-bottom: 240px;
+}
+.create-form{
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: space-around;
+  align-items: center;
+}
+.create-form input{
+  width: 150px;
+}
+.create-form select{
+  width: 150px;
 }

@@ -33,4 +33,21 @@ recordsController.create = (req, res) => {
     })
 }
 
+recordsController.createUser = (req, res) => {
+    Record.createUser({
+        service_num:req.body.service_num,
+        make:req.body.make,
+        plate:req.body.plate,
+        driver_name:req.body.driver_name,
+        phone_num:req.body.phone_num,
+    })
+    .then(user => {
+        res.json(user);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
 module.exports = recordsController;

@@ -43,6 +43,7 @@ class RecordList extends Component {
                         </div>
                     </div>
                 : <h5>正在努力加载您的保养记录...</h5>}
+                <Link to = "/"><button className = "back-btn">返回首页</button></Link>
             </div>
         )
     }

@@ -34,6 +34,8 @@ class App extends Component {
       this.getRecord = this.getRecord.bind(this);
       this.handleNewRecordSubmit = this.handleNewRecordSubmit.bind(this);
       this.resetCreateCompleted = this.resetCreateCompleted.bind(this);
+      this.setAuthState = this.setAuthState.bind(this);
+      this.handleNewUserSubmit = this.handleNewUserSubmit.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -90,7 +92,7 @@ class App extends Component {
 
   handleNewRecordSubmit(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id){
     e.preventDefault();
-    axios.post("/record/new", {
+    axios.post("/record/new-record", {
       record_time: e.target.record_time.value,
       record_name: e.target.record_name.value,
       record_milage: e.target.record_milage.value,
@@ -113,9 +115,38 @@ class App extends Component {
     })
   }
 
+  handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num){
+    e.preventDefault();
+    axios.post("/record/new-user", {
+      service_num: e.target.service_num.value,
+      make: e.target.make.value,
+      plate: e.target.plate.value,
+      driver_name: e.target.driver_name.value,
+      phone_num: e.target.phone_num.value,
+    })
+    .then(res => {
+      console.log(res.data);
+      this.setState({
+        createCompleted: true,
+      })
+    })
+    .catch(err => {
+      console.log(err);
+      this.setState({
+        createCompleted: false,
+      })
+    })
+  }
+
   resetCreateCompleted(){
     this.setState({
       createCompleted: null,
+    })
+  }
+
+  setAuthState(auth){
+    this.setState({
+      auth: auth,
     })
   }
 
@@ -142,15 +173,16 @@ class App extends Component {
                                                             recordData = {this.state.recordData}
                                                           />}/>
           <Route exact path = '/new' render = {() => <NewRecord
-                                                          auth = {this.state.auth}
+                                                          setAuthState = {this.setAuthState}
                                                           resetRedirect = {this.resetRedirect}
                                                           handleNewRecordSubmit = {this.handleNewRecordSubmit}
                                                           fireRedirect = {this.state.fireRedirect}
                                                           redirect = {this.state.redirect}
                                                           createCompleted = {this.state.createCompleted}
                                                           resetCreateCompleted = {this.resetCreateCompleted}
+                                                          handleNewUserSubmit = {this.handleNewUserSubmit}
                                                         />}/>
-          <Footer />
+          <Footer auth = {this.state.auth}/>
         </div>
       </Router>
     );

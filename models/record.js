@@ -26,14 +26,15 @@ Record.findByPlate = plate => {
 
 Record.create = users_records => {
     return db.one(`
-    INSERT INTO users_records
-    (record_time, 
+    INSERT INTO users_records(
+        record_time, 
         record_name, 
         record_milage, 
         record_operator, 
         record_gift, 
         record_detail, 
-        record_id)
+        record_id
+    )
     VALUES($1, $2, $3, $4, $5, $6, $7)
     RETURNING *
     `, [users_records.record_time, 
@@ -43,6 +44,24 @@ Record.create = users_records => {
         users_records.record_gift, 
         users_records.record_detail, 
         users_records.record_id])
+}
+
+Record.createUser = user => {
+    return db.one(`
+    INSERT INTO users(
+        service_num,
+        make,
+        plate,
+        driver_name,
+        phone_num
+    )
+    VALUES($1, $2, $3, $4, $5)
+    RETURNING *
+    `, [user.service_num, 
+        user.make, 
+        user.plate, 
+        user.driver_name, 
+        user.phone_num])
 }
 
 module.exports = Record;
