@@ -12,9 +12,9 @@ class RecordList extends Component {
             <div className = "records-content">
                 {this.props.recordData != null && this.props.recordData.length >= 1 ? 
                     <div>
-                        <h4>欢迎，{this.props.recordData[0].driver_name}先生/女士</h4>
+                        <h4>欢迎 {this.props.recordData[0].driver_name}</h4>
                         <p>您的车牌号码：{this.props.recordData[0].plate}</p>
-                        <p>车型：{this.props.recordData[0].make}</p>
+                        <p>车型：{this.props.recordData[0].make ? this.props.recordData[0].make : 无记录}</p>
                         <p>您的电话：{this.props.recordData[0].phone_num}</p>
                         <p>换油证号：{this.props.recordData[0].service_num}</p>
                         <div className = "record-table">
@@ -41,6 +41,7 @@ class RecordList extends Component {
                                 )
                             })}
                         </div>
+                        <p>若以上记录有任何疑问，欢迎联系我们核实或更新信息</p>
                     </div>
                 : <h5>正在努力加载您的保养记录...</h5>}
                 <Link to = "/"><button className = "back-btn">返回首页</button></Link>
