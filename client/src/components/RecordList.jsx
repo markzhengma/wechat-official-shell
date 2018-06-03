@@ -14,7 +14,7 @@ class RecordList extends Component {
                     <div>
                         <h4>欢迎 {this.props.recordData[0].driver_name}</h4>
                         <p>您的车牌号码：{this.props.recordData[0].plate}</p>
-                        <p>车型：{this.props.recordData[0].make ? this.props.recordData[0].make : 无记录}</p>
+                        <p>车型：{this.props.recordData[0].make ? this.props.recordData[0].make : "无记录"}</p>
                         <p>您的电话：{this.props.recordData[0].phone_num}</p>
                         <p>换油证号：{this.props.recordData[0].service_num}</p>
                         <div className = "record-table">
