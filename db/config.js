@@ -54,3 +54,5 @@ client.query('SELECT table_schema,table_name FROM infromation_schema.tables;', (
     }
     client.end();
 })
+
+module.exports = client;
