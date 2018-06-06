@@ -81,10 +81,87 @@ class NewRecord extends Component {
                         </select>
                         <h3>创建新保养记录（若有新用户请先创建用户后再创建保养记录）</h3>
                         <input className = "newrecord-input" type = "date" name = "record_time" placeholder = "日期" onChange = {this.handleInputChange}/>
-                        <input className = "newrecord-input" type = "text" name = "record_name" placeholder = "产品名称" onChange = {this.handleInputChange}/>
+                        {/* <input className = "newrecord-input" type = "text" name = "record_name" placeholder = "产品名称" onChange = {this.handleInputChange}/> */}
+                        <select name = "record_name" onChange = {this.handleInputChange}>
+                            <option value = "">-产品名称-</option>
+                            <option>HX2</option>
+                            <option>HX3</option>
+                            <option>HX3C</option>
+                            <option>HX5</option>
+                            <option>HX5AJ</option>
+                            <option>HX6(10W)</option>
+                            <option>HX6(5W)</option>
+                            <option>HX7</option>
+                            <option>HX7AJ</option>
+                            <option>HX8-40</option>
+                            <option>HX8-30</option>
+                            <option>超凡5W</option>
+                            <option>超凡0W</option>
+                            <option>极净超凡-40</option>
+                            <option>极净超凡-30</option>
+                            <option>极净超凡-20</option>
+                            <option>4LR2E</option>
+                            <option>4LR3</option>
+                            <option>4LR4</option>
+                            <option>4LR5E</option>
+                            <option>18LR2E</option>
+                            <option>18LR3</option>
+                            <option>18LR4</option>
+                            <option>18LR5E</option>
+                            <option>18LR6</option>
+                            <option>2L齿油</option>
+                            <option>4L齿油</option>
+                            <option>18L齿油</option>
+                            <option>18L中华CF-4</option>
+                            <option>3.8L中华1000</option>
+                            <option>蓝中华CD</option>
+                            <option>红中华CF</option>
+                            <option>16L液压油</option>
+                            <option>4LIID</option>
+                            <option>18KG防冻液</option>
+                            <option>壳防</option>
+                            <option>余油</option>
+                            <option>中华9900</option>
+                            <option>20L海加力</option>
+                            <option>自带油品</option>
+                            <option>16L液力油</option>
+                            <option>1LS6</option>
+                            <option>CVT变速箱油</option>
+                            <option>DCTF变速箱油</option>
+                            <option>火花塞</option>
+                            <option>刹车片</option>
+                        </select>
                         <input className = "newrecord-input" type = 'text' name = 'record_milage' placeholder = "表示里程" onChange = {this.handleInputChange}/>
                         <input className = "newrecord-input" type = 'text' name = 'record_operator' placeholder = "操作人" onChange = {this.handleInputChange}/>
-                        <input className = "newrecord-input" type = "text" name = "record_gift" placeholder = "赠品情况" onChange = {this.handleInputChange}/>
+                        {/* <input className = "newrecord-input" type = "text" name = "record_gift" placeholder = "赠品情况" onChange = {this.handleInputChange}/> */}
+                        <select name = "record_gift" onChange = {this.handleInputChange}>
+                            <option value = "">-赠品情况-</option>
+                            <option>四轮定位</option>
+                            <option>倒胎</option>
+                            <option>电瓶连接线</option>
+                            <option>手电</option>
+                            <option>工装</option>
+                            <option>保温杯</option>
+                            <option>劲霸水杯</option>
+                            <option>急救包</option>
+                            <option>车衣</option>
+                            <option>法拉利车模</option>
+                            <option>钓鱼保温箱</option>
+                            <option>折叠椅</option>
+                            <option>行车记录仪</option>
+                            <option>茶壶</option>
+                            <option>茶杯</option>
+                            <option>车充</option>
+                            <option>洗发水</option>
+                            <option>蓝牙耳机</option>
+                            <option>车载套装</option>
+                            <option>车载吸尘器</option>
+                            <option>毛巾包</option>
+                            <option>手机架</option>
+                            <option>油路清洁剂</option>
+                            <option>雨伞</option>
+                            <option>足球</option>
+                        </select>
                         <input className = "newrecord-input" type = "text" name = "record_detail" placeholder = "备注" onChange = {this.handleInputChange}/>
                         <input className = "newrecord-input" type = "text" name = "record_id" placeholder = "换油证号" onChange = {this.handleInputChange}/>
                         <button className = "newrecord-btn" type = "submit">创建保养记录</button>

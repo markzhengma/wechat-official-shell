@@ -25,8 +25,8 @@ footer a:hover{
 footer button{
   width: 100px;
   background-color: #FBE18D;
-  height: 20px;
-  font-size: 10px;
+  height: 40px;
+  font-size: 16px;
 }
 footer button:hover{
   background-color: #E93224;
@@ -58,21 +58,30 @@ input:hover{
 }
 .home-content{
   margin-bottom: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-content h5{
+  font-size: 20px;
+  width: 80vw;
 }
 .home-content form{
   display: flex;
   flex-direction: column;
-  height: 80px;
+  height: 140px;
   justify-content: space-around;
   align-items: center;
 }
 .home-content form input{
+  height: 30px;
   width: 160px;
+  font-size: 16px;
 }
 .home-content form button{
   width: 100px;
   background-color: #FBE18D;
-  height: 30px;
+  height: 40px;
   font-size: 16px;
 }
 .home-content form button:hover{
@@ -137,7 +146,7 @@ input:hover{
 .back-btn{
   width: 100px;
   background-color: #FBE18D;
-  height: 30px;
+  height: 40px;
   font-size: 16px;
 }
 .back-btn:hover{
@@ -148,18 +157,20 @@ input:hover{
 .login-form{
   display: flex;
   flex-direction: column;
-  height: 80px;
+  height: 140px;
   justify-content: space-around;
   align-items: center;
 }
 .login-input{
   width: 150px;
+  height: 24px;
+  font-size: 16px;
   text-align: center;
 }
 .create-page button{
   width: 100px;
   background-color: #FBE18D;
-  height: 20px;
+  height: 30px;
   font-size: 12px;
 }
 .create-page button:hover{
@@ -173,13 +184,18 @@ input:hover{
 .create-form{
   display: flex;
   flex-direction: column;
-  height: 300px;
+  height: 450px;
   justify-content: space-around;
   align-items: center;
 }
 .create-form input{
   width: 150px;
+  height: 24px;
+  font-size: 16px;
+  border-radius: 5px;
 }
 .create-form select{
-  width: 150px;
+  width: 156px;
+  height: 24px;
+  font-size: 16px;
 }
