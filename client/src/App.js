@@ -13,6 +13,8 @@ import Footer from './components/Footer';
 import Home from './components/Home';
 import RecordList from './components/RecordList';
 import NewRecord from './components/NewRecord';
+import Login from './components/Login';
+import AdminPage from './components/AdminPage';
 
 class App extends Component {
   constructor(){
@@ -27,6 +29,7 @@ class App extends Component {
           plateMatchesPhoneNum: true,
           plateExists: true,
           createCompleted: null,
+          location: '',
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.submitForm = this.submitForm.bind(this);
@@ -36,6 +39,8 @@ class App extends Component {
       this.resetCreateCompleted = this.resetCreateCompleted.bind(this);
       this.setAuthState = this.setAuthState.bind(this);
       this.handleNewUserSubmit = this.handleNewUserSubmit.bind(this);
+      this.setRedirect = this.setRedirect.bind(this);
+      this.setLocation = this.setLocation.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -138,6 +143,13 @@ class App extends Component {
     })
   }
 
+  setRedirect(path){
+    this.setState({
+      fireRedirect: true,
+      redirect: path,
+    })
+  }
+
   resetCreateCompleted(){
     this.setState({
       createCompleted: null,
@@ -147,6 +159,12 @@ class App extends Component {
   setAuthState(auth){
     this.setState({
       auth: auth,
+    })
+  }
+
+  setLocation(location){
+    this.setState({
+      location: location,
     })
   }
 
@@ -172,7 +190,7 @@ class App extends Component {
                                                             getRecord = {this.getRecord}
                                                             recordData = {this.state.recordData}
                                                           />}/>
-          <Route exact path = '/new' render = {() => <NewRecord
+          <Route exact path = '/login' render = {() => <Login
                                                           setAuthState = {this.setAuthState}
                                                           resetRedirect = {this.resetRedirect}
                                                           handleNewRecordSubmit = {this.handleNewRecordSubmit}
@@ -181,6 +199,15 @@ class App extends Component {
                                                           createCompleted = {this.state.createCompleted}
                                                           resetCreateCompleted = {this.resetCreateCompleted}
                                                           handleNewUserSubmit = {this.handleNewUserSubmit}
+                                                          setRedirect = {this.setRedirect}
+                                                          setLocation = {this.setLocation}
+                                                        />}/>
+          <Route exact path = '/admin' render = {() => <AdminPage
+                                                          auth = {this.state.auth}
+                                                          resetRedirect = {this.resetRedirect}
+                                                          setAuthState = {this.setAuthState}
+                                                          location = {this.state.location}
+                                                          redirect = {this.state.redirect}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

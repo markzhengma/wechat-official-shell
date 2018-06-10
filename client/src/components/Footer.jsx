@@ -12,7 +12,7 @@ class Footer extends Component {
                     {this.props.auth ? 
                         <b>管理员已登录</b>
                         :
-                        <Link to = "/new"><button>管理员登录</button></Link>
+                        <Link to = "/login"><button>管理员登录</button></Link>
                     }
                 </div>
             </footer>
