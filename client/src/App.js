@@ -30,6 +30,8 @@ class App extends Component {
           plateExists: true,
           createCompleted: null,
           location: '',
+          newServiceNum: null,
+          serviceNum: null,
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.submitForm = this.submitForm.bind(this);
@@ -41,6 +43,12 @@ class App extends Component {
       this.handleNewUserSubmit = this.handleNewUserSubmit.bind(this);
       this.setRedirect = this.setRedirect.bind(this);
       this.setLocation = this.setLocation.bind(this);
+      this.getNewHD = this.getNewHD.bind(this);
+      this.getNewH = this.getNewH.bind(this);
+      this.getNewM = this.getNewM.bind(this);
+      this.getNewM8 = this.getNewM8.bind(this);
+      this.getNewY = this.getNewY.bind(this);
+      this.padNumbers = this.padNumbers.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -168,6 +176,78 @@ class App extends Component {
     })
   }
 
+  padNumbers(number, size){
+    var s = number + "";
+    while (s.length < size) s = "0" + s;
+    return s;
+  }
+
+  getNewHD(){
+    axios.get('/record/newhd')
+    .then(res => {
+        var serviceNum = "HD" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
+        console.log(res.data.service_num);
+        this.setState({
+          newServiceNum: serviceNum,
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
+  getNewH(){
+    axios.get('/record/newh')
+    .then(res => {
+        var serviceNum = "H" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
+        console.log(res.data.service_num);
+        this.setState({
+          newServiceNum: serviceNum,
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
+  getNewM(){
+    axios.get('/record/newm')
+    .then(res => {
+        var serviceNum = "M" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
+        console.log(res.data.service_num);
+        this.setState({
+          newServiceNum: serviceNum,
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
+  getNewM8(){
+    axios.get('/record/newm8')
+    .then(res => {
+        var serviceNum = "M" + (parseInt(res.data.service_num.replace(/\D/g,'')) + 1);
+        console.log(res.data.service_num);
+        this.setState({
+          newServiceNum: serviceNum,
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
+  getNewY(){
+    axios.get('/record/newy')
+    .then(res => {
+        var serviceNum = "Y" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
+        console.log(res.data.service_num);
+        this.setState({
+          newServiceNum: serviceNum,
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -208,6 +288,12 @@ class App extends Component {
                                                           setAuthState = {this.setAuthState}
                                                           location = {this.state.location}
                                                           redirect = {this.state.redirect}
+                                                          newServiceNum = {this.state.newServiceNum}
+                                                          getNewHD = {this.getNewHD}
+                                                          getNewH = {this.getNewH}
+                                                          getNewM = {this.getNewM}
+                                                          getNewM8 = {this.getNewM8}
+                                                          getNewY = {this.getNewY}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

@@ -5,32 +5,23 @@ import {
 } from 'react-router-dom';
 
 class AdminPage extends Component {
-    constructor() {
-        super();
-        this.state = {
-            record_time: '',
-            record_name: '',
-            record_milage: '', 
-            record_operator: '', 
-            record_gift: '', 
-            record_detail: '', 
-            record_id: '',
-            service_num: '',
-            make: '',
-            plate: '',
-            driver_name: '',
-            phone_num: '',
-            admin: '',
-            pass: '',
-            inputAdmin: '',
-            inputPass: '',
-            userOrRecord: '用户',
-            isNewUser: true,
-            location: '',
-        }
-    }
     componentDidMount(){
         this.props.resetRedirect();
+        if(this.props.location == "海拉尔河东门店"){
+            this.props.getNewHD();
+        }
+        if(this.props.location == "海拉尔河西门店"){
+            this.props.getNewH();
+        }
+        if(this.props.location == "满洲里老店"){
+            this.props.getNewM();
+        }
+        if(this.props.location == "满洲里新店"){
+            this.props.getNewM8();
+        }
+        if(this.props.location == "牙克石门店"){
+            this.props.getNewY();
+        }
     }
     componentWillUnmount(){
         this.props.setAuthState(false);

@@ -50,4 +50,56 @@ recordsController.createUser = (req, res) => {
     })
 }
 
+recordsController.getNewHD = (req, res) => {
+    Record.getNewHD()
+    .then(serviceNum => {
+        res.json(serviceNum);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+recordsController.getNewH = (req, res) => {
+    Record.getNewH()
+    .then(serviceNum => {
+        res.json(serviceNum);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+recordsController.getNewM = (req, res) => {
+    Record.getNewM()
+    .then(serviceNum => {
+        res.json(serviceNum);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+recordsController.getNewM8 = (req, res) => {
+    Record.getNewM8()
+    .then(serviceNum => {
+        res.json(serviceNum);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+recordsController.getNewY = (req, res) => {
+    Record.getNewY()
+    .then(serviceNum => {
+        res.json(serviceNum);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
+
 module.exports = recordsController;
