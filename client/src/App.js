@@ -130,25 +130,37 @@ class App extends Component {
 
   handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num){
     e.preventDefault();
-    axios.post("/record/new-user", {
-      service_num: e.target.service_num.value,
-      make: e.target.make.value,
-      plate: e.target.plate.value,
-      driver_name: e.target.driver_name.value,
-      phone_num: e.target.phone_num.value,
-    })
-    .then(res => {
-      console.log(res.data);
-      this.setState({
-        createCompleted: true,
+    if(!e.target.make.value){
+      alert("请输入车型");
+    }else if(!e.target.plate.value){
+      alert("请输入车牌号");
+    }else if(!e.target.driver_name.value){
+      alert("请输入车主姓名");
+    }else if(!e.target.phone_num.value){
+      alert("请输入联系方式");
+    }else{
+      axios.post("/record/new-user", {
+        service_num: this.state.newServiceNum,
+        make: e.target.make.value,
+        plate: e.target.plate.value,
+        driver_name: e.target.driver_name.value,
+        phone_num: e.target.phone_num.value,
       })
-    })
-    .catch(err => {
-      console.log(err);
-      this.setState({
-        createCompleted: false,
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          createCompleted: true,
+        });
+        alert("创建成功");
       })
-    })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          createCompleted: false,
+        });
+        alert(`创建失败，原因：${err}`);
+      })
+    }
   }
 
   setRedirect(path){
@@ -276,12 +288,9 @@ class App extends Component {
                                                           handleNewRecordSubmit = {this.handleNewRecordSubmit}
                                                           fireRedirect = {this.state.fireRedirect}
                                                           redirect = {this.state.redirect}
-                                                          createCompleted = {this.state.createCompleted}
-                                                          resetCreateCompleted = {this.resetCreateCompleted}
-                                                          handleNewUserSubmit = {this.handleNewUserSubmit}
                                                           setRedirect = {this.setRedirect}
                                                           setLocation = {this.setLocation}
-                                                        />}/>
+                                                          />}/>
           <Route exact path = '/admin' render = {() => <AdminPage
                                                           auth = {this.state.auth}
                                                           resetRedirect = {this.resetRedirect}
@@ -294,6 +303,9 @@ class App extends Component {
                                                           getNewM = {this.getNewM}
                                                           getNewM8 = {this.getNewM8}
                                                           getNewY = {this.getNewY}
+                                                          handleNewUserSubmit = {this.handleNewUserSubmit}
+                                                          createCompleted = {this.state.createCompleted}
+                                                          resetCreateCompleted = {this.resetCreateCompleted}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

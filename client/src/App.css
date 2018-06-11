@@ -210,3 +210,14 @@ input:hover{
   height: 24px;
   font-size: 16px;
 }
+.admin-page button{
+  width: 100px;
+  background-color: #FBE18D;
+  height: 30px;
+  font-size: 12px;
+}
+.admin-page button:hover{
+  background-color: #E93224;
+  color: white;
+  cursor: pointer;
+}
