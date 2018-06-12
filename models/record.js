@@ -2,27 +2,69 @@ const db = require('../db/config');
 
 const Record = {};
 
-Record.findByPlate = plate => {
+Record.findUserByPlate = plate => {
     return db.query(`
         SELECT 
-            users.driver_name,
-            users.plate,
-            users.make,
-            users.phone_num,
-            users.service_num,
-            users_records.record_time,
-            users_records.record_name,
-            users_records.record_milage,
-            users_records.record_operator,
-            users_records.record_gift,
-            users_records.record_detail
+            driver_name,
+            plate,
+            make,
+            phone_num,
+            service_num
+        FROM users
+        WHERE plate = $1;
+    `, [plate])
+}
+Record.findUserByPhone = phone_num => {
+    return db.query(`
+        SELECT 
+            driver_name,
+            plate,
+            make,
+            phone_num,
+            service_num
+        FROM users
+        WHERE phone_num = $1;
+    `, [phone_num])
+}
+Record.findUserByName = driver_name => {
+    return db.query(`
+        SELECT 
+            driver_name,
+            plate,
+            make,
+            phone_num,
+            service_num
+        FROM users
+        WHERE driver_name = $1;
+    `, [driver_name])
+}
+Record.findUserByService = service_num => {
+    return db.query(`
+        SELECT 
+            driver_name,
+            plate,
+            make,
+            phone_num,
+            service_num
+        FROM users
+        WHERE service_num = $1;
+    `, [service_num])
+}
+Record.findRecordByService = service_num => {
+    return db.query(`
+        SELECT
+            record_time,
+            record_name,
+            record_milage,
+            record_operator,
+            record_gift,
+            record_detail,
+            record_id
         FROM users_records
-        INNER JOIN users
-        ON users.service_num=users_records.record_id
-        AND users.plate = $1
-        ORDER BY users_records.record_time DESC;
-    `, [plate]);
-};
+        WHERE record_id = $1;
+    `, [service_num])
+}
+
 
 Record.create = users_records => {
     return db.one(`

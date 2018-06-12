@@ -114,6 +114,7 @@ input:hover{
   width: 96vw;
   min-width: 360px;
   height: 50px;
+  background-color: #FBE18D;
 }
 .record-table-head-single{
   display: flex;
@@ -121,7 +122,6 @@ input:hover{
   justify-content: center;
   width: 16vw;
   min-width: 60px;
-  background-color: #FBE18D;
   color: #CF422B;
   font-weight: 900;
 }
@@ -131,10 +131,11 @@ input:hover{
   height: fit-content;
   width: 96vw;
   min-width: 360px;
+  min-height: 47.5px;
   border-bottom: rgb(231, 188, 182) solid 2px;
-  background-color: white;
   display: flex;
   align-items: center;
+  background-color: white;
 }
 .record-single-detail{
   display: flex;
@@ -220,4 +221,40 @@ input:hover{
   background-color: #E93224;
   color: white;
   cursor: pointer;
+}
+.create-record-group{
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: 96vw;
+  min-width: 360px;
+  min-height: 47.5px;
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  margin-top: -20px;
+}
+.create-record-input{
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0%;
+  border: none;
+  box-sizing: border-box;
+  border-left: rgb(231, 188, 182) solid 0.5px;
+  border-right: rgb(231, 188, 182) solid 0.5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 16vw;
+  min-width: 60px;
+  min-height: 47.5px;
+  background-color: white;
+  text-align: center;
+  text-align-last: center;
+  font-size: 12px;
+}
+.create-record-input option{
+  text-align: left;
 }

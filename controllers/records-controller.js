@@ -2,9 +2,52 @@ const Record = require('../models/record');
 
 const recordsController = {};
 
-recordsController.findByPlate = (req,res) => {
+recordsController.findUserByPlate = (req,res) => {
     console.log(req.params.plate);
-    Record.findByPlate(req.params.plate)
+    Record.findUserByPlate(req.params.plate)
+    .then(record => {
+        res.json(record);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+};
+recordsController.findRecordByService = (req,res) => {
+    Record.findRecordByService(req.params.service_num)
+    .then(record => {
+        res.json(record);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+recordsController.findUserByPhone = (req,res) => {
+    console.log(req.params.phone_num);
+    Record.findUserByPhone(req.params.phone_num)
+    .then(record => {
+        res.json(record);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+};
+recordsController.findUserByName = (req,res) => {
+    console.log(req.params.driver_name);
+    Record.findUserByName(req.params.driver_name)
+    .then(record => {
+        res.json(record);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+};
+recordsController.findUserByService = (req,res) => {
+    console.log(req.params.service_num);
+    Record.findUserByService(req.params.service_num)
     .then(record => {
         res.json(record);
     })

@@ -25,6 +25,7 @@ class App extends Component {
           phone_num: '',
           fireRedirect: false,
           redirect: '',
+          userData: null,
           recordData: null,
           plateMatchesPhoneNum: true,
           plateExists: true,
@@ -49,6 +50,11 @@ class App extends Component {
       this.getNewM8 = this.getNewM8.bind(this);
       this.getNewY = this.getNewY.bind(this);
       this.padNumbers = this.padNumbers.bind(this);
+      this.getRecordByPlate = this.getRecordByPlate.bind(this);
+      this.getRecordByPhone = this.getRecordByPhone.bind(this);
+      this.getRecordByName = this.getRecordByName.bind(this);
+      this.getRecordByService = this.getRecordByService.bind(this);
+      this.resetRecordData = this.resetRecordData.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -72,14 +78,14 @@ class App extends Component {
   }
 
   getRecord (plate, phone_num) {
-      axios.get(`/record/${plate}`, {
+      axios.get(`/record/plate/${plate}`, {
           plate: plate,
       })
       .then(res => {
           if(res.data){
               if(res.data[0].phone_num == phone_num){
                   this.setState({
-                      recordData: res.data,
+                      userData: res.data[0],
                       fireRedirect: true,
                       redirect: '/record',
                       plateMatchesPhoneNum: true,
@@ -92,6 +98,19 @@ class App extends Component {
                     plateExists: true,
                   })
               }
+              axios.get(`/record/search/${res.data[0].service_num}`, {
+                  service_num: res.data[0].service_num,
+              })
+              .then(res => {
+                  if(res.data){
+                      this.setState({
+                          recordData: res.data,
+                      })
+                  }
+              })
+              .catch(err => {
+                console.log(err);
+              })
           }
       })
       .catch(err => {
@@ -103,6 +122,143 @@ class App extends Component {
       })
   }
 
+  getRecordByPlate (e, plate) {
+    e.preventDefault();
+    axios.get(`/record/plate/${plate}`, {
+        plate: plate,
+    })
+    .then(res => {
+        if(res.data){
+            this.setState({
+                userData: res.data,
+                plateExists: true,
+            })
+            console.log(res.data);
+            axios.get(`/record/search/${res.data[0].service_num}`, {
+                service_num: res.data[0].service_num,
+            })
+            .then(res => {
+                if(res.data){
+                    this.setState({
+                        recordData: res.data,
+                    })
+                }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        this.setState({
+          plateExists: false,
+        })
+    })
+  }
+  getRecordByPhone (e, phone_num) {
+    e.preventDefault();
+    axios.get(`/record/phone/${phone_num}`, {
+        phone_num: phone_num,
+    })
+    .then(res => {
+        if(res.data){
+            this.setState({
+                userData: res.data,
+                plateExists: true,
+            })
+            console.log(res.data);
+            axios.get(`/record/search/${res.data[0].service_num}`, {
+                service_num: res.data[0].service_num,
+            })
+            .then(res => {
+                if(res.data){
+                    this.setState({
+                        recordData: res.data,
+                    })
+                }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        this.setState({
+          plateExists: false,
+        })
+    })
+  }
+  getRecordByName (e, driver_name) {
+    e.preventDefault();
+    axios.get(`/record/name/${driver_name}`, {
+        driver_name: driver_name,
+    })
+    .then(res => {
+        if(res.data){
+            this.setState({
+                userData: res.data,
+                plateExists: true,
+            })
+            console.log(res.data);
+            axios.get(`/record/search/${res.data[0].service_num}`, {
+                service_num: res.data[0].service_num,
+            })
+            .then(res => {
+                if(res.data){
+                    this.setState({
+                        recordData: res.data,
+                    })
+                }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        this.setState({
+          plateExists: false,
+        })
+    })
+  }
+  getRecordByService (e, service_num) {
+    e.preventDefault();
+    axios.get(`/record/service/${service_num}`, {
+        service_num: service_num,
+    })
+    .then(res => {
+        if(res.data){
+            this.setState({
+                userData: res.data,
+                plateExists: true,
+            })
+            console.log(res.data);
+            axios.get(`/record/search/${res.data[0].service_num}`, {
+                service_num: res.data[0].service_num,
+            })
+            .then(res => {
+                if(res.data){
+                    this.setState({
+                        recordData: res.data,
+                    })
+                }
+            })
+            .catch(err => {
+              console.log(err);
+            })
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        this.setState({
+          plateExists: false,
+        })
+    })
+  }
+
   handleNewRecordSubmit(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id){
     e.preventDefault();
     axios.post("/record/new-record", {
@@ -112,12 +268,28 @@ class App extends Component {
       record_operator: e.target.record_operator.value,
       record_gift: e.target.record_gift.value,
       record_detail: e.target.record_detail.value,
-      record_id: e.target.record_id.value,
+      record_id: record_id,
     })
     .then(res => {
       console.log(res.data);
+      alert("创建成功");
       this.setState({
         createCompleted: true,
+      })
+    })
+    .then(() => {
+      axios.get(`/record/search/${record_id}`, {
+        service_num: record_id,
+      })
+      .then(res => {
+          if(res.data){
+              this.setState({
+                  recordData: res.data,
+              })
+          }
+      })
+      .catch(err => {
+        console.log(err);
       })
     })
     .catch(err => {
@@ -125,6 +297,7 @@ class App extends Component {
       this.setState({
         createCompleted: false,
       })
+      alert(`创建失败。原因：${err}`);
     })
   }
 
@@ -152,6 +325,21 @@ class App extends Component {
           createCompleted: true,
         });
         alert("创建成功");
+        if(this.state.location == "海拉尔河东门店"){
+            this.getNewHD();
+        }
+        if(this.state.location == "海拉尔河西门店"){
+            this.getNewH();
+        }
+        if(this.state.location == "满洲里老店"){
+            this.getNewM();
+        }
+        if(this.state.location == "满洲里新店"){
+            this.getNewM8();
+        }
+        if(this.state.location == "牙克石门店"){
+            this.getNewY();
+        }
       })
       .catch(err => {
         console.log(err);
@@ -173,6 +361,13 @@ class App extends Component {
   resetCreateCompleted(){
     this.setState({
       createCompleted: null,
+    })
+  }
+
+  resetRecordData(){
+    this.setState({
+      recordData: null,
+      userData: null,
     })
   }
 
@@ -281,6 +476,7 @@ class App extends Component {
                                                             resetRedirect = {this.resetRedirect}
                                                             getRecord = {this.getRecord}
                                                             recordData = {this.state.recordData}
+                                                            userData = {this.state.userData}
                                                           />}/>
           <Route exact path = '/login' render = {() => <Login
                                                           setAuthState = {this.setAuthState}
@@ -304,8 +500,16 @@ class App extends Component {
                                                           getNewM8 = {this.getNewM8}
                                                           getNewY = {this.getNewY}
                                                           handleNewUserSubmit = {this.handleNewUserSubmit}
+                                                          handleNewRecordSubmit = {this.handleNewRecordSubmit}
                                                           createCompleted = {this.state.createCompleted}
                                                           resetCreateCompleted = {this.resetCreateCompleted}
+                                                          getRecordByPlate = {this.getRecordByPlate}
+                                                          getRecordByPhone = {this.getRecordByPhone}
+                                                          getRecordByName = {this.getRecordByName}
+                                                          getRecordByService = {this.getRecordByService}
+                                                          resetRecordData = {this.resetRecordData}
+                                                          recordData = {this.state.recordData}
+                                                          userData = {this.state.userData}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>
