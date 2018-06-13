@@ -55,6 +55,8 @@ class App extends Component {
       this.getRecordByName = this.getRecordByName.bind(this);
       this.getRecordByService = this.getRecordByService.bind(this);
       this.resetRecordData = this.resetRecordData.bind(this);
+      this.updateUser = this.updateUser.bind(this);
+      this.updateRecord = this.updateRecord.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -455,6 +457,69 @@ class App extends Component {
     })
   }
 
+  updateUser = (e, make, plate, driver_name, phone_num, id) => {
+    e.preventDefault();
+    axios.put(`/record/update/user/${id}`, {
+      make: make,
+      plate: plate,
+      driver_name: driver_name,
+      phone_num: phone_num
+    })
+    .then(res => {
+      console.log(res.data);
+      axios.get(`/record/service/${this.state.userData[0].service_num}`, {
+        service_num: this.state.userData[0].service_num,
+      })
+      .then(res => {
+        if(res.data){
+          this.setState({
+            userData: res.data,
+            plateExists: true,
+          })
+          console.log(res.data);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    })
+    .catch(err => {
+      alert(`修改客户信息失败。原因：${err}`);
+      console.log(err);
+    })
+  }
+  updateRecord = (e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, id) => {
+    e.preventDefault();
+    axios.put(`/record/update/record/${id}`, {
+      record_time: record_time,
+      record_name: record_name,
+      record_milage: record_milage,
+      record_operator: record_operator,
+      record_gift: record_gift,
+      record_detail: record_detail
+    })
+    .then(res => {
+      console.log(res.data);
+      axios.get(`/record/search/${this.state.userData[0].service_num}`, {
+          service_num: this.state.userData[0].service_num,
+      })
+      .then(res => {
+          if(res.data){
+              this.setState({
+                  recordData: res.data,
+              })
+          }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    })
+    .catch(err => {
+      alert(`修改客户信息失败。原因：${err}`);
+      console.log(err);
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -510,6 +575,8 @@ class App extends Component {
                                                           resetRecordData = {this.resetRecordData}
                                                           recordData = {this.state.recordData}
                                                           userData = {this.state.userData}
+                                                          updateUser = {this.updateUser}
+                                                          updateRecord = {this.updateRecord}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

@@ -4,62 +4,35 @@ const Record = {};
 
 Record.findUserByPlate = plate => {
     return db.query(`
-        SELECT 
-            driver_name,
-            plate,
-            make,
-            phone_num,
-            service_num
+        SELECT *
         FROM users
         WHERE plate = $1;
     `, [plate])
 }
 Record.findUserByPhone = phone_num => {
     return db.query(`
-        SELECT 
-            driver_name,
-            plate,
-            make,
-            phone_num,
-            service_num
+        SELECT *
         FROM users
         WHERE phone_num = $1;
     `, [phone_num])
 }
 Record.findUserByName = driver_name => {
     return db.query(`
-        SELECT 
-            driver_name,
-            plate,
-            make,
-            phone_num,
-            service_num
+        SELECT *
         FROM users
         WHERE driver_name = $1;
     `, [driver_name])
 }
 Record.findUserByService = service_num => {
     return db.query(`
-        SELECT 
-            driver_name,
-            plate,
-            make,
-            phone_num,
-            service_num
+        SELECT *
         FROM users
         WHERE service_num = $1;
     `, [service_num])
 }
 Record.findRecordByService = service_num => {
     return db.query(`
-        SELECT
-            record_time,
-            record_name,
-            record_milage,
-            record_operator,
-            record_gift,
-            record_detail,
-            record_id
+        SELECT *
         FROM users_records
         WHERE record_id = $1;
     `, [service_num])
@@ -152,6 +125,30 @@ Record.getNewY = () => {
         ORDER BY service_num DESC
         LIMIT 1;
     `)
+}
+Record.updateUser = (make, plate, driver_name, phone_num, id) => {
+    return db.one(`
+        UPDATE users SET
+        make = $1,
+        plate = $2,
+        driver_name = $3,
+        phone_num = $4
+        WHERE id = $5
+        RETURNING *
+    `, [make, plate, driver_name, phone_num, id]);
+}
+Record.updateRecord = (record_time, record_name, record_milage, record_operator, record_gift, record_detail, id) => {
+    return db.one(`
+        UPDATE users_records SET
+        record_time = $1,
+        record_name = $2,
+        record_milage = $3,
+        record_operator = $4,
+        record_gift = $5,
+        record_detail = $6
+        WHERE id = $7
+        RETURNING *
+    `, [record_time, record_name, record_milage, record_operator, record_gift, record_detail, id]);
 }
 
 module.exports = Record;

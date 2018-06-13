@@ -225,8 +225,10 @@ class CreateRecord extends Component {
                     </select>
                     <input className = "create-record-input" type = "text" name = "record_detail" placeholder = "备注" onChange = {this.handleInputChange} value = {this.state.record_detail}/>
                 </div>
-                <button className = "newrecord-btn" type = "submit">创建保养记录</button>
-                <button className = "newrecord-btn" type = "reset">清空输入框</button>
+                <div className = "create-record-btn-group">
+                    <button id = "delete-btn" onClick = {this.props.switchInputNew}/>
+                    <button className = "newrecord-btn" type = "submit">提交</button>
+                </div>
             </form>
         )
     }

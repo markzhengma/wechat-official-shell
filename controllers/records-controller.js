@@ -143,6 +143,26 @@ recordsController.getNewY = (req, res) => {
         res.status(500).json(err);
     })
 }
+recordsController.updateUser = (req, res) => {
+    Record.updateUser(req.body.make, req.body.plate, req.body.driver_name, req.body.phone_num, req.params.id)
+    .then(user => {
+        res.json(user);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+}
+recordsController.updateRecord = (req, res) => {
+    Record.updateRecord(req.body.record_time, req.body.record_name, req.body.record_milage, req.body.record_operator, req.body.record_gift, req.body.record_detail, req.params.id)
+    .then(user => {
+        res.json(user);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+}
 
 
 module.exports = recordsController;

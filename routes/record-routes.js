@@ -14,5 +14,7 @@ recordRoutes.get('/service/:service_num', recordsController.findUserByService);
 recordRoutes.get('/search/:service_num', recordsController.findRecordByService);
 recordRoutes.post('/new-record', recordsController.create);
 recordRoutes.post('/new-user', recordsController.createUser);
+recordRoutes.put('/update/user/:id', recordsController.updateUser);
+recordRoutes.put('/update/record/:id', recordsController.updateRecord);
 
 module.exports = recordRoutes;

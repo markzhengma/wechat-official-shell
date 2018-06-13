@@ -211,13 +211,13 @@ input:hover{
   height: 24px;
   font-size: 16px;
 }
-.admin-page button{
+.admin-page-btn{
   width: 100px;
   background-color: #FBE18D;
   height: 30px;
   font-size: 12px;
 }
-.admin-page button:hover{
+.admin-page-btn:hover{
   background-color: #E93224;
   color: white;
   cursor: pointer;
@@ -226,8 +226,8 @@ input:hover{
   display: flex;
   flex-direction: row;
   height: fit-content;
-  width: 96vw;
-  min-width: 360px;
+  width: 98vw;
+  min-width: 660px;
   min-height: 47.5px;
   border-bottom: rgb(231, 188, 182) solid 2px;
   display: flex;
@@ -247,8 +247,8 @@ input:hover{
   display: flex;
   justify-content: center;
   align-content: center;
-  width: 16vw;
-  min-width: 60px;
+  width: 14vw;
+  min-width: 94.3px;
   min-height: 47.5px;
   background-color: white;
   text-align: center;
@@ -257,4 +257,133 @@ input:hover{
 }
 .create-record-input option{
   text-align: left;
+}
+#add-btn{
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border: none;
+  border-radius: 50%;
+  background: url('./add.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#add-btn:hover{
+  border: rgb(231, 188, 182) solid 4px;
+}
+#delete-btn{
+  width: 40px;
+  height: 40px;
+  margin: 10px;
+  border: none;
+  border-radius: 50%;
+  background: url('./minus.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+#delete-btn:hover{
+  border: rgb(231, 188, 182) solid 4px;
+}
+.admin-box{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.create-record-btn-group{
+  height: 80px;
+  width: 98vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+}
+.record-table-admin{
+  display: flex;
+  flex-direction: column;
+  width: 98vw;
+  min-width: 660px;
+  margin-bottom: 20px;
+  overflow: scroll;
+}
+.record-table-head-admin{
+  display: flex;
+  width: 98vw;
+  min-width: 660px;
+  height: 50px;
+  background-color: #FBE18D;
+}
+.record-table-head-single-admin{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14vw;
+  min-width: 94.3px;
+  color: #CF422B;
+  font-weight: 900;
+}
+.record-single-admin{
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: 98vw;
+  min-width: 660px;
+  min-height: 47.5px;
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.record-single-detail-admin{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 14vw;
+  min-width: 94.3px;
+}
+.admin-edit-btn{
+  height: 20px;
+  width: 20px;
+  background: url('./edit.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  border: none;
+  cursor: pointer;
+}
+.admin-edit-btn:hover{
+  background-color: rgb(231, 188, 182);
+}
+.admin-delete-btn{
+  height: 20px;
+  width: 20px;
+  background: url('./delete.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+}
+.admin-delete-btn:hover{
+  background-color: rgb(231, 188, 182);
+}
+.record-single-detail-admin-edit{
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0%;
+  border: none;
+  box-sizing: border-box;
+  border-left: rgb(231, 188, 182) solid 0.5px;
+  border-right: rgb(231, 188, 182) solid 0.5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 14vw;
+  min-width: 94.3px;
+  min-height: 47.5px;
+  background-color: white;
+  text-align: center;
+  text-align-last: center;
+  font-size: 14px;
+  font-style: italic;
 }
