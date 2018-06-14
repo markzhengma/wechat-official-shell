@@ -353,6 +353,7 @@ class App extends Component {
             if(res.data){
                 this.setState({
                     userData: res.data,
+                    recordData: null,
                     plateExists: true,
                 })
                 console.log(res.data);
