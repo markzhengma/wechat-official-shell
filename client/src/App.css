@@ -161,6 +161,7 @@ input:hover{
   height: 140px;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: 240px;
 }
 .login-input{
   width: 150px;
@@ -216,6 +217,7 @@ input:hover{
   background-color: #FBE18D;
   height: 30px;
   font-size: 12px;
+  margin: 10px;
 }
 .admin-page-btn:hover{
   background-color: #E93224;
@@ -246,7 +248,7 @@ input:hover{
   border-right: rgb(231, 188, 182) solid 0.5px;
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   width: 14vw;
   min-width: 94.3px;
   min-height: 47.5px;
@@ -386,4 +388,31 @@ input:hover{
   text-align-last: center;
   font-size: 14px;
   font-style: italic;
+}
+.form-btn{
+  width: 80px;
+  background-color: #FBE18D;
+  height: 30px;
+  font-size: 12px;
+}
+.form-btn:hover{
+  background-color: #E93224;
+  color: white;
+  cursor: pointer;
+}
+.admin-select{
+  width: 150px;
+  height: 30px;
+  margin: 10px;
+  font-size: 14px;
+}
+.search-form input{
+  height: 30px;
+  width: 130px;
+  font-size: 14px;
+  margin: 10px;
+}
+.search-form button{
+  margin: 10px;
+  height: 36px;
 }

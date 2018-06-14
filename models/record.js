@@ -151,4 +151,15 @@ Record.updateRecord = (record_time, record_name, record_milage, record_operator,
     `, [record_time, record_name, record_milage, record_operator, record_gift, record_detail, id]);
 }
 
+Record.destroyUser = (id) => {
+    return db.none(`
+        DELETE FROM users where id = $1
+    `, [id]);
+}
+Record.destroyRecord = (id) => {
+    return db.none(`
+        DELETE FROM users_records where id = $1
+    `, [id]);
+}
+
 module.exports = Record;

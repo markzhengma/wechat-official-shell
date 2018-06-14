@@ -224,10 +224,10 @@ class CreateRecord extends Component {
                         <option>手电</option>
                     </select>
                     <input className = "create-record-input" type = "text" name = "record_detail" placeholder = "备注" onChange = {this.handleInputChange} value = {this.state.record_detail}/>
+                    <div className = "create-record-input"><button className = "form-btn" type = "submit">提交</button></div>
                 </div>
                 <div className = "create-record-btn-group">
                     <button id = "delete-btn" onClick = {this.props.switchInputNew}/>
-                    <button className = "newrecord-btn" type = "submit">提交</button>
                 </div>
             </form>
         )

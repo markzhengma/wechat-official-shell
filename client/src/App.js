@@ -57,6 +57,8 @@ class App extends Component {
       this.resetRecordData = this.resetRecordData.bind(this);
       this.updateUser = this.updateUser.bind(this);
       this.updateRecord = this.updateRecord.bind(this);
+      this.deleteUser = this.deleteUser.bind(this);
+      this.deleteRecord = this.deleteRecord.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -343,6 +345,26 @@ class App extends Component {
             this.getNewY();
         }
       })
+      .then(() => {
+        axios.get(`/record/service/${service_num}`, {
+          service_num: service_num,
+        })
+        .then(res => {
+            if(res.data){
+                this.setState({
+                    userData: res.data,
+                    plateExists: true,
+                })
+                console.log(res.data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            this.setState({
+              plateExists: false,
+            })
+        })
+      })
       .catch(err => {
         console.log(err);
         this.setState({
@@ -520,6 +542,53 @@ class App extends Component {
     })
   }
 
+  deleteUser = (id) => {
+    let confirm = window.confirm(`确认删除用户：${this.state.userData[0].driver_name}？`);
+    if(confirm === true){
+      axios.delete(`/record/delete/user/${id}`)
+      .then(res => {
+        console.log(res.data);
+        this.setState({
+          userData: null,
+          recordData: null,
+        })
+        alert("删除成功");
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  }
+  deleteRecord = (e, id) => {
+    e.preventDefault();
+    let confirm = window.confirm("确认删除该保养记录？");
+    if(confirm === true){
+      axios.delete(`/record/delete/record/${id}`)
+      .then(res => {
+        console.log(res.data);
+        alert("删除成功");
+      })
+      .then(() => {
+        axios.get(`/record/search/${this.state.userData[0].service_num}`, {
+          service_num: this.state.userData[0].service_num,
+        })
+        .then(res => {
+            if(res.data){
+                this.setState({
+                    recordData: res.data,
+                })
+            }
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  }
+
   render() {
     return (
       <Router>
@@ -577,6 +646,8 @@ class App extends Component {
                                                           userData = {this.state.userData}
                                                           updateUser = {this.updateUser}
                                                           updateRecord = {this.updateRecord}
+                                                          deleteUser = {this.deleteUser}
+                                                          deleteRecord = {this.deleteRecord}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

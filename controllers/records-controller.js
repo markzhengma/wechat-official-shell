@@ -164,5 +164,26 @@ recordsController.updateRecord = (req, res) => {
     });
 }
 
+recordsController.deleteUser = (req, res) => {
+    Record.destroyUser(req.params.id)
+    .then(user => {
+        res.json(user);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+recordsController.deleteRecord = (req, res) => {
+    Record.destroyRecord(req.params.id)
+    .then(record => {
+        res.json(record);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
 
 module.exports = recordsController;
