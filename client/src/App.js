@@ -33,6 +33,7 @@ class App extends Component {
           location: '',
           newServiceNum: null,
           serviceNum: null,
+          admin_selection: '查找老客户',
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.submitForm = this.submitForm.bind(this);
@@ -89,7 +90,7 @@ class App extends Component {
           if(res.data){
               if(res.data[0].phone_num == phone_num){
                   this.setState({
-                      userData: res.data[0],
+                      userData: res.data,
                       fireRedirect: true,
                       redirect: '/record',
                       plateMatchesPhoneNum: true,
@@ -327,6 +328,7 @@ class App extends Component {
         console.log(res.data);
         this.setState({
           createCompleted: true,
+          admin_selection: "查找老客户",
         });
         alert("创建成功");
         if(this.state.location == "海拉尔河东门店"){
@@ -649,6 +651,8 @@ class App extends Component {
                                                           updateRecord = {this.updateRecord}
                                                           deleteUser = {this.deleteUser}
                                                           deleteRecord = {this.deleteRecord}
+                                                          admin_selection = {this.state.admin_selection}
+                                                          handleInputChange = {this.handleInputChange}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

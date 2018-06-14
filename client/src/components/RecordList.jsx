@@ -11,7 +11,7 @@ class RecordList extends Component {
         return (
             <div className = "records-content">
                     <div>
-                        {this.props.userData ? 
+                        {this.props.userData && this.props.userData.length ? 
                             <div className = "record-title">
                                 <h4>欢迎 {this.props.userData[0].driver_name}</h4>
                                 <p>您的车牌号码：{this.props.userData[0].plate}</p>

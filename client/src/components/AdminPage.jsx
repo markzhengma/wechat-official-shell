@@ -9,7 +9,6 @@ class AdminPage extends Component {
     constructor(){
         super();
         this.state = {
-            admin_selection: '查找老客户',
             search_selection: '使用换油证号查找',
             service_num: '',
             make: '',
@@ -143,20 +142,20 @@ class AdminPage extends Component {
             <div className = "admin-page">
                 <h3>管理员登录：{this.props.location}</h3> 
                 <div>
-                    <select name = "admin_selection" className = "admin-select" onChange = {this.handleInputChange} value = {this.state.admin_selection}>
+                    <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
                         <option>查找老客户</option>
                         <option>创建新客户</option>
                     </select>
                 </div>
                 <div className = "admin-box">
-                    {this.state.admin_selection === "查找老客户" ?
+                    {this.props.admin_selection === "查找老客户" ?
                         <select name = "search_selection" className = "admin-select" onChange = {this.handleInputChange} value = {this.state.search_selection}>
                             <option>使用换油证号查找</option>
                             <option>使用手机号查找</option>
                             <option>使用车牌号查找</option>
                         </select>
                     : ""}
-                    {this.state.admin_selection === "查找老客户" ?
+                    {this.props.admin_selection === "查找老客户" ?
                         this.state.search_selection === "使用换油证号查找" ?
                         <form className = "search-form" onSubmit ={(e) => this.props.getRecordByService(e, this.state.search_service)}>
                             <input name = "search_service" placeholder = "请输入换油证号" onChange = {this.handleInputChange}/>
@@ -164,7 +163,7 @@ class AdminPage extends Component {
                         </form>
                         : ""
                     : ""}
-                    {this.state.admin_selection === "查找老客户" ?
+                    {this.props.admin_selection === "查找老客户" ?
                         this.state.search_selection === "使用手机号查找" ?
                         <form className = "search-form" onSubmit ={(e) => this.props.getRecordByPhone(e, this.state.search_phone)}>
                             <input name = "search_phone" placeholder = "请输入手机号" onChange = {this.handleInputChange}/>
@@ -172,7 +171,7 @@ class AdminPage extends Component {
                         </form>
                         : ""
                     : ""}
-                    {this.state.admin_selection === "查找老客户" ?
+                    {this.props.admin_selection === "查找老客户" ?
                         this.state.search_selection === "使用车主姓名查找" ?
                         <form className = "search-form" onSubmit ={(e) => this.props.getRecordByName(e, this.state.search_name)}>
                             <input name = "search_name" placeholder = "请输入车主姓名" onChange = {this.handleInputChange}/>
@@ -180,7 +179,7 @@ class AdminPage extends Component {
                         </form>
                         : ""
                     : ""}
-                    {this.state.admin_selection === "查找老客户" ?
+                    {this.props.admin_selection === "查找老客户" ?
                         this.state.search_selection === "使用车牌号查找" ?
                         <form className = "search-form" onSubmit ={(e) => this.props.getRecordByPlate(e, this.state.search_plate)}>
                             <input name = "search_plate" placeholder = "请输入车牌号" onChange = {this.handleInputChange}/>
@@ -189,7 +188,7 @@ class AdminPage extends Component {
                         : ""
                     : ""}
                     {this.props.userData != null && this.props.userData.length >= 1 ? 
-                        this.state.admin_selection === "查找老客户" ?
+                        this.props.admin_selection === "查找老客户" ?
                                 <div>
                                     <div className = "record-table-admin">
                                         <div className = "record-table-head-admin">
@@ -246,7 +245,7 @@ class AdminPage extends Component {
                         : ""
                     : ""}
                     {this.props.recordData != null && this.props.recordData.length >= 1 ? 
-                        this.state.admin_selection === "查找老客户" ?
+                        this.props.admin_selection === "查找老客户" ?
                             <div className = "record-table-admin">
                                 <div className = "record-table-head-admin">
                                     <div className = "record-table-head-single-admin">日期</div>
@@ -484,7 +483,7 @@ class AdminPage extends Component {
                             </div>
                         :""
                     : ""}
-                    {this.state.admin_selection === "查找老客户" && this.props.userData != null ?
+                    {this.props.admin_selection === "查找老客户" && this.props.userData != null ?
                         this.state.isInputNew ? 
                             <CreateRecord 
                                 service_num = {this.props.userData[0].service_num}
@@ -498,7 +497,7 @@ class AdminPage extends Component {
                             <div>添加保养记录</div>
                         </div>
                     : ""}
-                    {this.state.admin_selection === "创建新客户" ?
+                    {this.props.admin_selection === "创建新客户" ?
                         <form className = "create-form" onSubmit = {(e) => this.submitAndClearState(e, this.props.newServiceNum,
                                                                                                                 this.state.make,
                                                                                                                 this.state.plate,
@@ -513,7 +512,7 @@ class AdminPage extends Component {
                             <button className = "admin-page-btn" type = "reset">清空输入框</button>
                         </form>
                     : ""}
-                    {this.state.admin_selection === "创建换油记录" ?
+                    {this.props.admin_selection === "创建换油记录" ?
                         <form>
                             <input name = "search_service" placeholder = "换油证号"/>
                         </form>
