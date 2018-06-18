@@ -93,7 +93,7 @@ Record.getNewH = () => {
         SELECT service_num
         FROM users
         WHERE service_num LIKE 'H%'
-        AND service_num NOT LIKE 'HD%
+        AND service_num NOT LIKE 'HD%'
         ORDER BY service_num DESC
         LIMIT 1;
     `)
