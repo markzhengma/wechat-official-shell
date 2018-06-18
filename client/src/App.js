@@ -34,6 +34,9 @@ class App extends Component {
           newServiceNum: null,
           serviceNum: null,
           admin_selection: '查找老客户',
+          service_name_list: null,
+          operator_list: null,
+          gift_list: null,
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.submitForm = this.submitForm.bind(this);
@@ -60,6 +63,9 @@ class App extends Component {
       this.updateRecord = this.updateRecord.bind(this);
       this.deleteUser = this.deleteUser.bind(this);
       this.deleteRecord = this.deleteRecord.bind(this);
+      this.getServiceNameList = this.getServiceNameList.bind(this);
+      this.getOpList = this.getOpList.bind(this);
+      this.getGiftList = this.getGiftList.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -592,6 +598,40 @@ class App extends Component {
     }
   }
 
+  getServiceNameList = () => {
+    axios.get('/option/all-names')
+    .then(res => {
+        this.setState({
+            service_name_list: res.data,
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
+  getOpList = () => {
+    axios.get('/option/all-ops')
+    .then(res => {
+        this.setState({
+            operator_list: res.data,
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
+  }
+  getGiftList = () => {
+    axios.get('/option/all-gifts')
+    .then(res => {
+      this.setState({
+        gift_list: res.data,
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -653,6 +693,12 @@ class App extends Component {
                                                           deleteRecord = {this.deleteRecord}
                                                           admin_selection = {this.state.admin_selection}
                                                           handleInputChange = {this.handleInputChange}
+                                                          getServiceNameList = {this.getServiceNameList}
+                                                          service_name_list = {this.state.service_name_list}
+                                                          getOpList = {this.getOpList}
+                                                          operator_list = {this.state.operator_list}
+                                                          getGiftList = {this.getGiftList}
+                                                          gift_list = {this.state.gift_list}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

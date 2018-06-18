@@ -43,6 +43,8 @@ app.get('/', (req,res) => {
 // app.use('/user',userRoutes);
 const recordRoutes = require('./routes/record-routes');
 app.use('/record', recordRoutes);
+const optionRoutes = require('./routes/option-routes');
+app.use('/option', optionRoutes);
 
 app.use('*',(req,res) => {
     res.status(400).json({
