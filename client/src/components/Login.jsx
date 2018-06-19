@@ -34,7 +34,7 @@ class Login extends Component {
                 pass: this.state.inputPass,
             })
         }
-        if(this.state.inputAdmin == "1" && this.state.inputPass == "1"){
+        if(this.state.inputAdmin == "ShellHulunbuir" && this.state.inputPass == "Cheers!"){
             this.props.setAuthState(true);
             this.props.setRedirect('/admin');
             this.props.setLocation('总管理员');
