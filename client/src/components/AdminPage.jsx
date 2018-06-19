@@ -40,14 +40,16 @@ class AdminPage extends Component {
             isOpListUpdating: false,
             isGiftListUpdating: false,
             selectNameListId: '',
-            selectOpListId: '',
-            selectGiftListId: '',
             updateNameList: '',
             updateType: '',
             newNameInput: '',
             newTypeInput: '',
+            selectOpListId: '',
             updateOpList: '',
             updateLocation: '',
+            newOpInput: '',
+            newLocationInput: '',
+            selectGiftListId: '',
             updateGiftList: '',
         }
     }
@@ -172,6 +174,30 @@ class AdminPage extends Component {
         this.setState({
             newNameInput: '',
             newTypeInput: '',
+        })
+    }
+    selectOpListUpdate = (id, record_operator, location) => {
+        this.setState({
+            isOpListUpdating: true,
+            selectOpListId: id,
+            updateOpList: record_operator,
+            updateLocation: location,
+        })
+    }
+    completeOpListUpdate = (e, record_operator, location, id) => {
+        this.props.updateOpList(e, record_operator, location, id);
+        this.setState({
+            isOpListUpdating: false,
+            selectOpListId: '',
+            updateOpList: '',
+            updateLocation: '',
+        })
+    }
+    completeOpListAdd = (e, record_operator, location) => {
+        this.props.addOpList(e, record_operator, location);
+        this.setState({
+            newOpInput: '',
+            newLocationInput: '',
         })
     }
     render(){
@@ -438,7 +464,7 @@ class AdminPage extends Component {
                     : ""}
                     {this.props.admin_selection === "管理基本信息" ?
                         <div>
-                            <select name = "manager_selection" className = "admin-select" onChange = {this.props.handleInputChange}>
+                            <select name = "manager_selection" className = "admin-select" onChange = {this.handleInputChange}>
                                 <option>产品名称</option>
                                 <option>操作人</option>
                                 <option>赠品情况</option>
@@ -454,7 +480,7 @@ class AdminPage extends Component {
                                         return(
                                                 <div key = {service_name.id}>
                                                     {this.state.selectNameListId != service_name.id ?
-                                                        <div className = "manager_table_single" style = {this.props.service_name_list.indexOf(service_name) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
+                                                        <div className = "manager_table_single">
                                                             <div className = "manager_table_single_detail">{service_name.record_name}</div>
                                                             <div className = "manager_table_single_detail">{service_name.type}</div>
                                                             {!this.state.isNameListUpdating ? 
@@ -466,7 +492,6 @@ class AdminPage extends Component {
                                                         </div>
                                                     : 
                                                         <form className = "manager_table_single" 
-                                                                style = {this.props.service_name_list.indexOf(service_name) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}
                                                                 onSubmit = {(e) => this.completeNameListUpdate(e, this.state.updateNameList, this.state.updateType, this.state.selectNameListId)}
                                                             >
                                                             <div className = "manager_table_single_detail"><input defaultValue = {service_name.record_name} name = "updateNameList" onChange = {this.handleInputChange}/></div>
@@ -491,7 +516,58 @@ class AdminPage extends Component {
                                     : 
                                     <div className = "create-record-btn-group">
                                         <button id = "add-btn" onClick = {this.switchInputNew}/>
-                                        <div>添加保养记录</div>
+                                        <div>添加产品</div>
+                                    </div>}
+                                </div>
+                            : ""}
+                            {this.state.manager_selection === "操作人" ?
+                                <div className = "manager_table">
+                                    <div className = "manager_table_head">
+                                        <div className = "manager_table_head_single">操作人</div>
+                                        <div className = "manager_table_head_single">门店地区</div>
+                                        <div className = "manager_table_head_single">编辑</div>
+                                    </div>
+                                    {this.props.operator_list.map(operator => {
+                                        return(
+                                                <div key = {operator.id}>
+                                                    {this.state.selectOpListId != operator.id ?
+                                                        <div className = "manager_table_single">
+                                                            <div className = "manager_table_single_detail">{operator.record_operator}</div>
+                                                            <div className = "manager_table_single_detail">{operator.location}</div>
+                                                            {!this.state.isOpListUpdating ? 
+                                                                <div className = "manager_table_single_detail">
+                                                                    <button className = "admin-edit-btn" onClick = {() => this.selectOpListUpdate(operator.id, operator.record_operator, operator.location)}/>
+                                                                    <button className = "admin-delete-btn" onClick = {() => this.props.deleteOpList(operator.record_operator, operator.id)}/>
+                                                                </div>
+                                                            : ""}
+                                                        </div>
+                                                    : 
+                                                        <form className = "manager_table_single" 
+                                                                onSubmit = {(e) => this.completeOpListUpdate(e, this.state.updateOpList, this.state.updateLocation, this.state.selectOpListId)}
+                                                            >
+                                                            <div className = "manager_table_single_detail"><input defaultValue = {operator.record_operator} name = "updateOpList" onChange = {this.handleInputChange}/></div>
+                                                            <div className = "manager_table_single_detail"><input defaultValue = {operator.location} name = "updateLocation" onChange = {this.handleInputChange}/></div>
+                                                            <div className = "manager_table_single_detail"><button className = "form-btn" type = "submit">确定</button></div>
+                                                        </form>
+                                                    }
+                                                </div>
+                                            )
+                                    })}
+                                    {this.state.isInputNew ? 
+                                        <form className = "create-name-form" onSubmit = {(e) => this.completeOpListAdd(e, this.state.newOpInput, this.state.newLocationInput)}>
+                                            <div className = "create-name-group">
+                                                <input name = "newOpInput" className = "create-name-input" placeholder = "操作人" value = {this.state.newOpInput} onChange = {this.handleInputChange}/>
+                                                <input name = "newLocationInput" className = "create-name-input" placeholder = "门店地区" value = {this.state.newLocationInput} onChange = {this.handleInputChange}/>
+                                                <div className = "create-name-input"><button className = "form-btn" type = "submit">提交</button></div>
+                                            </div>
+                                            <div className = "create-record-btn-group">
+                                                <button id = "delete-btn" onClick = {this.switchInputNew}/>
+                                            </div>
+                                        </form>
+                                    : 
+                                    <div className = "create-record-btn-group">
+                                        <button id = "add-btn" onClick = {this.switchInputNew}/>
+                                        <div>添加操作人</div>
                                     </div>}
                                 </div>
                             : ""}

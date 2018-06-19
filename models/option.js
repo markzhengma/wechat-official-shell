@@ -53,4 +53,32 @@ Option.createNameList = nameList => {
         nameList.type])
 }
 
+Option.updateOperatorList = (record_operator, location, id) => {
+    return db.one(`
+        UPDATE record_operator_list SET
+        record_operator = $1,
+        location = $2
+        WHERE id = $3
+        RETURNING *
+    `, [record_operator, location, id]);
+}
+
+Option.destroyOperatorList = (id) => {
+    return db.none(`
+        DELETE FROM record_operator_list where id = $1
+    `, [id]);
+}
+
+Option.createOperatorList = opList => {
+    return db.one(`
+        INSERT INTO record_operator_list(
+            record_operator,
+            location
+        )
+        VALUES($1, $2)
+        RETURNING *
+    `, [opList.record_operator, 
+        opList.location])
+}
+
 module.exports = Option;

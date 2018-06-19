@@ -69,6 +69,9 @@ class App extends Component {
       this.updateServiceNameList = this.updateServiceNameList.bind(this);
       this.deleteServiceNameList = this.deleteServiceNameList.bind(this);
       this.addServiceNameList = this.addServiceNameList.bind(this);
+      this.updateOpList = this.updateOpList.bind(this);
+      this.deleteOpList = this.deleteOpList.bind(this);
+      this.addOpList = this.addOpList.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -700,6 +703,57 @@ class App extends Component {
       })
     }
   }
+  updateOpList = (e, record_operator, location, id) => {
+    e.preventDefault();
+    axios.put(`/option/update/op-list/${id}`, {
+      record_operator: record_operator,
+      location: location,
+    })
+    .then(res => {
+      console.log(res.data);
+      this.getOpList();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+  deleteOpList = (record_operator, id) => {
+    let confirm = window.confirm(`确认删除${record_operator}？`);
+    if(confirm === true){
+      axios.delete(`/option/delete/op-list/${id}`)
+      .then(res => {
+        console.log(res.data);
+        this.getOpList();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  }
+  addOpList = (e, record_operator, location) => {
+    e.preventDefault();
+    if(!record_operator){
+      alert("请输入操作人");
+    }else if(!location){
+      alert("请输入门店地区");
+    }else{
+      axios.post("/option/new-op-list", {
+        record_operator: record_operator,
+        location: location,
+      })
+      .then(res => {
+        console.log(res.data);
+        alert("创建成功");
+      })
+      .then(() => {
+        this.getOpList();
+      })
+      .catch(err => {
+        console.log(err);
+        alert(`创建失败。原因：${err}`);
+      })
+    }
+  }
 
   render() {
     return (
@@ -771,6 +825,9 @@ class App extends Component {
                                                           updateServiceNameList = {this.updateServiceNameList}
                                                           deleteServiceNameList = {this.deleteServiceNameList}
                                                           addServiceNameList = {this.addServiceNameList}
+                                                          updateOpList = {this.updateOpList}
+                                                          deleteOpList = {this.deleteOpList}
+                                                          addOpList = {this.addOpList}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

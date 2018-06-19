@@ -70,5 +70,40 @@ optionsController.createNameList = (req, res) => {
         res.status(500).json(err);
     })
 }
+optionsController.updateOperatorList = (req, res) => {
+    Option.updateOperatorList(req.body.record_operator, req.body.location, req.params.id)
+    .then(opList => {
+        res.json(opList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+}
+
+optionsController.deleteOperatorList = (req, res) => {
+    Option.destroyOperatorList(req.params.id)
+    .then(opList => {
+        res.json(opList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
+optionsController.createOperatorList = (req, res) => {
+    Option.createOperatorList({
+        record_operator: req.body.record_operator, 
+        location: req.body.location, 
+    })
+    .then(opList => {
+        res.json(opList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
 
 module.exports = optionsController;
