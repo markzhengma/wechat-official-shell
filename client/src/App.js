@@ -66,6 +66,9 @@ class App extends Component {
       this.getServiceNameList = this.getServiceNameList.bind(this);
       this.getOpList = this.getOpList.bind(this);
       this.getGiftList = this.getGiftList.bind(this);
+      this.updateServiceNameList = this.updateServiceNameList.bind(this);
+      this.deleteServiceNameList = this.deleteServiceNameList.bind(this);
+      this.addServiceNameList = this.addServiceNameList.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -272,44 +275,58 @@ class App extends Component {
 
   handleNewRecordSubmit(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id){
     e.preventDefault();
-    axios.post("/record/new-record", {
-      record_time: e.target.record_time.value,
-      record_name: e.target.record_name.value,
-      record_milage: e.target.record_milage.value,
-      record_operator: e.target.record_operator.value,
-      record_gift: e.target.record_gift.value,
-      record_detail: e.target.record_detail.value,
-      record_id: record_id,
-    })
-    .then(res => {
-      console.log(res.data);
-      alert("创建成功");
-      this.setState({
-        createCompleted: true,
-      })
-    })
-    .then(() => {
-      axios.get(`/record/search/${record_id}`, {
-        service_num: record_id,
+    if(!e.target.record_time.value){
+      alert("请输入日期");
+    }else if(!e.target.record_name.value){
+      alert("请输入产品名称");
+    }else if(!e.target.record_milage.value){
+      alert("请输入表示里程");
+    }else if(!e.target.record_operator.value){
+      alert("请输入操作人");
+    }else if(!e.target.record_gift.value){
+      alert("请输入赠品情况");
+    }else if(!e.target.record_detail.value){
+      alert("请输入备注");
+    }else{
+      axios.post("/record/new-record", {
+        record_time: e.target.record_time.value,
+        record_name: e.target.record_name.value,
+        record_milage: e.target.record_milage.value,
+        record_operator: e.target.record_operator.value,
+        record_gift: e.target.record_gift.value,
+        record_detail: e.target.record_detail.value,
+        record_id: record_id,
       })
       .then(res => {
-          if(res.data){
-              this.setState({
-                  recordData: res.data,
-              })
-          }
+        console.log(res.data);
+        alert("创建成功");
+        this.setState({
+          createCompleted: true,
+        })
+      })
+      .then(() => {
+        axios.get(`/record/search/${record_id}`, {
+          service_num: record_id,
+        })
+        .then(res => {
+            if(res.data){
+                this.setState({
+                    recordData: res.data,
+                })
+            }
+        })
+        .catch(err => {
+          console.log(err);
+        })
       })
       .catch(err => {
         console.log(err);
+        this.setState({
+          createCompleted: false,
+        })
+        alert(`创建失败。原因：${err}`);
       })
-    })
-    .catch(err => {
-      console.log(err);
-      this.setState({
-        createCompleted: false,
-      })
-      alert(`创建失败。原因：${err}`);
-    })
+    }
   }
 
   handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num){
@@ -610,26 +627,78 @@ class App extends Component {
     })
   }
   getOpList = () => {
-    axios.get('/option/all-ops')
-    .then(res => {
-        this.setState({
-            operator_list: res.data,
-        })
-    })
-    .catch(err => {
-        console.log(err);
-    })
+      axios.get('/option/all-ops')
+      .then(res => {
+          this.setState({
+              operator_list: res.data,
+          })
+      })
+      .catch(err => {
+          console.log(err);
+      })
   }
   getGiftList = () => {
-    axios.get('/option/all-gifts')
-    .then(res => {
-      this.setState({
-        gift_list: res.data,
+      axios.get('/option/all-gifts')
+      .then(res => {
+          this.setState({
+              gift_list: res.data,
+          })
       })
+      .catch(err => {
+          console.log(err);
+      })
+  }
+
+  updateServiceNameList = (e, record_name, type, id) => {
+    e.preventDefault();
+    axios.put(`/option/update/name-list/${id}`, {
+      record_name: record_name,
+      type: type,
+    })
+    .then(res => {
+      console.log(res.data);
+      this.getServiceNameList();
     })
     .catch(err => {
       console.log(err);
     })
+  }
+  deleteServiceNameList = (record_name, id) => {
+    let confirm = window.confirm(`确认删除${record_name}？`);
+    if(confirm === true){
+      axios.delete(`/option/delete/name-list/${id}`)
+      .then(res => {
+        console.log(res.data);
+        this.getServiceNameList();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  }
+  addServiceNameList = (e, record_name, type) => {
+    e.preventDefault();
+    if(!record_name){
+      alert("请输入产品名称");
+    }else if(!type){
+      alert("请输入产品分类");
+    }else{
+      axios.post("/option/new-name-list", {
+        record_name: record_name,
+        type: type,
+      })
+      .then(res => {
+        console.log(res.data);
+        alert("创建成功");
+      })
+      .then(() => {
+        this.getServiceNameList();
+      })
+      .catch(err => {
+        console.log(err);
+        alert(`创建失败。原因：${err}`);
+      })
+    }
   }
 
   render() {
@@ -699,6 +768,9 @@ class App extends Component {
                                                           operator_list = {this.state.operator_list}
                                                           getGiftList = {this.getGiftList}
                                                           gift_list = {this.state.gift_list}
+                                                          updateServiceNameList = {this.updateServiceNameList}
+                                                          deleteServiceNameList = {this.deleteServiceNameList}
+                                                          addServiceNameList = {this.addServiceNameList}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

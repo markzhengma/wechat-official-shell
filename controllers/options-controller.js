@@ -35,5 +35,40 @@ optionsController.findAllGifts = (req,res) => {
     })
 };
 
+optionsController.updateNameList = (req, res) => {
+    Option.updateNameList(req.body.record_name, req.body.type, req.params.id)
+    .then(nameList => {
+        res.json(nameList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+}
+
+optionsController.deleteNameList = (req, res) => {
+    Option.destroyNameList(req.params.id)
+    .then(nameList => {
+        res.json(nameList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
+optionsController.createNameList = (req, res) => {
+    Option.createNameList({
+        record_name: req.body.record_name, 
+        type: req.body.type, 
+    })
+    .then(nameList => {
+        res.json(nameList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
 
 module.exports = optionsController;

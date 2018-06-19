@@ -416,3 +416,78 @@ input:hover{
   margin: 10px;
   height: 36px;
 }
+.manager_table{
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  min-width: 660px;
+  margin-bottom: 20px;
+  overflow: scroll;
+}
+.manager_table_head{
+  display: flex;
+  width: 60vw;
+  min-width: 660px;
+  height: 50px;
+  background-color: #FBE18D;
+}
+.manager_table_head_single{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20vw;
+  min-width: 220px;
+  color: #CF422B;
+  font-weight: 900;
+}
+.manager_table_single{
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: 60vw;
+  min-width: 660px;
+  min-height: 47.5px;
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.manager_table_single_detail{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 20vw;
+  min-width: 220px;
+}
+.create-name-group{
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: 60vw;
+  min-width: 660px;
+  min-height: 47.5px;
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.create-name-input{
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0%;
+  border: none;
+  box-sizing: border-box;
+  border-left: rgb(231, 188, 182) solid 0.5px;
+  border-right: rgb(231, 188, 182) solid 0.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  min-width: 220px;
+  min-height: 47.5px;
+  background-color: white;
+  text-align: center;
+  text-align-last: center;
+  font-size: 12px;
+}

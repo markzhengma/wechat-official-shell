@@ -35,6 +35,20 @@ class AdminPage extends Component {
             updateDetail: '',
             isUserUpdating: false,
             isRecordUpdating: false,
+            manager_selection: '产品名称',
+            isNameListUpdating: false,
+            isOpListUpdating: false,
+            isGiftListUpdating: false,
+            selectNameListId: '',
+            selectOpListId: '',
+            selectGiftListId: '',
+            updateNameList: '',
+            updateType: '',
+            newNameInput: '',
+            newTypeInput: '',
+            updateOpList: '',
+            updateLocation: '',
+            updateGiftList: '',
         }
     }
     componentDidMount(){
@@ -135,6 +149,31 @@ class AdminPage extends Component {
             isRecordUpdating: false,
         })
     }
+
+    selectNameListUpdate = (id, record_name, type) => {
+        this.setState({
+            isNameListUpdating: true,
+            selectNameListId: id,
+            updateNameList: record_name,
+            updateType: type,
+        })
+    }
+    completeNameListUpdate = (e, record_name, type, id) => {
+        this.props.updateServiceNameList(e, record_name, type, id);
+        this.setState({
+            isNameListUpdating: false,
+            selectNameListId: '',
+            updateNameList: '',
+            updateType: '',
+        })
+    }
+    completeNameListAdd = (e, record_name, type) => {
+        this.props.addServiceNameList(e, record_name, type);
+        this.setState({
+            newNameInput: '',
+            newTypeInput: '',
+        })
+    }
     render(){
         if(this.props.fireRedirect == true){
             return <Redirect to = {this.props.redirect}/>
@@ -148,7 +187,10 @@ class AdminPage extends Component {
                 <div>
                     <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
                         <option>查找老客户</option>
-                        <option>创建新客户</option>
+                        {this.props.location === "总管理员" ?
+                        <option>管理基本信息</option>
+                            :
+                        <option>创建新客户</option>}
                     </select>
                 </div>
                 <div className = "admin-box">
@@ -369,6 +411,9 @@ class AdminPage extends Component {
                                 handleNewRecordSubmit = {this.props.handleNewRecordSubmit}
                                 getRecordByService = {this.props.getRecordByService}
                                 switchInputNew = {this.switchInputNew}
+                                service_name_list = {this.props.service_name_list}
+                                operator_list = {this.props.operator_list}
+                                gift_list = {this.props.gift_list}
                             />
                         : 
                         <div className = "create-record-btn-group">
@@ -390,6 +435,67 @@ class AdminPage extends Component {
                             <button className = "admin-page-btn" type = "submit">创建新客户</button>
                             <button className = "admin-page-btn" type = "reset">清空输入框</button>
                         </form>
+                    : ""}
+                    {this.props.admin_selection === "管理基本信息" ?
+                        <div>
+                            <select name = "manager_selection" className = "admin-select" onChange = {this.props.handleInputChange}>
+                                <option>产品名称</option>
+                                <option>操作人</option>
+                                <option>赠品情况</option>
+                            </select>
+                            {this.state.manager_selection === "产品名称" ?
+                                <div className = "manager_table">
+                                    <div className = "manager_table_head">
+                                        <div className = "manager_table_head_single">产品名称</div>
+                                        <div className = "manager_table_head_single">分类</div>
+                                        <div className = "manager_table_head_single">编辑</div>
+                                    </div>
+                                    {this.props.service_name_list.map(service_name => {
+                                        return(
+                                                <div key = {service_name.id}>
+                                                    {this.state.selectNameListId != service_name.id ?
+                                                        <div className = "manager_table_single" style = {this.props.service_name_list.indexOf(service_name) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
+                                                            <div className = "manager_table_single_detail">{service_name.record_name}</div>
+                                                            <div className = "manager_table_single_detail">{service_name.type}</div>
+                                                            {!this.state.isNameListUpdating ? 
+                                                                <div className = "manager_table_single_detail">
+                                                                    <button className = "admin-edit-btn" onClick = {() => this.selectNameListUpdate(service_name.id, service_name.record_name, service_name.type)}/>
+                                                                    <button className = "admin-delete-btn" onClick = {() => this.props.deleteServiceNameList(service_name.record_name, service_name.id)}/>
+                                                                </div>
+                                                            : ""}
+                                                        </div>
+                                                    : 
+                                                        <form className = "manager_table_single" 
+                                                                style = {this.props.service_name_list.indexOf(service_name) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}
+                                                                onSubmit = {(e) => this.completeNameListUpdate(e, this.state.updateNameList, this.state.updateType, this.state.selectNameListId)}
+                                                            >
+                                                            <div className = "manager_table_single_detail"><input defaultValue = {service_name.record_name} name = "updateNameList" onChange = {this.handleInputChange}/></div>
+                                                            <div className = "manager_table_single_detail"><input defaultValue = {service_name.type} name = "updateType" onChange = {this.handleInputChange}/></div>
+                                                            <div className = "manager_table_single_detail"><button className = "form-btn" type = "submit">确定</button></div>
+                                                        </form>
+                                                    }
+                                                </div>
+                                            )
+                                    })}
+                                    {this.state.isInputNew ? 
+                                        <form className = "create-name-form" onSubmit = {(e) => this.completeNameListAdd(e, this.state.newNameInput, this.state.newTypeInput)}>
+                                            <div className = "create-name-group">
+                                                <input name = "newNameInput" className = "create-name-input" placeholder = "产品名称" value = {this.state.newNameInput} onChange = {this.handleInputChange}/>
+                                                <input name = "newTypeInput" className = "create-name-input" placeholder = "分类" value = {this.state.newTypeInput} onChange = {this.handleInputChange}/>
+                                                <div className = "create-name-input"><button className = "form-btn" type = "submit">提交</button></div>
+                                            </div>
+                                            <div className = "create-record-btn-group">
+                                                <button id = "delete-btn" onClick = {this.switchInputNew}/>
+                                            </div>
+                                        </form>
+                                    : 
+                                    <div className = "create-record-btn-group">
+                                        <button id = "add-btn" onClick = {this.switchInputNew}/>
+                                        <div>添加保养记录</div>
+                                    </div>}
+                                </div>
+                            : ""}
+                        </div>
                     : ""}
                     {this.props.admin_selection === "创建换油记录" ?
                         <form>
