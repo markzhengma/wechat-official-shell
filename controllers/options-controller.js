@@ -105,5 +105,39 @@ optionsController.createOperatorList = (req, res) => {
         res.status(500).json(err);
     })
 }
+optionsController.updateGiftList = (req, res) => {
+    Option.updateGiftList(req.body.record_gift, req.params.id)
+    .then(giftList => {
+        res.json(giftList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+}
+
+optionsController.deleteGiftList = (req, res) => {
+    Option.destroyGiftList(req.params.id)
+    .then(giftList => {
+        res.json(giftList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
+optionsController.createGiftList = (req, res) => {
+    Option.createGiftList({
+        record_gift: req.body.record_gift, 
+    })
+    .then(giftList => {
+        res.json(giftList);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
 
 module.exports = optionsController;

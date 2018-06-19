@@ -51,6 +51,7 @@ class AdminPage extends Component {
             newLocationInput: '',
             selectGiftListId: '',
             updateGiftList: '',
+            newGiftInput: '',
         }
     }
     componentDidMount(){
@@ -198,6 +199,27 @@ class AdminPage extends Component {
         this.setState({
             newOpInput: '',
             newLocationInput: '',
+        })
+    }
+    selectGiftListUpdate = (id, record_gift) => {
+        this.setState({
+            isGiftListUpdating: true,
+            selectGiftListId: id,
+            updateGiftList: record_gift,
+        })
+    }
+    completeGiftListUpdate = (e, record_gift, id) => {
+        this.props.updateGiftList(e, record_gift, id);
+        this.setState({
+            isGiftListUpdating: false,
+            selectGiftListId: '',
+            updateGiftList: '',
+        })
+    }
+    completeGiftListAdd = (e, record_gift) => {
+        this.props.addGiftList(e, record_gift);
+        this.setState({
+            newGiftInput: '',
         })
     }
     render(){
@@ -568,6 +590,57 @@ class AdminPage extends Component {
                                     <div className = "create-record-btn-group">
                                         <button id = "add-btn" onClick = {this.switchInputNew}/>
                                         <div>添加操作人</div>
+                                    </div>}
+                                </div>
+                            : ""}
+                            {this.state.manager_selection === "赠品情况" ?
+                                <div className = "manager_table">
+                                    <div className = "manager_table_head">
+                                        <div className = "manager_table_head_spacer"/>
+                                        <div className = "manager_table_head_single">赠品名称</div>
+                                        <div className = "manager_table_head_single">编辑</div>
+                                    </div>
+                                    {this.props.gift_list.map(gift => {
+                                        return(
+                                                <div key = {gift.id}>
+                                                    {this.state.selectGiftListId != gift.id ?
+                                                        <div className = "manager_table_single">
+                                                            <div className = "manager_table_single_spacer"/>
+                                                            <div className = "manager_table_single_detail">{gift.record_gift}</div>
+                                                            {!this.state.isGiftListUpdating ? 
+                                                                <div className = "manager_table_single_detail">
+                                                                    <button className = "admin-edit-btn" onClick = {() => this.selectGiftListUpdate(gift.id, gift.record_gift)}/>
+                                                                    <button className = "admin-delete-btn" onClick = {() => this.props.deleteGiftList(gift.record_gift, gift.id)}/>
+                                                                </div>
+                                                            : ""}
+                                                        </div>
+                                                    : 
+                                                        <form className = "manager_table_single" 
+                                                                onSubmit = {(e) => this.completeGiftListUpdate(e, this.state.updateGiftList, this.state.selectGiftListId)}
+                                                            >
+                                                            <div className = "manager_table_single_spacer"/>
+                                                            <div className = "manager_table_single_detail"><input defaultValue = {gift.record_gift} name = "updateGiftList" onChange = {this.handleInputChange}/></div>
+                                                            <div className = "manager_table_single_detail"><button className = "form-btn" type = "submit">确定</button></div>
+                                                        </form>
+                                                    }
+                                                </div>
+                                            )
+                                    })}
+                                    {this.state.isInputNew ? 
+                                        <form className = "create-name-form" onSubmit = {(e) => this.completeGiftListAdd(e, this.state.newGiftInput)}>
+                                            <div className = "create-name-group">
+                                                <div className = "create-name-input-spacer"/>
+                                                <input name = "newGiftInput" className = "create-name-input" placeholder = "赠品名称" value = {this.state.newGiftInput} onChange = {this.handleInputChange}/>
+                                                <div  id = "new-gift-input" className = "create-name-input"><button className = "form-btn" type = "submit">提交</button></div>
+                                            </div>
+                                            <div className = "create-record-btn-group">
+                                                <button id = "delete-btn" onClick = {this.switchInputNew}/>
+                                            </div>
+                                        </form>
+                                    : 
+                                    <div className = "create-record-btn-group">
+                                        <button id = "add-btn" onClick = {this.switchInputNew}/>
+                                        <div>添加赠品</div>
                                     </div>}
                                 </div>
                             : ""}

@@ -80,5 +80,29 @@ Option.createOperatorList = opList => {
     `, [opList.record_operator, 
         opList.location])
 }
+Option.updateGiftList = (record_gift, id) => {
+    return db.one(`
+        UPDATE record_gift_list SET
+        record_gift = $1
+        WHERE id = $2
+        RETURNING *
+    `, [record_gift, id]);
+}
+
+Option.destroyGiftList = (id) => {
+    return db.none(`
+        DELETE FROM record_gift_list where id = $1
+    `, [id]);
+}
+
+Option.createGiftList = giftList => {
+    return db.one(`
+        INSERT INTO record_gift_list(
+            record_gift
+        )
+        VALUES($1)
+        RETURNING *
+    `, [giftList.record_gift])
+}
 
 module.exports = Option;

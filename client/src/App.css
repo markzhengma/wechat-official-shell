@@ -478,8 +478,7 @@ input:hover{
   border-radius: 0%;
   border: none;
   box-sizing: border-box;
-  border-left: rgb(231, 188, 182) solid 0.5px;
-  border-right: rgb(231, 188, 182) solid 0.5px;
+  border-right: rgb(231, 188, 182) solid 1px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -490,4 +489,27 @@ input:hover{
   text-align: center;
   text-align-last: center;
   font-size: 12px;
+}
+.manager_table_head_spacer{
+  width: 10vw;
+  min-width: 110px;
+}
+.manager_table_single_spacer{
+  width: 10vw;
+  min-width: 110px;
+}
+.create-name-input-spacer{
+  -webkit-appearance: none; 
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0%;
+  border: none;
+  box-sizing: border-box;
+  width: 10vw;
+  min-width: 110px;
+  min-height: 47.5px;
+  background-color: white;
+}
+#new-gift-input{
+  border-right: none;
 }

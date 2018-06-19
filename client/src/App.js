@@ -72,6 +72,9 @@ class App extends Component {
       this.updateOpList = this.updateOpList.bind(this);
       this.deleteOpList = this.deleteOpList.bind(this);
       this.addOpList = this.addOpList.bind(this);
+      this.updateGiftList = this.updateGiftList.bind(this);
+      this.deleteGiftList = this.deleteGiftList.bind(this);
+      this.addGiftList = this.addGiftList.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -754,6 +757,53 @@ class App extends Component {
       })
     }
   }
+  updateGiftList = (e, record_gift, id) => {
+    e.preventDefault();
+    axios.put(`/option/update/gift-list/${id}`, {
+      record_gift: record_gift,
+    })
+    .then(res => {
+      console.log(res.data);
+      this.getGiftList();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
+  deleteGiftList = (record_gift, id) => {
+    let confirm = window.confirm(`确认删除${record_gift}？`);
+    if(confirm === true){
+      axios.delete(`/option/delete/gift-list/${id}`)
+      .then(res => {
+        console.log(res.data);
+        this.getGiftList();
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
+  }
+  addGiftList = (e, record_gift) => {
+    e.preventDefault();
+    if(!record_gift){
+      alert("请输入赠品");
+    }else{
+      axios.post("/option/new-gift-list", {
+        record_gift: record_gift,
+      })
+      .then(res => {
+        console.log(res.data);
+        alert("创建成功");
+      })
+      .then(() => {
+        this.getGiftList();
+      })
+      .catch(err => {
+        console.log(err);
+        alert(`创建失败。原因：${err}`);
+      })
+    }
+  }
 
   render() {
     return (
@@ -828,6 +878,9 @@ class App extends Component {
                                                           updateOpList = {this.updateOpList}
                                                           deleteOpList = {this.deleteOpList}
                                                           addOpList = {this.addOpList}
+                                                          updateGiftList = {this.updateGiftList}
+                                                          deleteGiftList = {this.deleteGiftList}
+                                                          addGiftList = {this.addGiftList}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>
