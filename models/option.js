@@ -6,7 +6,7 @@ Option.findAllNames = () => {
     return db.query(`
         SELECT * 
         FROM record_name_list
-        ORDER BY type ASC
+        ORDER BY type, id
     `)
 }
 
@@ -14,7 +14,7 @@ Option.findAllOperators = () => {
     return db.query(`
         SELECT *
         FROM record_operator_list
-        ORDER BY location ASC
+        ORDER BY location, id
     `)
 }
 
@@ -22,6 +22,7 @@ Option.findAllGifts = () => {
     return db.query(`
         SELECT *
         FROM record_gift_list
+        ORDER BY id
     `)
 }
 

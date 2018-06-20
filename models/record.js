@@ -162,4 +162,15 @@ Record.destroyRecord = (id) => {
     `, [id]);
 }
 
+Record.exportBetweenDates = () => {
+    return db.query(`
+        \copy
+        (SELECT * FROM users_records
+        WHERE record_time
+        BETWEEN '2018-05-01' AND '2018-06-01')
+        TO './保养记录.csv'
+        WITH CSV DELIMITER ',';
+    `);
+}
+
 module.exports = Record;

@@ -185,5 +185,16 @@ recordsController.deleteRecord = (req, res) => {
     })
 }
 
+recordsController.exportBetweenDates = (req, res) => {
+    Record.exportBetweenDates()
+    .then(record => {
+        res.json(record);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
 
 module.exports = recordsController;

@@ -4,6 +4,7 @@ import {
     Redirect,
 } from 'react-router-dom';
 import CreateRecord from './CreateRecord';
+import BrowseAndExport from './BrowseAndExport';
 import axios from 'axios';
 
 class AdminPage extends Component {
@@ -233,13 +234,17 @@ class AdminPage extends Component {
             <div className = "admin-page">
                 <h3>管理员登录：{this.props.location}</h3> 
                 <div>
-                    <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
-                        <option>查找老客户</option>
-                        {this.props.location === "总管理员" ?
-                        <option>管理基本信息</option>
-                            :
-                        <option>创建新客户</option>}
-                    </select>
+                    {this.props.location === "总管理员" ?
+                        <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
+                            <option>查找老客户</option>
+                            <option>管理基本信息</option>
+                            {/* <option>浏览和下载记录</option> */}
+                        </select>
+                        :
+                        <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
+                            <option>查找老客户</option>
+                            <option>创建新客户</option>
+                        </select>}
                 </div>
                 <div className = "admin-box">
                     {this.props.admin_selection === "查找老客户" ?
@@ -645,6 +650,9 @@ class AdminPage extends Component {
                                 </div>
                             : ""}
                         </div>
+                    : ""}
+                    {this.props.admin_selection === "浏览和下载记录" ?
+                        <BrowseAndExport exportBetweenDates = {this.props.exportBetweenDates}/>
                     : ""}
                     {this.props.admin_selection === "创建换油记录" ?
                         <form>
