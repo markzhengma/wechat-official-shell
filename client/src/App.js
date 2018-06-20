@@ -75,7 +75,7 @@ class App extends Component {
       this.updateGiftList = this.updateGiftList.bind(this);
       this.deleteGiftList = this.deleteGiftList.bind(this);
       this.addGiftList = this.addGiftList.bind(this);
-      this.exportBetweenDates = this.exportBetweenDates.bind(this);
+      this.exportRecordData = this.exportRecordData.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -806,20 +806,18 @@ class App extends Component {
     }
   }
 
-  exportBetweenDates = () => {
-    // e.preventDefault()
-    // if(!startDate){
-    //   alert("请输入起始日期");
-    // }else if(!endDate){
-    //   alert("请输入截止日期");
-    // }else{
-      axios.get('/record/export/between-dates')
-      .then(res => {
-        console.log(res.data);
+  exportRecordData = (data) => {
+      console.log(data);
+      axios.post('/record/export/record-data', {
+        data: data,
       })
-      .catch(err => {
-        console.log(err);
-      })
+      // .then(res => {
+      //   console.log(res.data);
+      //   alert("下载成功！");
+      // })
+      // .catch(err => {
+      //   console.log(err);
+      // })
     // }
   }
 
@@ -899,7 +897,7 @@ class App extends Component {
                                                           updateGiftList = {this.updateGiftList}
                                                           deleteGiftList = {this.deleteGiftList}
                                                           addGiftList = {this.addGiftList}
-                                                          exportBetweenDates = {this.exportBetweenDates}
+                                                          exportRecordData = {this.exportRecordData}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

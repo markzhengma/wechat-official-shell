@@ -104,6 +104,7 @@ input:hover{
 .record-table{
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 96vw;
   min-width: 360px;
   margin-bottom: 20px;
@@ -512,4 +513,70 @@ input:hover{
 }
 #new-gift-input{
   border-right: none;
+}
+.export-browse-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.browse-table{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 98vw;
+  min-width: 490px;
+  margin-bottom: 20px;
+  overflow: scroll;
+}
+.browse-table-head{
+  display: flex;
+  width: 98vw;
+  min-width: 490px;
+  height: 50px;
+  background-color: #FBE18D;
+}
+.browse-table-head-single{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14vw;
+  min-width: 70px;
+  color: #CF422B;
+  font-weight: 900;
+}
+.browse-single{
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: 98vw;
+  min-width: 490px;
+  min-height: 47.5px;
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.browse-single-detail{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 14vw;
+  min-width: 70px;
+}
+.browse-form{
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.browse-input{
+  height: 30px;
+  width: 150px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.browse-input-select{
+  height: 30px;
+  width: 150px;
+  font-size: 14px;
 }

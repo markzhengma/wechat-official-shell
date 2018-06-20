@@ -3,23 +3,109 @@ import {
     Link,
     Redirect,
 } from 'react-router-dom';
+import axios from 'axios';
 
-class Login extends Component {
+class BrowseAndExport extends Component {
     constructor() {
         super();
         this.state = {
-            startDate: '',
-            endDate: '',
+            start_date: '',
+            end_date: '',
+            location_char: '',
+            dataToBeExported: null,
+        }
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+    handleInputChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({
+            [name]: value,
+        });
+    }
+    selectRecordBetweenDates = (e, start_date, end_date, location_char) => {
+        e.preventDefault();
+        if(!start_date){
+            alert("请输入起始日期");
+        }else if(!end_date){
+            alert("请输入截止日期");
+        }else if(Date.parse(start_date) >= Date.parse(end_date)){
+            alert("请选择在截止日期之前的起始日期")
+        }else{
+            axios.get(`/record/browse/between-dates/${start_date}/${end_date}/${location_char}`)
+            .then(res => {
+                console.log(res.data);
+                this.setState({
+                    dataToBeExported: res.data,
+                    start_date: '',
+                    end_date: '',
+                    location_char: '',
+                })
+            })
+            .catch(err => {
+                console.log(err);
+            })
         }
     }
+    // exportTest = () => {
+    //     const fs = require('fs');
+    //     const file = require('file-system');
+    //     const json2csv = require('json2csv').parse;
+    //     const serviceNameList = this.props.service_name_list;
+    //     const fields = ['id', 'record_name', 'type'];
+    //     const opts = { fields };
+    //     const csv = json2csv(serviceNameList, opts);
+    //     fs.writeFile('record_name_list.csv', '123', function (err) {
+    //         if (err) return console.log(err);
+    //         console.log('exported successfully!');
+    //     });
+    // }
     render(){
         return (
             <div className = "export-browse-page">
-                <h3>下载记录</h3> 
-                <button onClick = {this.props.exportBetweenDates()}>export</button>
+                <form className = "browse-form" onSubmit = {(e) => this.selectRecordBetweenDates(e, this.state.start_date, this.state.end_date, this.state.location_char)}>
+                    <input className = "browse-input" name = "start_date" type = "date" placeholder = "请输入起始日期" onChange = {this.handleInputChange}/>
+                    <input className = "browse-input" name = "end_date" type = "date" placeholder = "请输入截止日期" onChange = {this.handleInputChange}/>
+                    <select className = "browse-input-select" name = "location_char" onChange = {this.handleInputChange}>
+                        <option value = "">-请选择门店地区-</option>
+                        <option value = "H">海拉尔</option>
+                        <option value = "M">满洲里</option>
+                        <option value = "Y">牙克石</option>
+                    </select>
+                    <button className = "admin-page-btn" type = "submit">浏览</button>
+                </form>
+                {this.state.dataToBeExported != null && this.state.dataToBeExported.length >= 1 ? 
+                    <div className = "browse-table">
+                        <button className = "admin-page-btn" onClick = {() => this.props.exportRecordData(this.state.dataToBeExported)}>下载该记录</button>
+                        <div className = "browse-table-head">
+                            <div className = "browse-table-head-single">日期</div>
+                            <div className = "browse-table-head-single">产品<br/>名称</div>
+                            <div className = "browse-table-head-single">表示<br/>里程</div>
+                            <div className = "browse-table-head-single">赠品<br/>情况</div>
+                            <div className = "browse-table-head-single">备注</div>
+                            <div className = "browse-table-head-single">操作人</div>
+                            <div className = "browse-table-head-single">换油<br/>证号</div>
+                        </div>
+                        {this.state.dataToBeExported.map(record => {
+                            var date = new Date(record.record_time);
+                            var month = ((date.getMonth() + 1) < 10) ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+                            return (
+                                <div className = "browse-single" key = {this.state.dataToBeExported.indexOf(record)} style = {this.state.dataToBeExported.indexOf(record) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
+                                    <div className = "browse-single-detail">{date.getFullYear()}年<br/>{month}月{date.getDate()}日</div>
+                                    <div className = "browse-single-detail">{record.record_name}</div>
+                                    <div className = "browse-single-detail">{record.record_milage}</div>
+                                    <div className = "browse-single-detail">{record.record_gift}</div>
+                                    <div className = "browse-single-detail">{record.record_detail}</div>
+                                    <div className = "browse-single-detail">{record.record_operator}</div>
+                                    <div className = "browse-single-detail">{record.record_id}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                : ""}
             </div>
         )
     }
 }
 
-export default Login;
+export default BrowseAndExport;

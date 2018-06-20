@@ -1,6 +1,7 @@
 const db = require('../db/config');
-
 const Record = {};
+const fs = require('fs');
+const json2csv = require('json2csv').parse;
 
 Record.findUserByPlate = plate => {
     return db.query(`
@@ -162,15 +163,36 @@ Record.destroyRecord = (id) => {
     `, [id]);
 }
 
-Record.exportBetweenDates = () => {
-    return db.query(`
-        \copy
-        (SELECT * FROM users_records
-        WHERE record_time
-        BETWEEN '2018-05-01' AND '2018-06-01')
-        TO './保养记录.csv'
-        WITH CSV DELIMITER ',';
-    `);
+// Record.exportBetweenDates = () => {
+//     return db.query(`
+//         \copy
+//         (SELECT * FROM users_records
+//         WHERE record_time
+//         BETWEEN '2018-05-01' AND '2018-06-01')
+//         TO './保养记录.csv'
+//         WITH CSV DELIMITER ',';
+//     `);
+// }
+
+Record.exportRecordData = (data) => {
+    const fields = ['id', 'record_time', 'record_name', 'record_milage', 'record_operator', 'record_gift', 'record_id'];
+    const opts = { fields };
+    const csv = json2csv(data, opts);
+    console.log(data);
+    fs.writeFile('保养记录.csv', csv, function (err) {
+        if (err) return console.log(err);
+        console.log('exported successfully!');
+    });
+}
+
+Record.getRecordBetweenDates = (start_date, end_date, location_char) => {
+    return db.any(`
+        SELECT * FROM users_records
+        WHERE (record_time
+        BETWEEN $1 AND $2)
+        AND record_id LIKE $3
+        ORDER BY record_time, record_name
+    `, [start_date, end_date, location_char]);
 }
 
 module.exports = Record;

@@ -238,7 +238,7 @@ class AdminPage extends Component {
                         <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
                             <option>查找老客户</option>
                             <option>管理基本信息</option>
-                            {/* <option>浏览和下载记录</option> */}
+                            <option>浏览和下载记录</option>
                         </select>
                         :
                         <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
@@ -652,7 +652,9 @@ class AdminPage extends Component {
                         </div>
                     : ""}
                     {this.props.admin_selection === "浏览和下载记录" ?
-                        <BrowseAndExport exportBetweenDates = {this.props.exportBetweenDates}/>
+                        <BrowseAndExport 
+                            exportRecordData = {this.props.exportRecordData}
+                        />
                     : ""}
                     {this.props.admin_selection === "创建换油记录" ?
                         <form>

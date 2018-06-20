@@ -185,8 +185,23 @@ recordsController.deleteRecord = (req, res) => {
     })
 }
 
-recordsController.exportBetweenDates = (req, res) => {
-    Record.exportBetweenDates()
+// recordsController.exportBetweenDates = (req, res) => {
+//     Record.exportBetweenDates()
+//     .then(record => {
+//         res.json(record);
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json(err);
+//     })
+// }
+
+recordsController.exportRecordData = (req, res) => {
+    Record.exportRecordData(req.body.data);
+}
+
+recordsController.getRecordBetweenDates = (req, res) => {
+    Record.getRecordBetweenDates(req.params.start_date, req.params.end_date, (req.params.location_char + '%'))
     .then(record => {
         res.json(record);
     })
