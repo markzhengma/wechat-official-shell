@@ -4,6 +4,7 @@ import {
     Redirect,
 } from 'react-router-dom';
 import axios from 'axios';
+import * as fs from 'fs-web';
 
 class BrowseAndExport extends Component {
     constructor() {
@@ -15,6 +16,7 @@ class BrowseAndExport extends Component {
             dataToBeExported: null,
         }
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.exportData = this.exportData.bind(this);
     }
     handleInputChange = (e) => {
         const name = e.target.name;
@@ -47,19 +49,16 @@ class BrowseAndExport extends Component {
             })
         }
     }
-    // exportTest = () => {
-    //     const fs = require('fs');
-    //     const file = require('file-system');
-    //     const json2csv = require('json2csv').parse;
-    //     const serviceNameList = this.props.service_name_list;
-    //     const fields = ['id', 'record_name', 'type'];
-    //     const opts = { fields };
-    //     const csv = json2csv(serviceNameList, opts);
-    //     fs.writeFile('record_name_list.csv', '123', function (err) {
-    //         if (err) return console.log(err);
-    //         console.log('exported successfully!');
-    //     });
-    // }
+    exportData = () => {
+        const json2csv = require('json2csv').parse;
+        const fields = ['id', 'record_time', 'record_name', 'record_milage', 'record_operator', 'record_gift', 'record_id'];
+        const opts = { fields };
+        const csv = json2csv(this.state.dataToBeExported, opts);
+        fs.writeFile('保养记录.csv', csv)
+        .then(function(){
+            console.log("export successed!");
+        })
+    }
     render(){
         return (
             <div className = "export-browse-page">
@@ -76,7 +75,7 @@ class BrowseAndExport extends Component {
                 </form>
                 {this.state.dataToBeExported != null && this.state.dataToBeExported.length >= 1 ? 
                     <div className = "browse-table">
-                        <button className = "admin-page-btn" onClick = {() => this.props.exportRecordData(this.state.dataToBeExported)}>下载该记录</button>
+                        <button className = "admin-page-btn" onClick = {this.exportData}>下载该记录</button>
                         <div className = "browse-table-head">
                             <div className = "browse-table-head-single">日期</div>
                             <div className = "browse-table-head-single">产品<br/>名称</div>
