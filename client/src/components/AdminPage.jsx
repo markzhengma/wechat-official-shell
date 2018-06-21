@@ -93,14 +93,16 @@ class AdminPage extends Component {
     }
     submitAndClearState = (e, service_num, make, plate, driver_name, phone_num) => {
         this.props.handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num);
-        this.setState({
-            service_num: '',
-            make: '',
-            plate: '',
-            driver_name: '',
-            phone_num: '',
-            admin_selection: "查找老客户",
-        });
+        if(this.state.service_num && this.state.make && this.state.plate && this.state.driver_name && this.state.phone_num){
+            this.setState({
+                service_num: '',
+                make: '',
+                plate: '',
+                driver_name: '',
+                phone_num: '',
+                admin_selection: "查找老客户",
+            });
+        }
     }
     switchInputNew = () => {
         this.setState({
@@ -119,14 +121,16 @@ class AdminPage extends Component {
     }
     completeUserUpdate = (e, updateMake, updatePlate, updateDriverName, updatePhone, selectUserId) => {
         this.props.updateUser(e, updateMake, updatePlate, updateDriverName, updatePhone, selectUserId);
-        this.setState({
-            selectUserId: '',
-            updateMake: '',
-            updatePlate: '',
-            updateDriverName: '',
-            updatePhone: '',
-            isUserUpdating: false,
-        })
+        if(this.state.updateMake && this.state.updatePlate && this.state.updateDriverName && this.state.updatePhone){
+            this.setState({
+                selectUserId: '',
+                updateMake: '',
+                updatePlate: '',
+                updateDriverName: '',
+                updatePhone: '',
+                isUserUpdating: false,
+            })
+        }
     }
     selectRecordUpdate = (id, record_time, record_name, record_milage, record_operator, record_gift, record_detail) => {
         this.setState({
@@ -142,16 +146,18 @@ class AdminPage extends Component {
     }
     completeRecordUpdate = (e, updateDate, updateRecordName, updateMilage, updateOperator, updateGift, updateDetail, selectRecordId) => {
         this.props.updateRecord(e, updateDate, updateRecordName, updateMilage, updateOperator, updateGift, updateDetail, selectRecordId);
-        this.setState({
-            selectRecordId: '',
-            updateDate: '',
-            updateRecordName: '',
-            updateMilage: '',
-            updateOperator: '',
-            updateGift: '',
-            updateDetail: '',
-            isRecordUpdating: false,
-        })
+        if(this.state.updateDate && this.state.updateRecordName && this.state.updateMilage && this.state.updateOperator && this.state.updateGift && this.state.updateDetail){
+            this.setState({
+                selectRecordId: '',
+                updateDate: '',
+                updateRecordName: '',
+                updateMilage: '',
+                updateOperator: '',
+                updateGift: '',
+                updateDetail: '',
+                isRecordUpdating: false,
+            })
+        }
     }
 
     selectNameListUpdate = (id, record_name, type) => {
@@ -164,19 +170,23 @@ class AdminPage extends Component {
     }
     completeNameListUpdate = (e, record_name, type, id) => {
         this.props.updateServiceNameList(e, record_name, type, id);
-        this.setState({
-            isNameListUpdating: false,
-            selectNameListId: '',
-            updateNameList: '',
-            updateType: '',
-        })
+        if(this.state.updateNameList && this.state.updateType){
+            this.setState({
+                isNameListUpdating: false,
+                selectNameListId: '',
+                updateNameList: '',
+                updateType: '',
+            })
+        }
     }
     completeNameListAdd = (e, record_name, type) => {
         this.props.addServiceNameList(e, record_name, type);
-        this.setState({
-            newNameInput: '',
-            newTypeInput: '',
-        })
+        if(this.state.newNameInput && this.state.newTypeInput){
+            this.setState({
+                newNameInput: '',
+                newTypeInput: '',
+            })
+        }
     }
     selectOpListUpdate = (id, record_operator, location) => {
         this.setState({
@@ -188,19 +198,23 @@ class AdminPage extends Component {
     }
     completeOpListUpdate = (e, record_operator, location, id) => {
         this.props.updateOpList(e, record_operator, location, id);
-        this.setState({
-            isOpListUpdating: false,
-            selectOpListId: '',
-            updateOpList: '',
-            updateLocation: '',
-        })
+        if(this.state.updateOpList && this.state.updateLocation){
+            this.setState({
+                isOpListUpdating: false,
+                selectOpListId: '',
+                updateOpList: '',
+                updateLocation: '',
+            })
+        }
     }
     completeOpListAdd = (e, record_operator, location) => {
         this.props.addOpList(e, record_operator, location);
-        this.setState({
-            newOpInput: '',
-            newLocationInput: '',
-        })
+        if(this.state.newOpInput && this.state.newLocationInput){
+            this.setState({
+                newOpInput: '',
+                newLocationInput: '',
+            })
+        }
     }
     selectGiftListUpdate = (id, record_gift) => {
         this.setState({
@@ -211,17 +225,21 @@ class AdminPage extends Component {
     }
     completeGiftListUpdate = (e, record_gift, id) => {
         this.props.updateGiftList(e, record_gift, id);
-        this.setState({
-            isGiftListUpdating: false,
-            selectGiftListId: '',
-            updateGiftList: '',
-        })
+        if(this.state.updateGiftList){
+            this.setState({
+                isGiftListUpdating: false,
+                selectGiftListId: '',
+                updateGiftList: '',
+            })
+        }
     }
     completeGiftListAdd = (e, record_gift) => {
         this.props.addGiftList(e, record_gift);
-        this.setState({
-            newGiftInput: '',
-        })
+        if(this.state.newGiftInput){
+            this.setState({
+                newGiftInput: '',
+            })
+        }
     }
     render(){
         if(this.props.fireRedirect == true){

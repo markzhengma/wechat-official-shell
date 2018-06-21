@@ -12,7 +12,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import RecordList from './components/RecordList';
-import NewRecord from './components/NewRecord';
 import Login from './components/Login';
 import AdminPage from './components/AdminPage';
 
@@ -514,65 +513,89 @@ class App extends Component {
 
   updateUser = (e, make, plate, driver_name, phone_num, id) => {
     e.preventDefault();
-    axios.put(`/record/update/user/${id}`, {
-      make: make,
-      plate: plate,
-      driver_name: driver_name,
-      phone_num: phone_num
-    })
-    .then(res => {
-      console.log(res.data);
-      axios.get(`/record/service/${this.state.userData[0].service_num}`, {
-        service_num: this.state.userData[0].service_num,
+    if(!make){
+      alert("请输入车型");
+    }else if(!plate){
+      alert("请输入车牌号码");
+    }else if(!driver_name){
+      alert("请输入车主姓名");
+    }else if(!phone_num){
+      alert("请输入联系方式");
+    }else{
+      axios.put(`/record/update/user/${id}`, {
+        make: make,
+        plate: plate,
+        driver_name: driver_name,
+        phone_num: phone_num
       })
       .then(res => {
-        if(res.data){
-          this.setState({
-            userData: res.data,
-            plateExists: true,
-          })
-          console.log(res.data);
-        }
+        console.log(res.data);
+        axios.get(`/record/service/${this.state.userData[0].service_num}`, {
+          service_num: this.state.userData[0].service_num,
+        })
+        .then(res => {
+          if(res.data){
+            this.setState({
+              userData: res.data,
+              plateExists: true,
+            })
+            console.log(res.data);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
       })
       .catch(err => {
+        alert(`修改客户信息失败。原因：${err}`);
         console.log(err);
       })
-    })
-    .catch(err => {
-      alert(`修改客户信息失败。原因：${err}`);
-      console.log(err);
-    })
+    }
   }
   updateRecord = (e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, id) => {
     e.preventDefault();
-    axios.put(`/record/update/record/${id}`, {
-      record_time: record_time,
-      record_name: record_name,
-      record_milage: record_milage,
-      record_operator: record_operator,
-      record_gift: record_gift,
-      record_detail: record_detail
-    })
-    .then(res => {
-      console.log(res.data);
-      axios.get(`/record/search/${this.state.userData[0].service_num}`, {
-          service_num: this.state.userData[0].service_num,
+    if(!record_time){
+      alert("请输入日期");
+    }else if(!record_name){
+      alert("请输入产品名称");
+    }else if(!record_milage){
+      alert("请输入表示里程");
+    }else if(!record_operator){
+      alert("请输入操作人");
+    }else if(!record_gift){
+      alert("请输入赠品情况");
+    }else if(!record_detail){
+      alert("请输入备注");
+    }else{
+      axios.put(`/record/update/record/${id}`, {
+        record_time: record_time,
+        record_name: record_name,
+        record_milage: record_milage,
+        record_operator: record_operator,
+        record_gift: record_gift,
+        record_detail: record_detail
       })
       .then(res => {
-          if(res.data){
-              this.setState({
-                  recordData: res.data,
-              })
-          }
+        console.log(res.data);
+        axios.get(`/record/search/${this.state.userData[0].service_num}`, {
+            service_num: this.state.userData[0].service_num,
+        })
+        .then(res => {
+            if(res.data){
+                this.setState({
+                    recordData: res.data,
+                })
+            }
+        })
+        .catch(err => {
+          console.log(err);
+        })
       })
       .catch(err => {
+        alert(`修改客户信息失败。原因：${err}`);
         console.log(err);
       })
-    })
-    .catch(err => {
-      alert(`修改客户信息失败。原因：${err}`);
-      console.log(err);
-    })
+    }
   }
 
   deleteUser = (id) => {

@@ -36,36 +36,40 @@ class BrowseAndExport extends Component {
         }else{
             axios.get(`/record/browse/between-dates/${start_date}/${end_date}/${location_char}`)
             .then(res => {
-                console.log(res.data);
-                const formattedRecord = res.data.map(record =>{
-                    var date = new Date(record.record_time);
-                    var month = '' + (date.getMonth() + 1);
-                    if(month.length < 2){
-                        month = '0' + month;
-                    }
-                    var day = '' + date.getDate();
-                    if(day.length < 2){
-                        day = '0' + day;
-                    }
-                    var year = date.getFullYear();
-                    var formattedDate = [year, month, day].join('-');
-                    return ({
-                        id: record.id,
-                        record_time: formattedDate,
-                        record_name: record.record_name,
-                        record_milage: record.record_milage,
-                        record_operator: record.record_operator,
-                        record_gift: record.record_gift,
-                        record_detail: record.record_detail,
-                        record_id: record.record_id,
+                if(!res.data || res.data.length <= 1){
+                    alert("未找到记录");
+                }else{
+                    console.log(res.data);
+                    const formattedRecord = res.data.map(record =>{
+                        var date = new Date(record.record_time);
+                        var month = '' + (date.getMonth() + 1);
+                        if(month.length < 2){
+                            month = '0' + month;
+                        }
+                        var day = '' + date.getDate();
+                        if(day.length < 2){
+                            day = '0' + day;
+                        }
+                        var year = date.getFullYear();
+                        var formattedDate = [year, month, day].join('-');
+                        return ({
+                            id: record.id,
+                            record_time: formattedDate,
+                            record_name: record.record_name,
+                            record_milage: record.record_milage,
+                            record_operator: record.record_operator,
+                            record_gift: record.record_gift,
+                            record_detail: record.record_detail,
+                            record_id: record.record_id,
+                        })
+                    });
+                    this.setState({
+                        dataToBeExported: formattedRecord,
+                        start_date: '',
+                        end_date: '',
+                        location_char: '',
                     })
-                });
-                this.setState({
-                    dataToBeExported: formattedRecord,
-                    start_date: '',
-                    end_date: '',
-                    location_char: '',
-                })
+                }
             })
             .catch(err => {
                 console.log(err);
@@ -97,8 +101,8 @@ class BrowseAndExport extends Component {
         return (
             <div className = "export-browse-page">
                 <form className = "browse-form" onSubmit = {(e) => this.selectRecordBetweenDates(e, this.state.start_date, this.state.end_date, this.state.location_char)}>
-                    <input className = "browse-input" name = "start_date" type = "date" placeholder = "请输入起始日期" onChange = {this.handleInputChange}/>
-                    <input className = "browse-input" name = "end_date" type = "date" placeholder = "请输入截止日期" onChange = {this.handleInputChange}/>
+                    <input className = "browse-input" name = "start_date" type = "date" placeholder = "请输入起始日期" value = {this.state.start_date} onChange = {this.handleInputChange}/>
+                    <input className = "browse-input" name = "end_date" type = "date" placeholder = "请输入截止日期" value = {this.state.end_date} onChange = {this.handleInputChange}/>
                     <select className = "browse-input-select" name = "location_char" onChange = {this.handleInputChange}>
                         <option value = "">-请选择门店地区-</option>
                         <option value = "H">海拉尔</option>
