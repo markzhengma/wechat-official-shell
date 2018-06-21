@@ -125,11 +125,9 @@ class BrowseAndExport extends Component {
                             <div className = "browse-table-head-single">换油<br/>证号</div>
                         </div>
                         {this.state.dataToBeExported.map(record => {
-                            var date = new Date(record.record_time);
-                            var month = ((date.getMonth() + 1) < 10) ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
                             return (
                                 <div className = "browse-single" key = {this.state.dataToBeExported.indexOf(record)} style = {this.state.dataToBeExported.indexOf(record) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
-                                    <div className = "browse-single-detail">{date.getFullYear()}年<br/>{month}月{date.getDate()}日</div>
+                                    <div className = "browse-single-detail">{record.record_time}</div>
                                     <div className = "browse-single-detail">{record.record_name}</div>
                                     <div className = "browse-single-detail">{record.record_milage}</div>
                                     <div className = "browse-single-detail">{record.record_gift}</div>
