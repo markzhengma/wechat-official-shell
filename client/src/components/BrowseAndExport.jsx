@@ -4,7 +4,7 @@ import {
     Redirect,
 } from 'react-router-dom';
 import axios from 'axios';
-import * as fs from 'fs-web';
+import { CSVLink } from 'react-csv';
 
 class BrowseAndExport extends Component {
     constructor() {
@@ -37,8 +37,31 @@ class BrowseAndExport extends Component {
             axios.get(`/record/browse/between-dates/${start_date}/${end_date}/${location_char}`)
             .then(res => {
                 console.log(res.data);
+                const formattedRecord = res.data.map(record =>{
+                    var date = new Date(record.record_time);
+                    var month = '' + (date.getMonth() + 1);
+                    if(month.length < 2){
+                        month = '0' + month;
+                    }
+                    var day = '' + date.getDate();
+                    if(day.length < 2){
+                        day = '0' + day;
+                    }
+                    var year = date.getFullYear();
+                    var formattedDate = [year, month, day].join('-');
+                    return ({
+                        id: record.id,
+                        record_time: formattedDate,
+                        record_name: record.record_name,
+                        record_milage: record.record_milage,
+                        record_operator: record.record_operator,
+                        record_gift: record.record_gift,
+                        record_detail: record.record_detail,
+                        record_id: record.record_id,
+                    })
+                });
                 this.setState({
-                    dataToBeExported: res.data,
+                    dataToBeExported: formattedRecord,
                     start_date: '',
                     end_date: '',
                     location_char: '',
@@ -50,16 +73,27 @@ class BrowseAndExport extends Component {
         }
     }
     exportData = () => {
-        const json2csv = require('json2csv').parse;
-        const fields = ['id', 'record_time', 'record_name', 'record_milage', 'record_operator', 'record_gift', 'record_id'];
-        const opts = { fields };
-        const csv = json2csv(this.state.dataToBeExported, opts);
-        fs.writeFile('保养记录.csv', csv)
-        .then(function(){
-            console.log("export successed!");
-        })
+        // const json2csv = require('json2csv').parse;
+        // const fields = ['id', 'record_time', 'record_name', 'record_milage', 'record_operator', 'record_gift', 'record_id'];
+        // const opts = { fields };
+        // const csv = json2csv(this.state.dataToBeExported, opts);
+        // fs.writeFile('保养记录.csv', csv)
+        // .then(function(){
+        //     console.log("export successed!");
+        // })
     }
     render(){
+        const headers = [
+            {label: '序号', key: 'id'},
+            {label: '日期', key: 'record_time'},
+            {label: '产品名称', key: 'record_name'},
+            {label: '表示里程', key: 'record_milage'},
+            {label: '操作人', key: 'record_operator'},
+            {label: '赠品情况', key: 'record_gift'},
+            {label: '换油证号', key: 'record_id'}
+        ];
+
+        const data = this.state.dataToBeExported;
         return (
             <div className = "export-browse-page">
                 <form className = "browse-form" onSubmit = {(e) => this.selectRecordBetweenDates(e, this.state.start_date, this.state.end_date, this.state.location_char)}>
@@ -75,7 +109,8 @@ class BrowseAndExport extends Component {
                 </form>
                 {this.state.dataToBeExported != null && this.state.dataToBeExported.length >= 1 ? 
                     <div className = "browse-table">
-                        <button className = "admin-page-btn" onClick = {this.exportData}>下载该记录</button>
+                        {/* <button className = "admin-page-btn" onClick = {this.exportData}>下载该记录</button> */}
+                        <CSVLink data = {data} headers = {headers}><button className = "admin-page-btn">下载</button></CSVLink>
                         <div className = "browse-table-head">
                             <div className = "browse-table-head-single">日期</div>
                             <div className = "browse-table-head-single">产品<br/>名称</div>
