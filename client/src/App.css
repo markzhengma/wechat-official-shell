@@ -9,11 +9,12 @@ header{
 }
 footer{
   width: 100vw;
-  height: 40px;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 10px;
 }
 footer a{
   text-decoration: none;
@@ -33,8 +34,9 @@ footer button:hover{
   color: white;
   cursor: pointer;
 }
-footer b{
-  color: #E93224;
+.app-footer{
+  display: flex;
+  flex-direction: column;
 }
 .app-header{
   width: 100vw;

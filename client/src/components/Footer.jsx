@@ -6,6 +6,7 @@ class Footer extends Component {
         return (
             <footer>
                 <div className = "app-footer">
+                    <b>联系电话</b>
                     <a href = 'tel:+86-0470-8223779'>海拉尔河东：0470-8223779</a>
                     <a href = 'tel:+86-0470-8307711'>海拉尔河西：0470-8307711</a>
                     <a href = 'tel:+86-0470-2205900'>满洲里四道街：0470-2205900</a>

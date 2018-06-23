@@ -375,13 +375,21 @@ class AdminPage extends Component {
                                 </div>
                                 {this.props.recordData.map(record => {
                                     var date = new Date(record.record_time);
-                                    var month = ((date.getMonth() + 1) < 10) ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
-                                    var dateFormatted = date.getFullYear() + "-" + month + "-" + date.getDate()
+                                    var month = '' + (date.getMonth() + 1);
+                                    if(month.length < 2){
+                                        month = '0' + month;
+                                    }
+                                    var day = '' + date.getDate();
+                                    if(day.length < 2){
+                                        day = '0' + day;
+                                    }
+                                    var year = date.getFullYear();
+                                    var formattedDate = [year, month, day].join('-');
                                     return (
                                         <div key = {record.id}>
                                             {this.state.selectRecordId != record.id ?
                                                 <div className = "record-single-admin" style = {this.props.recordData.indexOf(record) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
-                                                    <div className = "record-single-detail-admin">{date.getFullYear()}年<br/>{month}月{date.getDate()}日</div>
+                                                    <div className = "record-single-detail-admin">{formattedDate}</div>
                                                     <div className = "record-single-detail-admin">{record.record_name}</div>
                                                     <div className = "record-single-detail-admin">{record.record_milage}</div>
                                                     <div className = "record-single-detail-admin">{record.record_operator}</div>
@@ -390,7 +398,7 @@ class AdminPage extends Component {
                                                     {!this.state.isRecordUpdating ? 
                                                         <div className = "record-single-detail-admin">
                                                             <button className = "admin-edit-btn" onClick = {() => this.selectRecordUpdate(record.id,
-                                                                                                                                        dateFormatted,
+                                                                                                                                        formattedDate,
                                                                                                                                         record.record_name,
                                                                                                                                         record.record_milage,
                                                                                                                                         record.record_operator,
