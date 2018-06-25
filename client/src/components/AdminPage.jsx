@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 import CreateRecord from './CreateRecord';
 import BrowseAndExport from './BrowseAndExport';
-import axios from 'axios';
 
 class AdminPage extends Component {
     constructor(){
@@ -59,19 +58,19 @@ class AdminPage extends Component {
         this.props.resetRedirect();
         this.props.resetCreateCompleted();
         this.props.resetRecordData();
-        if(this.props.location == "海拉尔河东门店"){
+        if(this.props.location === "海拉尔河东门店"){
             this.props.getNewHD();
         }
-        if(this.props.location == "海拉尔河西门店"){
+        if(this.props.location === "海拉尔河西门店"){
             this.props.getNewH();
         }
-        if(this.props.location == "满洲里老店"){
+        if(this.props.location === "满洲里老店"){
             this.props.getNewM();
         }
-        if(this.props.location == "满洲里新店"){
+        if(this.props.location === "满洲里新店"){
             this.props.getNewM8();
         }
-        if(this.props.location == "牙克石门店"){
+        if(this.props.location === "牙克石门店"){
             this.props.getNewY();
         }
         this.props.getServiceNameList();
@@ -242,7 +241,7 @@ class AdminPage extends Component {
         }
     }
     render(){
-        if(this.props.fireRedirect == true){
+        if(this.props.fireRedirect === true){
             return <Redirect to = {this.props.redirect}/>
         }
         if(!this.props.auth){
@@ -387,8 +386,8 @@ class AdminPage extends Component {
                                     var formattedDate = [year, month, day].join('-');
                                     return (
                                         <div key = {record.id}>
-                                            {this.state.selectRecordId != record.id ?
-                                                <div className = "record-single-admin" style = {this.props.recordData.indexOf(record) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
+                                            {this.state.selectRecordId !== record.id ?
+                                                <div className = "record-single-admin" style = {this.props.recordData.indexOf(record) % 2 === 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
                                                     <div className = "record-single-detail-admin">{formattedDate}</div>
                                                     <div className = "record-single-detail-admin">{record.record_name}</div>
                                                     <div className = "record-single-detail-admin">{record.record_milage}</div>
@@ -418,29 +417,37 @@ class AdminPage extends Component {
                                                                                                     this.state.updateDetail, 
                                                                                                     this.state.selectRecordId
                                                                                                     )}>
-                                                    <div className = "record-single-admin" style = {this.props.recordData.indexOf(record) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
+                                                    <div className = "record-single-admin" style = {this.props.recordData.indexOf(record) % 2 === 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
                                                         <input className = "record-single-detail-admin-edit" name = "updateDate" type = "date" defaultValue = {this.state.updateDate} onChange = {this.handleInputChange}/>
                                                         <select className = "record-single-detail-admin-edit" name = "updateRecordName" defaultValue = {this.state.updateRecordName} onChange = {this.handleInputChange}>
                                                             <option value = "">-产品名称-</option>
                                                             <option value = "">**汽机油**</option>
                                                             {this.props.service_name_list.map(service => {
                                                                 if (service.type === '汽机油')
-                                                                return <option key = {service.id}>{service.record_name}</option>
+                                                                return <option key = {service.id}>{service.record_name}</option>;
+                                                                else
+                                                                return "";
                                                             })}
                                                             <option value = "">**柴机油**</option>
                                                             {this.props.service_name_list.map(service => {
                                                                 if (service.type === '柴机油')
-                                                                return <option key = {service.id}>{service.record_name}</option>
+                                                                return <option key = {service.id}>{service.record_name}</option>;
+                                                                else
+                                                                return "";
                                                             })}
                                                             <option value = "">**附属品**</option>
                                                             {this.props.service_name_list.map(service => {
                                                                 if (service.type === '附属品')
-                                                                return <option key = {service.id}>{service.record_name}</option>
+                                                                return <option key = {service.id}>{service.record_name}</option>;
+                                                                else
+                                                                return "";
                                                             })}
                                                             <option value = "">**中华产品**</option>
                                                             {this.props.service_name_list.map(service => {
                                                                 if (service.type === '中华产品')
-                                                                return <option key = {service.id}>{service.record_name}</option>
+                                                                return <option key = {service.id}>{service.record_name}</option>;
+                                                                else
+                                                                return "";
                                                             })}
                                                         </select>
                                                         <input className = "record-single-detail-admin-edit" name = "updateMilage" defaultValue = {this.state.updateMilage} onChange = {this.handleInputChange}/>
@@ -448,22 +455,30 @@ class AdminPage extends Component {
                                                             <option value = "">-操作人-</option>
                                                             {this.props.operator_list.map(operator => {
                                                                 if (operator.location === '其他')
-                                                                return <option key = {operator.id}>{operator.record_operator}</option>
+                                                                return <option key = {operator.id}>{operator.record_operator}</option>;
+                                                                else
+                                                                return "";
                                                             })}
                                                             <option value = "">**海拉尔**</option>
                                                             {this.props.operator_list.map(operator => {
                                                                 if (operator.location === '海拉尔')
-                                                                return <option key = {operator.id}>{operator.record_operator}</option>
+                                                                return <option key = {operator.id}>{operator.record_operator}</option>;
+                                                                else
+                                                                return "";
                                                             })}
                                                             <option value = "">**满洲里**</option>
                                                             {this.props.operator_list.map(operator => {
                                                                 if (operator.location === '满洲里')
-                                                                return <option key = {operator.id}>{operator.record_operator}</option>
+                                                                return <option key = {operator.id}>{operator.record_operator}</option>;
+                                                                else
+                                                                return "";
                                                             })}
                                                             <option value = "">**牙克石**</option>
                                                             {this.props.operator_list.map(operator => {
                                                                 if (operator.location === '牙克石')
-                                                                return <option key = {operator.id}>{operator.record_operator}</option>
+                                                                return <option key = {operator.id}>{operator.record_operator}</option>;
+                                                                else
+                                                                return "";
                                                             })}
                                                         </select>
                                                         <select className = "record-single-detail-admin-edit" name = "updateGift" defaultValue = {this.state.updateGift} onChange = {this.handleInputChange}>
@@ -512,7 +527,6 @@ class AdminPage extends Component {
                             <input className = "newrecord-input" type = 'text' name = 'driver_name' placeholder = "车主姓名" onChange = {this.handleInputChange} value = {this.state.driver_name}/>
                             <input className = "newrecord-input" type = "text" name = "phone_num" placeholder = "联系方式" onChange = {this.handleInputChange} value = {this.state.phone_num}/>
                             <button className = "admin-page-btn" type = "submit">创建新客户</button>
-                            <button className = "admin-page-btn" type = "reset">清空输入框</button>
                         </form>
                     : ""}
                     {this.props.admin_selection === "管理基本信息" ?
@@ -532,7 +546,7 @@ class AdminPage extends Component {
                                     {this.props.service_name_list.map(service_name => {
                                         return(
                                                 <div key = {service_name.id}>
-                                                    {this.state.selectNameListId != service_name.id ?
+                                                    {this.state.selectNameListId !== service_name.id ?
                                                         <div className = "manager_table_single">
                                                             <div className = "manager_table_single_detail">{service_name.record_name}</div>
                                                             <div className = "manager_table_single_detail">{service_name.type}</div>
@@ -583,7 +597,7 @@ class AdminPage extends Component {
                                     {this.props.operator_list.map(operator => {
                                         return(
                                                 <div key = {operator.id}>
-                                                    {this.state.selectOpListId != operator.id ?
+                                                    {this.state.selectOpListId !== operator.id ?
                                                         <div className = "manager_table_single">
                                                             <div className = "manager_table_single_detail">{operator.record_operator}</div>
                                                             <div className = "manager_table_single_detail">{operator.location}</div>
@@ -634,7 +648,7 @@ class AdminPage extends Component {
                                     {this.props.gift_list.map(gift => {
                                         return(
                                                 <div key = {gift.id}>
-                                                    {this.state.selectGiftListId != gift.id ?
+                                                    {this.state.selectGiftListId !== gift.id ?
                                                         <div className = "manager_table_single">
                                                             <div className = "manager_table_single_spacer"/>
                                                             <div className = "manager_table_single_detail">{gift.record_gift}</div>

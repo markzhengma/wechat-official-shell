@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class CreateRecord extends Component {
     constructor() {
@@ -51,22 +50,30 @@ class CreateRecord extends Component {
                         <option value = "">**汽机油**</option>
                         {this.props.service_name_list.map(service => {
                             if (service.type === '汽机油')
-                            return <option key = {service.id}>{service.record_name}</option>
+                            return <option key = {service.id}>{service.record_name}</option>;
+                            else
+                            return "";
                         })}
                         <option value = "">**柴机油**</option>
                         {this.props.service_name_list.map(service => {
                             if (service.type === '柴机油')
-                            return <option key = {service.id}>{service.record_name}</option>
+                            return <option key = {service.id}>{service.record_name}</option>;
+                            else
+                            return "";
                         })}
                         <option value = "">**附属品**</option>
                         {this.props.service_name_list.map(service => {
                             if (service.type === '附属品')
-                            return <option key = {service.id}>{service.record_name}</option>
+                            return <option key = {service.id}>{service.record_name}</option>;
+                            else
+                            return "";
                         })}
                         <option value = "">**中华产品**</option>
                         {this.props.service_name_list.map(service => {
                             if (service.type === '中华产品')
-                            return <option key = {service.id}>{service.record_name}</option>
+                            return <option key = {service.id}>{service.record_name}</option>;
+                            else
+                            return "";
                         })}
                     </select>
                     <input className = "create-record-input" type = 'text' name = 'record_milage' placeholder = "表示里程" onChange = {this.handleInputChange} value = {this.state.record_milage}/>
@@ -74,22 +81,30 @@ class CreateRecord extends Component {
                         <option value = "">-操作人-</option>
                         {this.props.operator_list.map(operator => {
                             if (operator.location === '其他')
-                            return <option key = {operator.id}>{operator.record_operator}</option>
+                            return <option key = {operator.id}>{operator.record_operator}</option>;
+                            else
+                            return "";
                         })}
                         <option value = "">**海拉尔**</option>
                         {this.props.operator_list.map(operator => {
                             if (operator.location === '海拉尔')
-                            return <option key = {operator.id}>{operator.record_operator}</option>
+                            return <option key = {operator.id}>{operator.record_operator}</option>;
+                            else
+                            return "";
                         })}
                         <option value = "">**满洲里**</option>
                         {this.props.operator_list.map(operator => {
                             if (operator.location === '满洲里')
-                            return <option key = {operator.id}>{operator.record_operator}</option>
+                            return <option key = {operator.id}>{operator.record_operator}</option>;
+                            else
+                            return "";
                         })}
                         <option value = "">**牙克石**</option>
                         {this.props.operator_list.map(operator => {
                             if (operator.location === '牙克石')
-                            return <option key = {operator.id}>{operator.record_operator}</option>
+                            return <option key = {operator.id}>{operator.record_operator}</option>;
+                            else
+                            return "";
                         })}
                     </select>
                     <select className = "create-record-input" name = "record_gift" onChange = {this.handleInputChange} value = {this.state.record_gift}>

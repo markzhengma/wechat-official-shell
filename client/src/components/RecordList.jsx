@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 
 class RecordList extends Component {
     componentDidMount(){
@@ -34,7 +33,7 @@ class RecordList extends Component {
                                     var date = new Date(record.record_time);
                                     var month = ((date.getMonth() + 1) < 10) ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
                                     return (
-                                        <div className = "record-single" key = {this.props.recordData.indexOf(record)} style = {this.props.recordData.indexOf(record) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
+                                        <div className = "record-single" key = {this.props.recordData.indexOf(record)} style = {this.props.recordData.indexOf(record) % 2 === 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
                                             <div className = "record-single-detail">{date.getFullYear()}年<br/>{month}月{date.getDate()}日</div>
                                             <div className = "record-single-detail">{record.record_name}</div>
                                             <div className = "record-single-detail">{record.record_milage}</div>

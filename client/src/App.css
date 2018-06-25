@@ -9,12 +9,13 @@ header{
 }
 footer{
   width: 100vw;
+  background-color: grey;
   height: fit-content;
+  position: absolute;
+  bottom: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 10px;
+  flex-direction: row;
+  justify-content: space-between;
 }
 footer a{
   text-decoration: none;
@@ -23,20 +24,22 @@ footer a{
 footer a:hover{
   color: white;
 }
-footer button{
-  width: 140px;
-  background-color: #FBE18D;
-  height: 40px;
-  font-size: 16px;
+footer div{
+  margin: 10px;
 }
-footer button:hover{
+footer b{
+  color: #DB3732;
+}
+.footer-btn{
+  width: 100px;
+  background-color: #FBE18D;
+  height: 30px;
+  font-size: 14px;
+}
+.footer-btn:hover{
   background-color: #E93224;
   color: white;
   cursor: pointer;
-}
-.app-footer{
-  display: flex;
-  flex-direction: column;
 }
 .app-header{
   width: 100vw;

@@ -5,7 +5,6 @@ import axios from 'axios';
 import {
   BrowserRouter as Router,
   Route,
-  Redirect,
 } from 'react-router-dom';
 
 import Header from './components/Header';
@@ -103,7 +102,7 @@ class App extends Component {
       })
       .then(res => {
           if(res.data){
-              if(res.data[0].phone_num == phone_num){
+              if(res.data[0].phone_num === phone_num){
                   this.setState({
                       userData: res.data,
                       fireRedirect: true,
@@ -360,19 +359,19 @@ class App extends Component {
           admin_selection: "查找老客户",
         });
         alert("创建成功");
-        if(this.state.location == "海拉尔河东门店"){
+        if(this.state.location === "海拉尔河东门店"){
             this.getNewHD();
         }
-        if(this.state.location == "海拉尔河西门店"){
+        if(this.state.location === "海拉尔河西门店"){
             this.getNewH();
         }
-        if(this.state.location == "满洲里老店"){
+        if(this.state.location === "满洲里老店"){
             this.getNewM();
         }
-        if(this.state.location == "满洲里新店"){
+        if(this.state.location === "满洲里新店"){
             this.getNewM8();
         }
-        if(this.state.location == "牙克石门店"){
+        if(this.state.location === "牙克石门店"){
             this.getNewY();
         }
       })

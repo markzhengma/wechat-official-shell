@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import {
-    Link,
-    Redirect,
-} from 'react-router-dom';
 import axios from 'axios';
 import { CSVLink } from 'react-csv';
 
@@ -126,7 +122,7 @@ class BrowseAndExport extends Component {
                         </div>
                         {this.state.dataToBeExported.map(record => {
                             return (
-                                <div className = "browse-single" key = {this.state.dataToBeExported.indexOf(record)} style = {this.state.dataToBeExported.indexOf(record) % 2 == 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
+                                <div className = "browse-single" key = {this.state.dataToBeExported.indexOf(record)} style = {this.state.dataToBeExported.indexOf(record) % 2 === 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
                                     <div className = "browse-single-detail">{record.record_time}</div>
                                     <div className = "browse-single-detail">{record.record_name}</div>
                                     <div className = "browse-single-detail">{record.record_milage}</div>

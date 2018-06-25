@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class Header extends Component {
-    componentDidMount(){
-        console.log(window.innerWidth);
-    }
     render(){
         return (
             <header>

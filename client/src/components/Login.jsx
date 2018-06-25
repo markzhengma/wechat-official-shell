@@ -28,38 +28,38 @@ class Login extends Component {
 
     handleLogIn = (e) => {
         e.preventDefault();
-        if(this.state.location != ''){
+        if(this.state.location !== ''){
             this.setState({
                 admin: this.state.inputAdmin,
                 pass: this.state.inputPass,
             })
         }
-        if(this.state.inputAdmin == "ShellHulunbuir" && this.state.inputPass == "Cheers!"){
+        if(this.state.inputAdmin === "ShellHulunbuir" && this.state.inputPass === "Cheers!"){
             this.props.setAuthState(true);
             this.props.setRedirect('/admin');
             this.props.setLocation('总管理员');
         }
-        if(this.state.inputAdmin == "shellhd" && this.state.inputPass == "hedong"){
+        if(this.state.inputAdmin === "shellhd" && this.state.inputPass === "hedong"){
             this.props.setAuthState(true);
             this.props.setRedirect('/admin');
             this.props.setLocation('海拉尔河东门店');
         }
-        if(this.state.inputAdmin == "shellh" && this.state.inputPass == "hexi"){
+        if(this.state.inputAdmin === "shellh" && this.state.inputPass === "hexi"){
             this.props.setAuthState(true);
             this.props.setRedirect('/admin');
             this.props.setLocation('海拉尔河西门店');
         }
-        if(this.state.inputAdmin == "shellm" && this.state.inputPass == "manzhoulilaodian"){
+        if(this.state.inputAdmin === "shellm" && this.state.inputPass === "manzhoulilaodian"){
             this.props.setAuthState(true);
             this.props.setRedirect('/admin');
             this.props.setLocation('满洲里老店');
         }
-        if(this.state.inputAdmin == "shellm8" && this.state.inputPass == "manzhoulixindian"){
+        if(this.state.inputAdmin === "shellm8" && this.state.inputPass === "manzhoulixindian"){
             this.props.setAuthState(true);
             this.props.setRedirect('/admin');
             this.props.setLocation('满洲里新店');
         }
-        if(this.state.inputAdmin == "shelly" && this.state.inputPass == "yakeshi"){
+        if(this.state.inputAdmin === "shelly" && this.state.inputPass === "yakeshi"){
             this.props.setAuthState(true);
             this.props.setRedirect('/admin');
             this.props.setLocation('牙克石门店');
@@ -74,7 +74,7 @@ class Login extends Component {
         })
     }
     render(){
-        if(this.props.fireRedirect == true){
+        if(this.props.fireRedirect === true){
             return <Redirect to = {this.props.redirect}/>
         }
         return (

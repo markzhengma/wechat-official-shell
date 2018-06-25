@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import {
-    Link,
-    Redirect,
-} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class Home extends Component {
     componentDidMount(){
         this.props.resetRedirect();
     }
     render(){
-        if(this.props.fireRedirect == true){
+        if(this.props.fireRedirect === true){
             return <Redirect to = {this.props.redirect}/>
         }
         return (
