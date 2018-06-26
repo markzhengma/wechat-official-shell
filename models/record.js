@@ -35,7 +35,8 @@ Record.findRecordByService = service_num => {
     return db.query(`
         SELECT *
         FROM users_records
-        WHERE record_id = $1;
+        WHERE record_id = $1
+        ORDER BY record_time DESC
     `, [service_num])
 }
 

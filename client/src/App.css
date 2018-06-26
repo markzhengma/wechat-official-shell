@@ -87,7 +87,7 @@ input:hover{
   background-color: #FBE18D;
 }
 .home-content{
-  margin-bottom: 240px;
+  margin-bottom: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,37 +134,37 @@ input:hover{
 }
 .record-table{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  width: 96vw;
-  min-width: 360px;
+  width: 90vw;
+  margin-left: 20px;
   margin-bottom: 20px;
   overflow: scroll;
 }
 .record-table-head{
   display: flex;
-  width: 96vw;
-  min-width: 360px;
-  height: 50px;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
   background-color: #FBE18D;
 }
 .record-table-head-single{
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 16vw;
-  min-width: 60px;
+  width: 50px;
+  height: 52px;
+  padding: 5px;
   color: #CF422B;
   font-weight: 900;
 }
 .record-single{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   height: fit-content;
-  width: 96vw;
-  min-width: 360px;
+  width: fit-content;
   min-height: 47.5px;
-  border-bottom: rgb(231, 188, 182) solid 2px;
+  /* border-bottom: rgb(231, 188, 182) solid 2px; */
   display: flex;
   align-items: center;
   background-color: white;
@@ -172,9 +172,11 @@ input:hover{
 .record-single-detail{
   display: flex;
   justify-content: center;
-  align-content: center;
-  width: 16vw;
-  min-width: 60px;
+  align-items: center;
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  width: 80px;
+  padding: 5px;
+  height: 50px;
 }
 .back-btn{
   width: 100px;
@@ -246,6 +248,9 @@ input:hover{
   width: 156px;
   height: 24px;
   font-size: 16px;
+}
+.admin-page{
+  margin-bottom: 60px;
 }
 .admin-page-btn{
   width: 100px;
