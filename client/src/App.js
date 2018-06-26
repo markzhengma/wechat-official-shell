@@ -35,6 +35,7 @@ class App extends Component {
           service_name_list: null,
           operator_list: null,
           gift_list: null,
+          isShowHeader: true,
       }
       this.handleInputChange = this.handleInputChange.bind(this);
       this.submitForm = this.submitForm.bind(this);
@@ -73,7 +74,7 @@ class App extends Component {
       this.updateGiftList = this.updateGiftList.bind(this);
       this.deleteGiftList = this.deleteGiftList.bind(this);
       this.addGiftList = this.addGiftList.bind(this);
-      this.exportRecordData = this.exportRecordData.bind(this);
+      this.switchShowHeader = this.switchShowHeader.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -828,26 +829,17 @@ class App extends Component {
     }
   }
 
-  exportRecordData = (data) => {
-      console.log(data);
-      axios.post('/record/export/record-data', {
-        data: data,
-      })
-      // .then(res => {
-      //   console.log(res.data);
-      //   alert("下载成功！");
-      // })
-      // .catch(err => {
-      //   console.log(err);
-      // })
-    // }
+  switchShowHeader = () => {
+    this.setState({
+      isShowHeader: !this.state.isShowHeader,
+    })
   }
 
   render() {
     return (
       <Router>
         <div className="App">
-          <Header />
+          <Header isShowHeader = {this.state.isShowHeader}/>
           <Route exact path = '/' render = {() => <Home
                                                       plate = {this.state.plate}
                                                       phone_num = {this.state.phone_num}
@@ -865,6 +857,7 @@ class App extends Component {
                                                             getRecord = {this.getRecord}
                                                             recordData = {this.state.recordData}
                                                             userData = {this.state.userData}
+                                                            switchShowHeader = {this.switchShowHeader}
                                                           />}/>
           <Route exact path = '/login' render = {() => <Login
                                                           setAuthState = {this.setAuthState}
@@ -919,7 +912,6 @@ class App extends Component {
                                                           updateGiftList = {this.updateGiftList}
                                                           deleteGiftList = {this.deleteGiftList}
                                                           addGiftList = {this.addGiftList}
-                                                          exportRecordData = {this.exportRecordData}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

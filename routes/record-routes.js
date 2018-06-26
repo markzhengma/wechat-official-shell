@@ -11,6 +11,7 @@ recordRoutes.get('/plate/:plate', recordsController.findUserByPlate);
 recordRoutes.get('/phone/:phone_num', recordsController.findUserByPhone);
 recordRoutes.get('/name/:driver_name', recordsController.findUserByName);
 recordRoutes.get('/service/:service_num', recordsController.findUserByService);
+recordRoutes.get('/user-location/:location_char', recordsController.findUserByLocation);
 recordRoutes.get('/search/:service_num', recordsController.findRecordByService);
 recordRoutes.post('/new-record', recordsController.create);
 recordRoutes.post('/new-user', recordsController.createUser);
@@ -18,7 +19,6 @@ recordRoutes.put('/update/user/:id', recordsController.updateUser);
 recordRoutes.put('/update/record/:id', recordsController.updateRecord);
 recordRoutes.delete('/delete/user/:id', recordsController.deleteUser);
 recordRoutes.delete('/delete/record/:id', recordsController.deleteRecord);
-recordRoutes.post('/export/record-data', recordsController.exportRecordData);
 recordRoutes.get('/browse/between-dates/:start_date/:end_date/:location_char', recordsController.getRecordBetweenDates);
 
 module.exports = recordRoutes;

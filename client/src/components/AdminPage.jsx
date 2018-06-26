@@ -693,7 +693,6 @@ class AdminPage extends Component {
                     : ""}
                     {this.props.admin_selection === "浏览和下载记录" ?
                         <BrowseAndExport 
-                            exportRecordData = {this.props.exportRecordData}
                         />
                     : ""}
                     {this.props.admin_selection === "创建换油记录" ?

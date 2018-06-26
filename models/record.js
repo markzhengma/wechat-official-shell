@@ -31,6 +31,15 @@ Record.findUserByService = service_num => {
         WHERE service_num = $1;
     `, [service_num])
 }
+Record.findUserByLocation = location_char => {
+    return db.query(`
+        SELECT 
+        id, service_num, make, plate, driver_name, phone_num
+        FROM users
+        WHERE service_num LIKE $1
+        ORDER BY service_num
+    `, [location_char])
+}
 Record.findRecordByService = service_num => {
     return db.query(`
         SELECT *
@@ -162,28 +171,6 @@ Record.destroyRecord = (id) => {
     return db.none(`
         DELETE FROM users_records where id = $1
     `, [id]);
-}
-
-// Record.exportBetweenDates = () => {
-//     return db.query(`
-//         \copy
-//         (SELECT * FROM users_records
-//         WHERE record_time
-//         BETWEEN '2018-05-01' AND '2018-06-01')
-//         TO './保养记录.csv'
-//         WITH CSV DELIMITER ',';
-//     `);
-// }
-
-Record.exportRecordData = (data) => {
-    const fields = ['id', 'record_time', 'record_name', 'record_milage', 'record_operator', 'record_gift', 'record_id'];
-    const opts = { fields };
-    const csv = json2csv(data, opts);
-    console.log(data);
-    fs.writeFile('保养记录.csv', csv, function (err) {
-        if (err) return console.log(err);
-        console.log('exported successfully!');
-    });
 }
 
 Record.getRecordBetweenDates = (start_date, end_date, location_char) => {
