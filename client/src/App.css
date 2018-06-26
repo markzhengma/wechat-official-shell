@@ -10,29 +10,54 @@ header{
 footer{
   width: 100vw;
   background-color: grey;
-  height: fit-content;
+  height: 50px;
   position: absolute;
   bottom: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-footer a{
-  text-decoration: none;
-  color: #E93224;
+.contact-box{
+  position: absolute;
+  background: rgba(233, 92, 36, 0.822);
+  width: fit-content;
+  max-height: 0;
+  overflow: hidden;
+  bottom: 50px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: grey solid 0;
+  border-radius: 10px;
+  transition: 0.5s;
 }
-footer a:hover{
+.contact-box b{
+  margin-top: 4px;
+}
+.store-num{
+  font-size: 13px;
+  color: black;
+  margin-left: 8px;
+  margin-bottom: 4px;
+}
+.contact-box a:hover{
   color: white;
+}
+.store-name{
+  text-decoration: none;
+  font-size: 13px;
+  color: #F9D148;
+  margin-left: 8px;
+  margin-bottom: 4px;
 }
 footer div{
   margin: 10px;
 }
-footer b{
-  color: #DB3732;
-}
 .footer-btn{
   width: 100px;
   background-color: #FBE18D;
+  border-radius: 8px;
   height: 30px;
   font-size: 14px;
 }
@@ -88,6 +113,7 @@ input:hover{
   background-color: #FBE18D;
   height: 40px;
   font-size: 16px;
+  border-radius: 8px;
 }
 .home-content form button:hover{
   background-color: #E93224;
@@ -153,6 +179,7 @@ input:hover{
 .back-btn{
   width: 100px;
   background-color: #FBE18D;
+  border-radius: 8px;
   height: 40px;
   font-size: 16px;
 }
@@ -178,6 +205,7 @@ input:hover{
 .login-btn{
   width: 100px;
   background-color: #FBE18D;
+  border-radius: 8px;
   height: 30px;
   font-size: 12px;
 }
@@ -191,6 +219,7 @@ input:hover{
   background-color: #FBE18D;
   height: 30px;
   font-size: 12px;
+  border-radius: 8px;
 }
 .create-page button:hover{
   background-color: #E93224;
@@ -224,6 +253,7 @@ input:hover{
   height: 30px;
   font-size: 12px;
   margin: 10px;
+  border-radius: 8px;
 }
 .admin-page-btn:hover{
   background-color: #E93224;
@@ -400,6 +430,7 @@ input:hover{
   background-color: #FBE18D;
   height: 30px;
   font-size: 12px;
+  border-radius: 8px;
 }
 .form-btn:hover{
   background-color: #E93224;

@@ -2,16 +2,34 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class Footer extends Component {
+    constructor(){
+        super();
+        this.state = {
+            isShowContact: false,
+        }
+    }
+    switchContactShow = () => {
+        this.setState({
+            isShowContact: !this.state.isShowContact,
+        })
+    }
     render(){
         return (
             <footer>
+                <div className = "contact-box" style = {this.state.isShowContact ? {maxHeight: '300px', border: 'grey solid 0px'} : {maxHeight: '0px', border: 'grey solid 0px'}}>
+                    <b><a href = 'tel:+86-0470-8223779' className = "store-name">海拉尔河东店：</a></b>
+                    <a href = 'tel:+86-0470-8223779' className = "store-num">0470-8223779</a>
+                    <b><a href = 'tel:+86-0470-8307711' className = "store-name">海拉尔河西店：</a></b>
+                    <a href = 'tel:+86-0470-8307711' className = "store-num">0470-8307711</a>
+                    <b><a href = 'tel:+86-0470-2205900' className = "store-name">满洲里四道街店：</a></b>
+                    <a href = 'tel:+86-0470-2205900' className = "store-num">0470-2205900</a>
+                    <b><a href = 'tel:+86-0470-6221541' className = "store-name">满洲里粮库综合楼店：</a></b>
+                    <a href = 'tel:+86-0470-6221541' className = "store-num">0470-6221541</a>
+                    <b><a href = 'tel:+86-0470-7379457' className = "store-name">牙克石光明南路店：</a></b>
+                    <a href = 'tel:+86-0470-7379457' className = "store-num">0470-7379457</a>
+                </div>
                 <div className = "app-footer">
-                    <button className = "footer-btn">联系电话</button>
-                    {/* <a href = 'tel:+86-0470-8223779'>海拉尔河东：0470-8223779</a>
-                    <a href = 'tel:+86-0470-8307711'>海拉尔河西：0470-8307711</a>
-                    <a href = 'tel:+86-0470-2205900'>满洲里四道街：0470-2205900</a>
-                    <a href = 'tel:+86-0470-6221541'>满洲里粮库综合楼：0470-6221541</a>
-                    <a href = 'tel:+86-0470-7379457'>牙克石光明南路：0470-7379457</a> */}
+                    <button className = "footer-btn" onClick = {this.switchContactShow}>联系我们</button>
                 </div>
                 <div className = "header-logo"/>
                 <div>
