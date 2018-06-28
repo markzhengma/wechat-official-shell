@@ -303,9 +303,34 @@ class AdminPage extends Component {
                         </form>
                         : ""
                     : ""}
-                    {this.props.userData != null && this.props.userData.length >= 1 ? 
+                    {this.props.admin_selection === "查找老客户" && this.props.userList ? 
+                        <div className = "table-container">
+                            <h5>找到多于一条记录，请点击选择要浏览或编辑的客户记录</h5>
+                            <div className = "user-list-table">
+                                <div className = "user-list-head">
+                                    <div className = "user-list-head-single">换油证号</div>
+                                    <div className = "user-list-head-single">车型</div>
+                                    <div className = "user-list-head-single">车牌号码</div>
+                                    <div className = "user-list-head-single">车主姓名</div>
+                                    <div className = "user-list-head-single">联系方式</div>
+                                </div>
+                                {this.props.userList.map(user => {
+                                    return(
+                                        <div className = "user-list-detail" key = {this.props.userList.indexOf(user)} onClick = {() => this.props.selectFromUserList(this.props.userList.indexOf(user), user.service_num)}>
+                                            <div className = "user-list-detail-single">{user.service_num ? user.service_num : "无记录"}</div>
+                                            <div className = "user-list-detail-single">{user.make ? user.make : "无记录"}</div>
+                                            <div className = "user-list-detail-single">{user.plate ? user.plate : "无记录"}</div>
+                                            <div className = "user-list-detail-single">{user.driver_name ? user.driver_name : "无记录"}</div>
+                                            <div className = "user-list-detail-single">{user.phone_num ? user.phone_num : "无记录"}</div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    : ""}
+                    {this.props.userData ? 
                         this.props.admin_selection === "查找老客户" ?
-                                <div>
+                                <div className = "table-container">
                                     <div className = "record-table-admin">
                                         <div className = "record-table-head-admin">
                                             <div className = "record-table-head-single-admin">换油证号</div>
@@ -316,24 +341,24 @@ class AdminPage extends Component {
                                             <div className = "record-table-head-single-admin"/>
                                             <div className = "record-table-head-single-admin">编辑</div>
                                         </div>
-                                        {this.state.selectUserId !== this.props.userData[0].id ?
+                                        {this.state.selectUserId !== this.props.userData.id ?
                                             <div className = "record-single-admin">
-                                                <div className = "record-single-detail-admin">{this.props.userData[0].service_num ? this.props.userData[0].service_num : "无记录"}</div>
-                                                <div className = "record-single-detail-admin">{this.props.userData[0].make ? this.props.userData[0].make : "无记录"}</div>
-                                                <div className = "record-single-detail-admin">{this.props.userData[0].plate ? this.props.userData[0].plate : "无记录"}</div>
-                                                <div className = "record-single-detail-admin">{this.props.userData[0].driver_name ? this.props.userData[0].driver_name : "无记录"}</div>
-                                                <div className = "record-single-detail-admin">{this.props.userData[0].phone_num ? this.props.userData[0].phone_num : "无记录"}</div>
+                                                <div className = "record-single-detail-admin">{this.props.userData.service_num ? this.props.userData.service_num : "无记录"}</div>
+                                                <div className = "record-single-detail-admin">{this.props.userData.make ? this.props.userData.make : "无记录"}</div>
+                                                <div className = "record-single-detail-admin">{this.props.userData.plate ? this.props.userData.plate : "无记录"}</div>
+                                                <div className = "record-single-detail-admin">{this.props.userData.driver_name ? this.props.userData.driver_name : "无记录"}</div>
+                                                <div className = "record-single-detail-admin">{this.props.userData.phone_num ? this.props.userData.phone_num : "无记录"}</div>
                                                 <div className = "record-single-detail-admin"/>
                                                 {!this.state.isUserUpdating ? 
                                                     <div className = "record-single-detail-admin">
-                                                        <button className = "admin-edit-btn" onClick = {() => this.selectUserUpdate(this.props.userData[0].id,
-                                                                                                                                        this.props.userData[0].make,
-                                                                                                                                        this.props.userData[0].plate,
-                                                                                                                                        this.props.userData[0].driver_name,
-                                                                                                                                        this.props.userData[0].phone_num,
+                                                        <button className = "admin-edit-btn" onClick = {() => this.selectUserUpdate(this.props.userData.id,
+                                                                                                                                        this.props.userData.make,
+                                                                                                                                        this.props.userData.plate,
+                                                                                                                                        this.props.userData.driver_name,
+                                                                                                                                        this.props.userData.phone_num,
                                                                                                                                     )}/>
                                                         {this.props.recordData === null || this.props.recordData.length < 1 ?
-                                                            <button className = "admin-delete-btn" onClick = {() => this.props.deleteUser(this.props.userData[0].id)}/>
+                                                            <button className = "admin-delete-btn" onClick = {() => this.props.deleteUser(this.props.userData.id)}/>
                                                         : ""}
                                                     </div>
                                                 : ""}
@@ -346,7 +371,7 @@ class AdminPage extends Component {
                                                                                                 this.state.selectUserId
                                                                                             )}>
                                                 <div className = "record-single-admin">
-                                                    <div className = "record-single-detail-admin">{this.props.userData[0].service_num ? this.props.userData[0].service_num : "无记录"}</div>
+                                                    <div className = "record-single-detail-admin">{this.props.userData.service_num ? this.props.userData.service_num : "无记录"}</div>
                                                     <input className = "record-single-detail-admin-edit" name = "updateMake" defaultValue = {this.state.updateMake} onChange = {this.handleInputChange}/>
                                                     <input className = "record-single-detail-admin-edit" name = "updatePlate" defaultValue = {this.state.updatePlate} onChange = {this.handleInputChange}/>
                                                     <input className = "record-single-detail-admin-edit" name = "updateDriverName" defaultValue = {this.state.updateDriverName} onChange = {this.handleInputChange}/>
@@ -362,6 +387,7 @@ class AdminPage extends Component {
                     : ""}
                     {this.props.recordData != null && this.props.recordData.length >= 1 ? 
                         this.props.admin_selection === "查找老客户" ?
+                        <div className = "table-container">
                             <div className = "record-table-admin">
                                 <div className = "record-table-head-admin">
                                     <div className = "record-table-head-single-admin">日期</div>
@@ -496,6 +522,7 @@ class AdminPage extends Component {
                                     )
                                 })}
                             </div>
+                        </div>
                         :""
                     : ""}
                     {this.props.admin_selection === "查找老客户" && this.props.userData != null ?

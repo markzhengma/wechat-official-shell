@@ -23,10 +23,10 @@ class RecordList extends Component {
         return (
             <div className = "records-content">
                     <div>
-                        {this.props.userData && this.props.userData.length ? 
+                        {this.props.userData ? 
                             <div className = "record-title">
                                 <div className = "user-info-table"  style = {this.state.isShowRecord ? {maxHeight: '0px'}: {maxHeight: '300px'}}>
-                                    <h4>欢迎 {this.props.userData[0].driver_name}</h4>
+                                    <h4>欢迎 {this.props.userData.driver_name}</h4>
                                     <div className = "user-info-head">
                                         <div className = "user-info-head-single">
                                             车牌号码
@@ -37,10 +37,10 @@ class RecordList extends Component {
                                     </div>
                                     <div className = "user-info-detail">
                                         <div className = "user-info-detail-single">
-                                            {this.props.userData[0].plate}
+                                            {this.props.userData.plate}
                                         </div>
                                         <div className = "user-info-detail-single">
-                                            {this.props.userData[0].make ? this.props.userData[0].make : "无记录"}
+                                            {this.props.userData.make ? this.props.userData.make : "无记录"}
                                         </div>
                                     </div>
                                     <div className = "user-info-head">
@@ -53,10 +53,10 @@ class RecordList extends Component {
                                     </div>
                                     <div className = "user-info-detail">
                                         <div className = "user-info-detail-single">
-                                            {this.props.userData[0].phone_num}
+                                            {this.props.userData.phone_num}
                                         </div>
                                         <div className = "user-info-detail-single">
-                                            {this.props.userData[0].service_num ? this.props.userData[0].service_num : "无记录"}
+                                            {this.props.userData.service_num ? this.props.userData.service_num : "无记录"}
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +114,7 @@ class RecordList extends Component {
                             </div>
                         : <h5>暂无保养记录</h5>}
                     </div>
-                <Link to = "/"><button className = "back-btn">返回首页</button></Link>
+                <Link to = "/"><button className = "back-btn" onClick = {this.props.showHeader}>返回首页</button></Link>
             </div>
         )
     }

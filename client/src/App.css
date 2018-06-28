@@ -682,3 +682,57 @@ input:hover{
   margin-left: 20px;
   margin-right: 20px;
 }
+.user-list-table{
+  margin-bottom: 30px;
+}
+.user-list-head{
+  display: flex;
+  width: 70vw;
+  min-width: 600px;
+  height: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: grey;
+}
+.user-list-head-single{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14vw;
+  min-width: 120px;
+  color: #F9D148;
+  font-weight: 900;
+}
+.user-list-detail{
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 70vw;
+  min-width: 600px;
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+}
+.user-list-detail:hover{
+  background-color: #FBE18D;
+  color: #CF422B;
+}
+.user-list-detail-single{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 14vw;
+  min-width: 120px;
+}
+.table-container{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: flex-start;
+  padding-left: 20px;
+}

@@ -15,12 +15,12 @@ class Home extends Component {
                 {!this.props.plateMatchesPhoneNum ? 
                     <h5 className = "banner">车牌号和手机号不符，<br/>请重新输入或联系我们更新您的信息。</h5>
                     : ''}
-                {!this.props.plateExists ? 
-                    <h5 className = "banner">未能找到与您的车牌号对应的记录，<br/>请重新输入或联系我们更新您的信息。</h5>
+                {!this.props.phoneExists ? 
+                    <h5 className = "banner">未能找到与您的手机号对应的记录，<br/>请重新输入或联系我们更新您的信息。</h5>
                     : ''}
                 <form onSubmit = {this.props.submitForm}>
-                    <input type = "text" name = "plate" value = {this.props.plate} placeholder = "请输入车牌号" onChange = {this.props.handleInputChange}/>
                     <input type = "text" name = "phone_num" value = {this.props.phone_num} placeholder = "请输入手机号码" onChange = {this.props.handleInputChange}/>
+                    <input type = "text" name = "plate" value = {this.props.plate} placeholder = "请输入车牌号" onChange = {this.props.handleInputChange}/>
                     <button type = "submit">查询</button>
                 </form>
             </div>
