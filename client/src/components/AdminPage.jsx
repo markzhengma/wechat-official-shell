@@ -398,6 +398,23 @@ class AdminPage extends Component {
                                     <div className = "record-table-head-single-admin">备注</div>
                                     <div className = "record-table-head-single-admin">编辑</div>
                                 </div>
+                                {this.props.admin_selection === "查找老客户" && this.props.userData != null ?
+                                    this.state.isInputNew ? 
+                                        <CreateRecord 
+                                            service_num = {this.props.userData.service_num}
+                                            handleNewRecordSubmit = {this.props.handleNewRecordSubmit}
+                                            getRecordByService = {this.props.getRecordByService}
+                                            switchInputNew = {this.switchInputNew}
+                                            service_name_list = {this.props.service_name_list}
+                                            operator_list = {this.props.operator_list}
+                                            gift_list = {this.props.gift_list}
+                                        />
+                                    : 
+                                    <div className = "create-record-btn-group">
+                                        <button id = "add-btn" onClick = {this.switchInputNew}/>
+                                        <div>添加保养记录</div>
+                                    </div>
+                                : ""}
                                 {this.props.recordData.map(record => {
                                     var date = new Date(record.record_time);
                                     var month = '' + (date.getMonth() + 1);
@@ -525,23 +542,7 @@ class AdminPage extends Component {
                         </div>
                         :""
                     : ""}
-                    {this.props.admin_selection === "查找老客户" && this.props.userData != null ?
-                        this.state.isInputNew ? 
-                            <CreateRecord 
-                                service_num = {this.props.userData[0].service_num}
-                                handleNewRecordSubmit = {this.props.handleNewRecordSubmit}
-                                getRecordByService = {this.props.getRecordByService}
-                                switchInputNew = {this.switchInputNew}
-                                service_name_list = {this.props.service_name_list}
-                                operator_list = {this.props.operator_list}
-                                gift_list = {this.props.gift_list}
-                            />
-                        : 
-                        <div className = "create-record-btn-group">
-                            <button id = "add-btn" onClick = {this.switchInputNew}/>
-                            <div>添加保养记录</div>
-                        </div>
-                    : ""}
+                    
                     {this.props.admin_selection === "创建新客户" ?
                         <form className = "create-form" onSubmit = {(e) => this.submitAndClearState(e, this.props.newServiceNum,
                                                                                                                 this.state.make,

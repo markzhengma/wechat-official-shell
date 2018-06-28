@@ -284,7 +284,6 @@ input:hover{
   display: flex;
   align-items: center;
   background-color: white;
-  margin-top: -20px;
 }
 .create-record-input{
   -webkit-appearance: none; 
@@ -292,9 +291,9 @@ input:hover{
   appearance: none;
   border-radius: 0%;
   border: none;
-  box-sizing: border-box;
+  /* box-sizing: border-box;
   border-left: rgb(231, 188, 182) solid 0.5px;
-  border-right: rgb(231, 188, 182) solid 0.5px;
+  border-right: rgb(231, 188, 182) solid 0.5px; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -310,8 +309,8 @@ input:hover{
   text-align: left;
 }
 #add-btn{
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: 10px;
   border: none;
   border-radius: 50%;
@@ -323,8 +322,8 @@ input:hover{
   border: rgb(231, 188, 182) solid 4px;
 }
 #delete-btn{
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: 10px;
   border: none;
   border-radius: 50%;
@@ -342,12 +341,15 @@ input:hover{
   align-items: center;
 }
 .create-record-btn-group{
-  height: 80px;
+  height: 50px;
   width: 98vw;
+  background-color: white;
+  border-bottom: rgb(231, 188, 182) solid 2px;
   display: flex;
   flex-direction: row;
   justify-content: left;
   align-items: center;
+  min-width: 660px;
 }
 .record-table-admin{
   display: flex;
