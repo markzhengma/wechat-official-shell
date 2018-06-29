@@ -17,15 +17,6 @@ class BrowseAndExport extends Component {
         }
         this.handleInputChange = this.handleInputChange.bind(this);
     }
-    componentDidMount = () => {
-        axios.get('/record/recent/h')
-        .then(res => {
-            console.log(res.data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
     handleInputChange = (e) => {
         const name = e.target.name;
         const value = e.target.value;
