@@ -385,8 +385,7 @@ class AdminPage extends Component {
                                 </div>
                         : ""
                     : ""}
-                    {this.props.recordData != null && this.props.recordData.length >= 1 ? 
-                        this.props.admin_selection === "查找老客户" ?
+                    {this.props.admin_selection === "查找老客户" ?
                         <div className = "table-container">
                             <div className = "record-table-admin">
                                 <div className = "record-table-head-admin">
@@ -415,19 +414,20 @@ class AdminPage extends Component {
                                         <div>添加保养记录</div>
                                     </div>
                                 : ""}
-                                {this.props.recordData.map(record => {
-                                    var date = new Date(record.record_time);
-                                    var month = '' + (date.getMonth() + 1);
-                                    if(month.length < 2){
-                                        month = '0' + month;
-                                    }
-                                    var day = '' + date.getDate();
-                                    if(day.length < 2){
-                                        day = '0' + day;
-                                    }
-                                    var year = date.getFullYear();
-                                    var formattedDate = [year, month, day].join('-');
-                                    return (
+                                {this.props.recordData != null && this.props.recordData.length >= 1 ? 
+                                    this.props.recordData.map(record => {
+                                        var date = new Date(record.record_time);
+                                        var month = '' + (date.getMonth() + 1);
+                                        if(month.length < 2){
+                                            month = '0' + month;
+                                        }
+                                        var day = '' + date.getDate();
+                                        if(day.length < 2){
+                                            day = '0' + day;
+                                        }
+                                        var year = date.getFullYear();
+                                        var formattedDate = [year, month, day].join('-');
+                                        return (
                                         <div key = {record.id}>
                                             {this.state.selectRecordId !== record.id ?
                                                 <div className = "record-single-admin" style = {this.props.recordData.indexOf(record) % 2 === 0 ? {backgroundColor: 'white'} : {backgroundColor: '#faefc9'}}>
@@ -537,10 +537,10 @@ class AdminPage extends Component {
                                             }
                                         </div>
                                     )
-                                })}
+                                })
+                                : ""}
                             </div>
                         </div>
-                        :""
                     : ""}
                     
                     {this.props.admin_selection === "创建新客户" ?

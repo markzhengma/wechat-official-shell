@@ -452,7 +452,7 @@ class App extends Component {
         .then(res => {
             if(res.data){
                 this.setState({
-                    userData: res.data,
+                    userData: res.data[0],
                     recordData: null,
                     phoneExists: true,
                 })
@@ -605,7 +605,7 @@ class App extends Component {
         .then(res => {
           if(res.data){
             this.setState({
-              userData: res.data,
+              userData: res.data[0],
               phoneExists: true,
             })
             console.log(res.data);
