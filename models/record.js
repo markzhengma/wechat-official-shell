@@ -187,7 +187,7 @@ Record.getRecentRecords = (location_char) => {
     return db.any(`
         SELECT * from users_records
         WHERE record_id LIKE $1
-        ORDER BY id, record_id DESC
+        ORDER BY id DESC
         LIMIT 10
     `, [location_char])
 }
