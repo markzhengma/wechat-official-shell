@@ -739,3 +739,46 @@ input:hover{
   justify-content: flex-start;
   padding-left: 20px;
 }
+.recent-record-head{
+  display: flex;
+  width: 98vw;
+  min-width: 700px;
+  height: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: grey;
+}
+.recent-record-head-single{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14vw;
+  min-width: 100px;
+  color: #F9D148;
+  font-weight: 900;
+}
+.recent-record-detail{
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 98vw;
+  min-width: 700px;
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  cursor: pointer;
+}
+.recent-record-detail:hover{
+  background-color: #FBE18D;
+  color: #CF422B;
+}
+.recent-record-detail-single{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 14vw;
+  min-width: 100px;
+}

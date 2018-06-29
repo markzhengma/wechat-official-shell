@@ -20,5 +20,6 @@ recordRoutes.put('/update/record/:id', recordsController.updateRecord);
 recordRoutes.delete('/delete/user/:id', recordsController.deleteUser);
 recordRoutes.delete('/delete/record/:id', recordsController.deleteRecord);
 recordRoutes.get('/browse/between-dates/:start_date/:end_date/:location_char', recordsController.getRecordBetweenDates);
+recordRoutes.get('/recent/:location_char', recordsController.getRecentRecords);
 
 module.exports = recordRoutes;

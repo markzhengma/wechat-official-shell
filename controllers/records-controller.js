@@ -217,5 +217,16 @@ recordsController.getRecordBetweenDates = (req, res) => {
     })
 }
 
+recordsController.getRecentRecords = (req, res) => {
+    Record.getRecentRecords(req.params.location_char + '%')
+    .then(record => {
+        res.json(record);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+}
+
 
 module.exports = recordsController;

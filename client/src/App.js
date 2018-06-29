@@ -79,6 +79,7 @@ class App extends Component {
       this.switchShowHeader = this.switchShowHeader.bind(this);
       this.showHeader = this.showHeader.bind(this);
       this.selectFromUserList = this.selectFromUserList.bind(this);
+      this.redirectToRecordPage = this.redirectToRecordPage.bind(this);
   }
 
   handleInputChange = (e) => {
@@ -910,6 +911,12 @@ class App extends Component {
     })
   }
 
+  redirectToRecordPage = () => {
+    this.setState({
+      admin_selection: "查找老客户"
+    })
+  }
+
   render() {
     return (
       <Router>
@@ -990,6 +997,7 @@ class App extends Component {
                                                           addGiftList = {this.addGiftList}
                                                           userList = {this.state.userList}
                                                           selectFromUserList = {this.selectFromUserList}
+                                                          redirectToRecordPage = {this.redirectToRecordPage}
                                                         />}/>
           <Footer auth = {this.state.auth}/>
         </div>

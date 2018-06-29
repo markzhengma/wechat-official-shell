@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 import CreateRecord from './CreateRecord';
 import BrowseAndExport from './BrowseAndExport';
+import RecentRecords from './RecentRecords';
 
 class AdminPage extends Component {
     constructor(){
@@ -240,6 +241,10 @@ class AdminPage extends Component {
             })
         }
     }
+    redirectToRecordPageAndSearch = (e, service_num) => {
+        this.props.redirectToRecordPage();
+        this.props.getRecordByService(e, service_num);
+    }
     render(){
         if(this.props.fireRedirect === true){
             return <Redirect to = {this.props.redirect}/>
@@ -254,12 +259,14 @@ class AdminPage extends Component {
                     {this.props.location === "总管理员" ?
                         <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
                             <option>查找老客户</option>
+                            <option>查看近期记录</option>
                             <option>管理基本信息</option>
                             <option>浏览和下载记录</option>
                         </select>
                         :
                         <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
                             <option>查找老客户</option>
+                            <option>查看近期记录</option>
                             <option>创建新客户</option>
                         </select>}
                 </div>
@@ -385,7 +392,7 @@ class AdminPage extends Component {
                                 </div>
                         : ""
                     : ""}
-                    {this.props.admin_selection === "查找老客户" ?
+                    {this.props.admin_selection === "查找老客户" && this.props.userData != null ?
                         <div className = "table-container">
                             <div className = "record-table-admin">
                                 <div className = "record-table-head-admin">
@@ -556,6 +563,9 @@ class AdminPage extends Component {
                             <input className = "newrecord-input" type = "text" name = "phone_num" placeholder = "联系方式" onChange = {this.handleInputChange} value = {this.state.phone_num}/>
                             <button className = "admin-page-btn" type = "submit">创建新客户</button>
                         </form>
+                    : ""}
+                    {this.props.admin_selection === "查看近期记录" ?
+                        <RecentRecords redirectToRecordPageAndSearch = {this.redirectToRecordPageAndSearch}/>
                     : ""}
                     {this.props.admin_selection === "管理基本信息" ?
                         <div>
