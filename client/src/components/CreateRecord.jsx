@@ -15,15 +15,7 @@ class CreateRecord extends Component {
             record_id: '',
         }
     }
-    handleInputChange = (e) => {
-        const name = e.target.name;
-        const value = e.target.value;
-        this.setState({
-            [name]: value,
-        });
-    }
-    submitAndClearState(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id){
-        this.props.handleNewRecordSubmit(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id);
+    componentWillUnmount(){
         this.setState({
             record_time: '',
             record_name: '',
@@ -33,6 +25,27 @@ class CreateRecord extends Component {
             record_detail: '', 
             record_id: '',
         })
+    }
+    handleInputChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        this.setState({
+            [name]: value,
+        });
+    }
+    submitAndClearState(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id){
+        this.props.handleNewRecordSubmit(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id);
+        if(this.state.record_time && this.state.record_name && this.state.record_milage && this.state.record_operator && this.state.record_gift && this.state.record_detail && this.state.record_id){
+            this.setState({
+                record_time: '',
+                record_name: '',
+                record_milage: '', 
+                record_operator: '', 
+                record_gift: '', 
+                record_detail: '', 
+                record_id: '',
+            })
+        }
     }
     render(){
         return (

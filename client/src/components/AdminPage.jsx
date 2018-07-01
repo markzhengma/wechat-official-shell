@@ -93,7 +93,7 @@ class AdminPage extends Component {
     }
     submitAndClearState = (e, service_num, make, plate, driver_name, phone_num) => {
         this.props.handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num);
-        if(this.state.service_num && this.state.make && this.state.plate && this.state.driver_name && this.state.phone_num){
+        if(service_num && make && plate && driver_name && phone_num){
             this.setState({
                 service_num: '',
                 make: '',
@@ -262,6 +262,7 @@ class AdminPage extends Component {
                             <option>查看近期记录</option>
                             <option>管理基本信息</option>
                             <option>浏览和下载记录</option>
+                            <option>创建新客户</option>
                         </select>
                         :
                         <select name = "admin_selection" className = "admin-select" onChange = {this.props.handleInputChange} value = {this.props.admin_selection}>
@@ -551,12 +552,25 @@ class AdminPage extends Component {
                     : ""}
                     
                     {this.props.admin_selection === "创建新客户" ?
-                        <form className = "create-form" onSubmit = {(e) => this.submitAndClearState(e, this.props.newServiceNum,
-                                                                                                                this.state.make,
-                                                                                                                this.state.plate,
-                                                                                                                this.state.driver_name,
-                                                                                                                this.state.phone_num)}>
-                            <input className = "newrecord-input" value = {this.props.newServiceNum} readOnly = {true}/>
+                        <form className = "create-form" onSubmit = {this.props.location === "总管理员" ? 
+                                (e) => this.submitAndClearState(e, 
+                                            this.state.service_num,
+                                            this.state.make,
+                                            this.state.plate,
+                                            this.state.driver_name,
+                                            this.state.phone_num)
+                                :
+                                (e) => this.submitAndClearState(e, 
+                                            this.props.newServiceNum,
+                                            this.state.make,
+                                            this.state.plate,
+                                            this.state.driver_name,
+                                            this.state.phone_num)}>
+                            {this.props.location === "总管理员" ? 
+                                <input className = "newrecord-input" name = "service_num" placeholder = "换油证号" onChange = {this.handleInputChange} value = {this.state.service_num}/>
+                                : 
+                                <input className = "newrecord-input" value = {this.props.newServiceNum} readOnly = {true}/>
+                            }
                             <input className = "newrecord-input" type = "text" name = "make" placeholder = "车型" onChange = {this.handleInputChange} value = {this.state.make}/>
                             <input className = "newrecord-input" type = 'text' name = 'plate' placeholder = "车牌号" onChange = {this.handleInputChange} value = {this.state.plate}/>
                             <input className = "newrecord-input" type = 'text' name = 'driver_name' placeholder = "车主姓名" onChange = {this.handleInputChange} value = {this.state.driver_name}/>

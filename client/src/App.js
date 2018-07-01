@@ -30,7 +30,7 @@ class App extends Component {
           phoneExists: true,
           createCompleted: null,
           location: '',
-          newServiceNum: null,
+          newServiceNum: '',
           serviceNum: null,
           admin_selection: '查找老客户',
           service_name_list: null,
@@ -417,11 +417,11 @@ class App extends Component {
       alert("请输入联系方式");
     }else{
       axios.post("/record/new-user", {
-        service_num: this.state.newServiceNum,
-        make: e.target.make.value,
-        plate: e.target.plate.value,
-        driver_name: e.target.driver_name.value,
-        phone_num: e.target.phone_num.value,
+        service_num: service_num,
+        make: make,
+        plate: plate,
+        driver_name: driver_name,
+        phone_num: phone_num,
       })
       .then(res => {
         console.log(res.data);
