@@ -5,8 +5,9 @@ class CreateRecord extends Component {
         super();
         var today = new Date();
         var month = ((today.getMonth() + 1) < 10) ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1);
+        var date = ((today.getDate() + 1) < 10) ? '0' + today.getDate() : today.getDate();
         this.state = {
-            record_time: today.getFullYear() + "-" + month + "-" + today.getDate(),
+            record_time: today.getFullYear() + "-" + month + "-" + date,
             record_name: '',
             record_milage: '', 
             record_operator: '', 
@@ -35,9 +36,12 @@ class CreateRecord extends Component {
     }
     submitAndClearState(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id){
         this.props.handleNewRecordSubmit(e, record_time, record_name, record_milage, record_operator, record_gift, record_detail, record_id);
-        if(this.state.record_time && this.state.record_name && this.state.record_milage && this.state.record_operator && this.state.record_gift && this.state.record_detail && this.state.record_id){
+        if(record_time && record_name && record_milage && record_operator && record_gift && record_detail && record_id){
+            var today = new Date();
+            var month = ((today.getMonth() + 1) < 10) ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1);
+            var date = ((today.getDate() + 1) < 10) ? '0' + today.getDate() : today.getDate();
             this.setState({
-                record_time: '',
+                record_time: today.getFullYear() + "-" + month + "-" + date,
                 record_name: '',
                 record_milage: '', 
                 record_operator: '', 
@@ -48,6 +52,9 @@ class CreateRecord extends Component {
         }
     }
     render(){
+        var today = new Date();
+        var month = ((today.getMonth() + 1) < 10) ? '0' + (today.getMonth() + 1) : (today.getMonth() + 1);
+        var date = ((today.getDate() + 1) < 10) ? '0' + today.getDate() : today.getDate();
         return (
             <form className = "create-record-form" onSubmit = {(e) => this.submitAndClearState(e, this.state.record_time, 
                                                                                                     this.state.record_name, 
