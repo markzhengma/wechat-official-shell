@@ -27,6 +27,7 @@ class Footer extends Component {
                     <a href = 'tel:+86-0470-6221541' className = "store-num">0470-6221541</a>
                     <b><a href = 'tel:+86-0470-7379457' className = "store-name">牙克石光明南路店：</a></b>
                     <a href = 'tel:+86-0470-7379457' className = "store-num">0470-7379457</a>
+                    <Link to = "/maps"><b className = "store-name">门店地址</b></Link>
                 </div>
                 <div className = "app-footer">
                     <button className = "footer-btn" onClick = {this.switchContactShow}>联系我们</button>

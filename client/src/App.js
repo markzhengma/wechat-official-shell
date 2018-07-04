@@ -13,6 +13,7 @@ import Home from './components/Home';
 import RecordList from './components/RecordList';
 import Login from './components/Login';
 import AdminPage from './components/AdminPage';
+import MapPage from './components/MapPage';
 
 class App extends Component {
   constructor(){
@@ -999,6 +1000,7 @@ class App extends Component {
                                                           selectFromUserList = {this.selectFromUserList}
                                                           redirectToRecordPage = {this.redirectToRecordPage}
                                                         />}/>
+          <Route exact path = "/maps" render = {() => <MapPage/>}/>
           <Footer auth = {this.state.auth}/>
         </div>
       </Router>

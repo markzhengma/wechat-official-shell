@@ -20,6 +20,7 @@ footer{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  z-index: 2;
 }
 .contact-box{
   position: absolute;
@@ -781,4 +782,50 @@ input:hover{
   align-content: center;
   width: 14vw;
   min-width: 100px;
+}
+.map-page{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.map-container{
+  width: 90vw;
+  height: 90vw;
+  margin-bottom: 80px;
+  margin-top: 20px;
+}
+.location-btn{
+  width: 95vw;
+  background-color: rgba(128, 128, 128, 0.685);
+  border-top: rgb(231, 188, 182) solid 2px;
+  color: #F9D148;
+  font-size: 20px;
+  cursor: pointer;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.location-btn:hover{
+  color: white;
+}
+.location-list{
+  width: 95vw;
+  max-height: 600px;
+  transition: max-height 0.5s;
+  overflow: hidden;
+  background-color: rgba(128, 128, 128, 0.685);
+  border-bottom: rgb(231, 188, 182) solid 2px;
+  position: absolute;
+  top: 40px;
+  z-index: 1;
+}
+.location-list-single{
+  cursor: pointer;
+  color: #F9D148;
+}
+.location-list-single:hover{
+  color: white;
 }
