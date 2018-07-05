@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {Map, Marker, NavigationControl, InfoWindow} from 'react-bmap';
 // import ReactQMap from 'react-qmap';
 
@@ -75,6 +76,7 @@ class MapPage extends Component {
                         <p>地址：牙克石光明南路民生B区26号楼9号门市</p>
                     </div>
                 : ""}
+                <Link to = "/"><button className = "admin-page-btn">返回首页</button></Link>
                 {this.state.location ? 
                     <div className = "map-container">
                         <Map center={this.state.location} zoom="17" style={{height: "100%", width: "100%"}}>

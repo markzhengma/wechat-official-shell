@@ -34,7 +34,7 @@ footer{
   flex-direction: column;
   align-items: flex-start;
   border: grey solid 0;
-  border-radius: 10px;
+  border-radius: 8px;
   transition: 0.5s;
 }
 .contact-box b{
@@ -848,4 +848,16 @@ input:hover{
 }
 .location-detail p{
   margin: 0;
+}
+.map-page-btn{
+  margin: 6px;
+  background-color: grey;
+  width: 100px;
+  height: 26px;
+  color: #F9D148;
+  font-size: 14px;
+  border-radius: 8px;
+}
+.map-page-btn:hover{
+  background-color: #E93224;
 }
