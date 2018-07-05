@@ -794,12 +794,13 @@ input:hover{
   width: 90vw;
   height: 90vw;
   margin-bottom: 80px;
-  margin-top: 20px;
+  margin-top: 5px;
 }
 .location-btn{
   width: 95vw;
   background-color: rgba(128, 128, 128, 0.685);
-  border-top: rgb(231, 188, 182) solid 2px;
+  box-sizing: border-box;
+  border-top: rgba(255, 255, 255, 0.664) solid 2px;
   color: #F9D148;
   font-size: 20px;
   cursor: pointer;
@@ -814,18 +815,37 @@ input:hover{
 .location-list{
   width: 95vw;
   max-height: 600px;
-  transition: max-height 0.5s;
+  transition: max-height 0.5s ease-in-out;
   overflow: hidden;
   background-color: rgba(128, 128, 128, 0.685);
-  border-bottom: rgb(231, 188, 182) solid 2px;
+  box-sizing: border-box;
+  border-bottom: rgba(255, 255, 255, 0.664) solid 2px;
   position: absolute;
   top: 40px;
   z-index: 1;
 }
 .location-list-single{
+  margin: 5px;
   cursor: pointer;
   color: #F9D148;
 }
 .location-list-single:hover{
   color: white;
+}
+.location-detail{
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90vw;
+  color: grey;
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.location-detail a{
+  text-decoration: none;
+  color: #E93224;
+}
+.location-detail p{
+  margin: 0;
 }
