@@ -125,7 +125,7 @@ Record.getNewM8 = () => {
     `)
 }
 Record.getNewY = () => {
-    return db.one(`
+    return db.query(`
         SELECT service_num
         FROM users
         WHERE service_num LIKE 'Y%'

@@ -115,6 +115,9 @@ recordsController.getNewHD = (req, res) => {
             if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
                 res.json("HD" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
                 break;
+            }else if(i === serviceNums.length - 1){
+                res.json("HD" + (padNumbers((parseInt(serviceNums[i].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
             }
         }
     })
@@ -134,6 +137,9 @@ recordsController.getNewH = (req, res) => {
         for(var i = 1; i < serviceNums.length; i ++){
             if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
                 res.json("H" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
+            }else if(i === serviceNums.length - 1){
+                res.json("H" + (padNumbers((parseInt(serviceNums[i].service_num.replace(/\D/g,'')) + 1), 4)));
                 break;
             }
         }
@@ -155,6 +161,9 @@ recordsController.getNewM = (req, res) => {
             if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
                 res.json("M" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
                 break;
+            }else if(i === serviceNums.length - 1){
+                res.json("M" + (padNumbers((parseInt(serviceNums[i].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
             }
         }
     })
@@ -166,14 +175,12 @@ recordsController.getNewM = (req, res) => {
 recordsController.getNewM8 = (req, res) => {
     Record.getNewM8()
     .then(serviceNums => {
-        function padNumbers(number, size){
-            var s = number + "";
-            while (s.length < size) s = "0" + s;
-            return s;
-          }
         for(var i = 1; i < serviceNums.length; i ++){
             if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
-                res.json("M8" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
+                res.json("M" + (parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1));
+                break;
+            }else if(i === serviceNums.length - 1){
+                res.json("M" + (parseInt(serviceNums[i].service_num.replace(/\D/g,'')) + 1));
                 break;
             }
         }
@@ -192,8 +199,11 @@ recordsController.getNewY = (req, res) => {
             return s;
           }
         for(var i = 1; i < serviceNums.length; i ++){
-            if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
+            if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1 && i < serviceNums.length - 1){
                 res.json("Y" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
+            }else if(i === serviceNums.length - 1){
+                res.json("Y" + (padNumbers((parseInt(serviceNums[i].service_num.replace(/\D/g,'')) + 1), 4)));
                 break;
             }
         }
