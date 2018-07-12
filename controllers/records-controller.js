@@ -105,8 +105,18 @@ recordsController.createUser = (req, res) => {
 
 recordsController.getNewHD = (req, res) => {
     Record.getNewHD()
-    .then(serviceNum => {
-        res.json(serviceNum);
+    .then(serviceNums => {
+        function padNumbers(number, size){
+            var s = number + "";
+            while (s.length < size) s = "0" + s;
+            return s;
+          }
+        for(var i = 1; i < serviceNums.length; i ++){
+            if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
+                res.json("HD" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
+            }
+        }
     })
     .catch(err => {
         console.log(err);
@@ -115,8 +125,18 @@ recordsController.getNewHD = (req, res) => {
 }
 recordsController.getNewH = (req, res) => {
     Record.getNewH()
-    .then(serviceNum => {
-        res.json(serviceNum);
+    .then(serviceNums => {
+        function padNumbers(number, size){
+            var s = number + "";
+            while (s.length < size) s = "0" + s;
+            return s;
+          }
+        for(var i = 1; i < serviceNums.length; i ++){
+            if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
+                res.json("H" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
+            }
+        }
     })
     .catch(err => {
         console.log(err);
@@ -125,8 +145,18 @@ recordsController.getNewH = (req, res) => {
 }
 recordsController.getNewM = (req, res) => {
     Record.getNewM()
-    .then(serviceNum => {
-        res.json(serviceNum);
+    .then(serviceNums => {
+        function padNumbers(number, size){
+            var s = number + "";
+            while (s.length < size) s = "0" + s;
+            return s;
+          }
+        for(var i = 1; i < serviceNums.length; i ++){
+            if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
+                res.json("M" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
+            }
+        }
     })
     .catch(err => {
         console.log(err);
@@ -135,8 +165,18 @@ recordsController.getNewM = (req, res) => {
 }
 recordsController.getNewM8 = (req, res) => {
     Record.getNewM8()
-    .then(serviceNum => {
-        res.json(serviceNum);
+    .then(serviceNums => {
+        function padNumbers(number, size){
+            var s = number + "";
+            while (s.length < size) s = "0" + s;
+            return s;
+          }
+        for(var i = 1; i < serviceNums.length; i ++){
+            if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
+                res.json("M8" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
+            }
+        }
     })
     .catch(err => {
         console.log(err);
@@ -145,8 +185,18 @@ recordsController.getNewM8 = (req, res) => {
 }
 recordsController.getNewY = (req, res) => {
     Record.getNewY()
-    .then(serviceNum => {
-        res.json(serviceNum);
+    .then(serviceNums => {
+        function padNumbers(number, size){
+            var s = number + "";
+            while (s.length < size) s = "0" + s;
+            return s;
+          }
+        for(var i = 1; i < serviceNums.length; i ++){
+            if(parseInt(serviceNums[i].service_num.replace(/\D/g,'')) - parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) != 1){
+                res.json("Y" + (padNumbers((parseInt(serviceNums[i-1].service_num.replace(/\D/g,'')) + 1), 4)));
+                break;
+            }
+        }
     })
     .catch(err => {
         console.log(err);

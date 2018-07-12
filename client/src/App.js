@@ -519,10 +519,10 @@ class App extends Component {
   getNewHD(){
     axios.get('/record/newhd')
     .then(res => {
-        var serviceNum = "HD" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
-        console.log(res.data.service_num);
+        // var serviceNum = "HD" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
+        console.log(res.data);
         this.setState({
-          newServiceNum: serviceNum,
+          newServiceNum: res.data,
         })
     })
     .catch(err => {
@@ -532,10 +532,10 @@ class App extends Component {
   getNewH(){
     axios.get('/record/newh')
     .then(res => {
-        var serviceNum = "H" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
-        console.log(res.data.service_num);
+        // var serviceNum = "H" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
+        console.log(res.data);
         this.setState({
-          newServiceNum: serviceNum,
+          newServiceNum: res.data,
         })
     })
     .catch(err => {
@@ -545,10 +545,10 @@ class App extends Component {
   getNewM(){
     axios.get('/record/newm')
     .then(res => {
-        var serviceNum = "M" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
-        console.log(res.data.service_num);
+        // var serviceNum = "M" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
+        console.log(res.data);
         this.setState({
-          newServiceNum: serviceNum,
+          newServiceNum: res.data,
         })
     })
     .catch(err => {
@@ -558,10 +558,10 @@ class App extends Component {
   getNewM8(){
     axios.get('/record/newm8')
     .then(res => {
-        var serviceNum = "M" + (parseInt(res.data.service_num.replace(/\D/g,'')) + 1);
-        console.log(res.data.service_num);
+        // var serviceNum = "M" + (parseInt(res.data.service_num.replace(/\D/g,'')) + 1);
+        console.log(res.data);
         this.setState({
-          newServiceNum: serviceNum,
+          newServiceNum: res.data,
         })
     })
     .catch(err => {
@@ -571,10 +571,10 @@ class App extends Component {
   getNewY(){
     axios.get('/record/newy')
     .then(res => {
-        var serviceNum = "Y" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
-        console.log(res.data.service_num);
+        // var serviceNum = "Y" + (this.padNumbers((parseInt(res.data.service_num.replace(/\D/g,'')) + 1), 4));
+        console.log(res.data);
         this.setState({
-          newServiceNum: serviceNum,
+          newServiceNum: res.data,
         })
     })
     .catch(err => {

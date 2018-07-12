@@ -91,41 +91,37 @@ Record.createUser = user => {
 }
 
 Record.getNewHD = () => {
-    return db.one(`
+    return db.query(`
         SELECT service_num
         FROM users
         WHERE service_num LIKE 'HD%'
-        ORDER BY service_num DESC
-        LIMIT 1;
+        ORDER BY service_num ASC;
     `)
 }
 Record.getNewH = () => {
-    return db.one(`
+    return db.query(`
         SELECT service_num
         FROM users
         WHERE service_num LIKE 'H%'
         AND service_num NOT LIKE 'HD%'
-        ORDER BY service_num DESC
-        LIMIT 1;
+        ORDER BY service_num ASC;
     `)
 }
 Record.getNewM = () => {
-    return db.one(`
+    return db.query(`
         SELECT service_num
         FROM users
         WHERE service_num LIKE 'M%'
         AND service_num NOT LIKE 'M8%'
-        ORDER BY service_num DESC
-        LIMIT 1;
+        ORDER BY service_num ASC;
     `)
 }
 Record.getNewM8 = () => {
-    return db.one(`
+    return db.query(`
         SELECT service_num
         FROM users
         WHERE service_num LIKE 'M8%'
-        ORDER BY service_num DESC
-        LIMIT 1;
+        ORDER BY service_num ASC;
     `)
 }
 Record.getNewY = () => {
@@ -133,8 +129,7 @@ Record.getNewY = () => {
         SELECT service_num
         FROM users
         WHERE service_num LIKE 'Y%'
-        ORDER BY service_num DESC
-        LIMIT 1;
+        ORDER BY service_num ASC;
     `)
 }
 Record.updateUser = (make, plate, driver_name, phone_num, id) => {
