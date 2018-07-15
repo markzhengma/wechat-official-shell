@@ -129,7 +129,7 @@ class AdminPage extends Component {
     }
     completeUserUpdate = (e, updateMake, updatePlate, updateDriverName, updatePhone, updatePoint, selectUserId) => {
         this.props.updateUser(e, updateMake, updatePlate, updateDriverName, updatePhone, updatePoint, selectUserId);
-        if(this.state.updateMake && this.state.updatePlate && this.state.updateDriverName && this.state.updatePhone && updatePoint != ''){
+        if(this.state.updateMake && this.state.updatePlate && this.state.updateDriverName && this.state.updatePhone && updatePoint){
             this.setState({
                 selectUserId: '',
                 updateMake: '',
