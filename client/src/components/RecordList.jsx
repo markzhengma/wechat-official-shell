@@ -26,10 +26,7 @@ class RecordList extends Component {
                         {this.props.userData ? 
                             <div className = "record-title">
                                 <div className = "user-info-table"  style = {this.state.isShowRecord ? {maxHeight: '0px'}: {maxHeight: '300px'}}>
-                                    <div className = "user-info-title">
-                                        <div><h4>欢迎 {this.props.userData.driver_name}</h4></div>
-                                        <div>积分：{this.props.userData.point ? this.props.userData.point : "无记录"}</div>
-                                    </div>
+                                    <h4>欢迎 {this.props.userData.driver_name}</h4>
                                     <div className = "user-info-head">
                                         <div className = "user-info-head-single">
                                             车牌号码

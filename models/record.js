@@ -80,7 +80,7 @@ Record.createUser = user => {
             plate,
             driver_name,
             phone_num,
-            point
+            detail
         )
         VALUES($1, $2, $3, $4, $5, $6)
         RETURNING *
@@ -89,7 +89,7 @@ Record.createUser = user => {
         user.plate, 
         user.driver_name, 
         user.phone_num,
-        user.point])
+        user.detail])
 }
 
 Record.getNewHD = () => {
@@ -134,17 +134,17 @@ Record.getNewY = () => {
         ORDER BY service_num ASC;
     `)
 }
-Record.updateUser = (make, plate, driver_name, phone_num, point, id) => {
+Record.updateUser = (make, plate, driver_name, phone_num, detail, id) => {
     return db.one(`
         UPDATE users SET
         make = $1,
         plate = $2,
         driver_name = $3,
         phone_num = $4,
-        point = $5
+        detail = $5
         WHERE id = $6
         RETURNING *
-    `, [make, plate, driver_name, phone_num, point, id]);
+    `, [make, plate, driver_name, phone_num, detail, id]);
 }
 Record.updateRecord = (record_time, record_name, record_milage, record_operator, record_gift, record_detail, id) => {
     return db.one(`

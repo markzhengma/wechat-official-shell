@@ -406,7 +406,7 @@ class App extends Component {
     }
   }
 
-  handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num, point){
+  handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num, detail){
     e.preventDefault();
     if(!e.target.make.value){
       alert("请输入车型");
@@ -416,8 +416,6 @@ class App extends Component {
       alert("请输入车主姓名");
     }else if(!e.target.phone_num.value){
       alert("请输入联系方式");
-    }else if(!point){
-      alert("请输入积分备注");
     }else{
       axios.post("/record/new-user", {
         service_num: service_num,
@@ -425,7 +423,7 @@ class App extends Component {
         plate: plate,
         driver_name: driver_name,
         phone_num: phone_num,
-        point: point
+        detail: detail
       })
       .then(res => {
         console.log(res.data);
@@ -585,7 +583,7 @@ class App extends Component {
     })
   }
 
-  updateUser = (e, make, plate, driver_name, phone_num, point, id) => {
+  updateUser = (e, make, plate, driver_name, phone_num, detail, id) => {
     e.preventDefault();
     if(!make){
       alert("请输入车型");
@@ -595,15 +593,15 @@ class App extends Component {
       alert("请输入车主姓名");
     }else if(!phone_num){
       alert("请输入联系方式");
-    }else if(!point){
-      alert("请输入积分备注");
+    }else if(!detail){
+      alert("请输入备注");
     }else{
       axios.put(`/record/update/user/${id}`, {
         make: make,
         plate: plate,
         driver_name: driver_name,
         phone_num: phone_num,
-        point: point
+        detail: detail
       })
       .then(res => {
         console.log(res.data);
