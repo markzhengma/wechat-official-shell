@@ -17,6 +17,7 @@ class AdminPage extends Component {
             plate: '',
             driver_name: '',
             phone_num: '',
+            point: '',
             search_name: '',
             search_phone: '',
             search_plate: '',
@@ -28,6 +29,7 @@ class AdminPage extends Component {
             updatePlate: '',
             updateDriverName: '',
             updatePhone: '',
+            updatePoint: '',
             updateDate: '',
             updateRecordName: '',
             updateMilage: '',
@@ -91,15 +93,20 @@ class AdminPage extends Component {
     logOut = () => {
         this.props.setAuthState(false);
     }
-    submitAndClearState = (e, service_num, make, plate, driver_name, phone_num) => {
-        this.props.handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num);
-        if(service_num && make && plate && driver_name && phone_num){
+    submitAndClearState = (e, service_num, make, plate, driver_name, phone_num, point) => {
+        if(point != ''){
+            this.props.handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num, point);
+        }else{
+            this.props.handleNewUserSubmit(e, service_num, make, plate, driver_name, phone_num, "0");
+        }
+        if(service_num && make && plate && driver_name && phone_num && point){
             this.setState({
                 service_num: '',
                 make: '',
                 plate: '',
                 driver_name: '',
                 phone_num: '',
+                point: '',
                 admin_selection: "查找老客户",
             });
         }
@@ -109,7 +116,7 @@ class AdminPage extends Component {
             isInputNew: !this.state.isInputNew,
         })
     }
-    selectUserUpdate = (id, make, plate, name, phone) => {
+    selectUserUpdate = (id, make, plate, name, phone, point) => {
         this.setState({
             isUserUpdating: true,
             selectUserId: id,
@@ -117,17 +124,19 @@ class AdminPage extends Component {
             updatePlate: plate,
             updateDriverName: name,
             updatePhone: phone,
+            updatePoint: point
         })
     }
-    completeUserUpdate = (e, updateMake, updatePlate, updateDriverName, updatePhone, selectUserId) => {
-        this.props.updateUser(e, updateMake, updatePlate, updateDriverName, updatePhone, selectUserId);
-        if(this.state.updateMake && this.state.updatePlate && this.state.updateDriverName && this.state.updatePhone){
+    completeUserUpdate = (e, updateMake, updatePlate, updateDriverName, updatePhone, updatePoint, selectUserId) => {
+        this.props.updateUser(e, updateMake, updatePlate, updateDriverName, updatePhone, updatePoint, selectUserId);
+        if(this.state.updateMake && this.state.updatePlate && this.state.updateDriverName && this.state.updatePhone && updatePoint != ''){
             this.setState({
                 selectUserId: '',
                 updateMake: '',
                 updatePlate: '',
                 updateDriverName: '',
                 updatePhone: '',
+                updatePoint: '',
                 isUserUpdating: false,
             })
         }
@@ -321,6 +330,7 @@ class AdminPage extends Component {
                                     <div className = "user-list-head-single">车牌号码</div>
                                     <div className = "user-list-head-single">车主姓名</div>
                                     <div className = "user-list-head-single">联系方式</div>
+                                    <div className = "user-list-head-single">积分备注</div>
                                 </div>
                                 {this.props.userList.map(user => {
                                     return(
@@ -330,6 +340,7 @@ class AdminPage extends Component {
                                             <div className = "user-list-detail-single">{user.plate ? user.plate : "无记录"}</div>
                                             <div className = "user-list-detail-single">{user.driver_name ? user.driver_name : "无记录"}</div>
                                             <div className = "user-list-detail-single">{user.phone_num ? user.phone_num : "无记录"}</div>
+                                            <div className = "user-list-detail-single">{user.point? user.point: "无记录"}</div>
                                         </div>
                                     )
                                 })}
@@ -346,7 +357,7 @@ class AdminPage extends Component {
                                             <div className = "record-table-head-single-admin">车牌号码</div>
                                             <div className = "record-table-head-single-admin">车主姓名</div>
                                             <div className = "record-table-head-single-admin">联系方式</div>
-                                            <div className = "record-table-head-single-admin"/>
+                                            <div className = "record-table-head-single-admin">积分备注</div>
                                             <div className = "record-table-head-single-admin">编辑</div>
                                         </div>
                                         {this.state.selectUserId !== this.props.userData.id ?
@@ -356,7 +367,7 @@ class AdminPage extends Component {
                                                 <div className = "record-single-detail-admin">{this.props.userData.plate ? this.props.userData.plate : "无记录"}</div>
                                                 <div className = "record-single-detail-admin">{this.props.userData.driver_name ? this.props.userData.driver_name : "无记录"}</div>
                                                 <div className = "record-single-detail-admin">{this.props.userData.phone_num ? this.props.userData.phone_num : "无记录"}</div>
-                                                <div className = "record-single-detail-admin"/>
+                                                <div className = "record-single-detail-admin">{this.props.userData.point ? this.props.userData.point : "无记录"}</div>
                                                 {!this.state.isUserUpdating ? 
                                                     <div className = "record-single-detail-admin">
                                                         <button className = "admin-edit-btn" onClick = {() => this.selectUserUpdate(this.props.userData.id,
@@ -364,6 +375,7 @@ class AdminPage extends Component {
                                                                                                                                         this.props.userData.plate,
                                                                                                                                         this.props.userData.driver_name,
                                                                                                                                         this.props.userData.phone_num,
+                                                                                                                                        this.props.userData.point,
                                                                                                                                     )}/>
                                                         {this.props.recordData === null || this.props.recordData.length < 1 ?
                                                             <button className = "admin-delete-btn" onClick = {() => this.props.deleteUser(this.props.userData.id)}/>
@@ -376,6 +388,7 @@ class AdminPage extends Component {
                                                                                                 this.state.updatePlate,
                                                                                                 this.state.updateDriverName,
                                                                                                 this.state.updatePhone,
+                                                                                                this.state.updatePoint,
                                                                                                 this.state.selectUserId
                                                                                             )}>
                                                 <div className = "record-single-admin">
@@ -384,7 +397,7 @@ class AdminPage extends Component {
                                                     <input className = "record-single-detail-admin-edit" name = "updatePlate" defaultValue = {this.state.updatePlate} onChange = {this.handleInputChange}/>
                                                     <input className = "record-single-detail-admin-edit" name = "updateDriverName" defaultValue = {this.state.updateDriverName} onChange = {this.handleInputChange}/>
                                                     <input className = "record-single-detail-admin-edit" name = "updatePhone" defaultValue = {this.state.updatePhone} onChange = {this.handleInputChange}/>
-                                                    <div className = "record-single-detail-admin"/>
+                                                    <input className = "record-single-detail-admin-edit" name = "updatePoint" type = "number" defaultValue = {this.state.updatePoint} onChange = {this.handleInputChange}/>
                                                     <div className = "record-single-detail-admin"><button className = "form-btn" type = "submit">确定</button></div>
                                                 </div>
                                             </form>
@@ -558,14 +571,16 @@ class AdminPage extends Component {
                                             this.state.make,
                                             this.state.plate,
                                             this.state.driver_name,
-                                            this.state.phone_num)
+                                            this.state.phone_num,
+                                            this.state.point)
                                 :
                                 (e) => this.submitAndClearState(e, 
                                             this.props.newServiceNum,
                                             this.state.make,
                                             this.state.plate,
                                             this.state.driver_name,
-                                            this.state.phone_num)}>
+                                            this.state.phone_num,
+                                            this.state.point)}>
                             {this.props.location === "总管理员" ? 
                                 <input className = "newrecord-input" name = "service_num" placeholder = "换油证号" onChange = {this.handleInputChange} value = {this.state.service_num}/>
                                 : 
@@ -575,6 +590,7 @@ class AdminPage extends Component {
                             <input className = "newrecord-input" type = 'text' name = 'plate' placeholder = "车牌号" onChange = {this.handleInputChange} value = {this.state.plate}/>
                             <input className = "newrecord-input" type = 'text' name = 'driver_name' placeholder = "车主姓名" onChange = {this.handleInputChange} value = {this.state.driver_name}/>
                             <input className = "newrecord-input" type = "text" name = "phone_num" placeholder = "联系方式" onChange = {this.handleInputChange} value = {this.state.phone_num}/>
+                            <input className = "newrecord-input" type = "number" name = "point" placeholder = "积分备注" onChange = {this.handleInputChange} value = {this.state.point}/>
                             <button className = "admin-page-btn" type = "submit">创建新客户</button>
                         </form>
                     : ""}

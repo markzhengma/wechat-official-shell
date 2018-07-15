@@ -93,6 +93,7 @@ recordsController.createUser = (req, res) => {
         plate:req.body.plate,
         driver_name:req.body.driver_name,
         phone_num:req.body.phone_num,
+        point:req.body.point
     })
     .then(user => {
         res.json(user);
@@ -214,7 +215,7 @@ recordsController.getNewY = (req, res) => {
     })
 }
 recordsController.updateUser = (req, res) => {
-    Record.updateUser(req.body.make, req.body.plate, req.body.driver_name, req.body.phone_num, req.params.id)
+    Record.updateUser(req.body.make, req.body.plate, req.body.driver_name, req.body.phone_num, req.body.point, req.params.id)
     .then(user => {
         res.json(user);
     })
