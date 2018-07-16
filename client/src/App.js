@@ -593,8 +593,6 @@ class App extends Component {
       alert("请输入车主姓名");
     }else if(!phone_num){
       alert("请输入联系方式");
-    }else if(!detail){
-      alert("请输入备注");
     }else{
       axios.put(`/record/update/user/${id}`, {
         make: make,
