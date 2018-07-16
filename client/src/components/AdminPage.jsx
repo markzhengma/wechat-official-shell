@@ -411,7 +411,7 @@ class AdminPage extends Component {
                                     <div className = "record-table-head-single-admin">表示<br/>里程</div>
                                     <div className = "record-table-head-single-admin">操作人</div>
                                     <div className = "record-table-head-single-admin">赠品<br/>情况</div>
-                                    <div className = "record-table-head-single-admin">积分备注</div>
+                                    <div className = "record-table-head-single-admin">积分<br/>备注</div>
                                     <div className = "record-table-head-single-admin">编辑</div>
                                 </div>
                                 {this.props.admin_selection === "查找老客户" && this.props.userData != null ?
