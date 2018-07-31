@@ -5,6 +5,10 @@ class Home extends Component {
     componentDidMount(){
         this.props.resetRedirect();
     }
+    // componentWillUpdate(nextProps, nextState){
+    //     localStorage.setItem("phone_num", this.props.phone_num);
+    //     alert( "号码：" + localStorage.getItem("phone_num"));
+    // }
     render(){
         if(this.props.fireRedirect === true){
             return <Redirect to = {this.props.redirect}/>

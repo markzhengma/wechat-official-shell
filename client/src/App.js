@@ -83,6 +83,15 @@ class App extends Component {
       this.redirectToRecordPage = this.redirectToRecordPage.bind(this);
   }
 
+  componentWillMount() {
+    if(localStorage.getItem("phone_num") && localStorage.getItem("plate")){
+      this.setState({
+        phone_num: localStorage.getItem("phone_num"),
+        plate: localStorage.getItem("plate")
+      })
+    }
+  }
+
   handleInputChange = (e) => {
       const name = e.target.name;
       const value = e.target.value;
@@ -94,6 +103,8 @@ class App extends Component {
   submitForm = (e) => {
     e.preventDefault();
     this.getRecord(this.state.phone_num, this.state.plate);
+    localStorage.setItem("phone_num", this.state.phone_num);
+    localStorage.setItem("plate", this.state.plate);
   }
 
   resetRedirect = () => {
