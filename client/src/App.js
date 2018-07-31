@@ -102,9 +102,9 @@ class App extends Component {
 
   submitForm = (e) => {
     e.preventDefault();
-    this.getRecord(this.state.phone_num, this.state.plate);
+    this.getRecord(this.state.phone_num, this.state.plate.toUpperCase());
     localStorage.setItem("phone_num", this.state.phone_num);
-    localStorage.setItem("plate", this.state.plate);
+    localStorage.setItem("plate", this.state.plate.toUpperCase());
   }
 
   resetRedirect = () => {

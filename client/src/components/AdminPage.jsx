@@ -310,7 +310,7 @@ class AdminPage extends Component {
                     : ""}
                     {this.props.admin_selection === "查找老客户" ?
                         this.state.search_selection === "使用车牌号查找" ?
-                        <form className = "search-form" onSubmit ={(e) => this.props.getRecordByPlate(e, this.state.search_plate)}>
+                        <form className = "search-form" onSubmit ={(e) => this.props.getRecordByPlate(e, this.state.search_plate.toUpperCase())}>
                             <input name = "search_plate" placeholder = "请输入车牌号" onChange = {this.handleInputChange}/>
                             <button className = "admin-page-btn" type = "submit">查找</button>
                         </form>
