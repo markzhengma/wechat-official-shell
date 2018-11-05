@@ -40,6 +40,7 @@ class MapPage extends Component {
                     <p className = "location-list-single" onClick = {() => this.setLocation({lng: 117.503674, lat: 49.58917}, "满洲里粮库综合楼店")}>满洲里粮库综合楼店</p>
                     <b>牙克石</b>
                     <p className = "location-list-single" onClick = {() => this.setLocation({lng: 120.718067, lat: 49.285365}, "牙克石光明南路店")}>牙克石光明南路店</p>
+                    <p className = "location-list-single" onClick = {() => this.setLocation({lng: 120.723473, lat: 49.285071}, "牙克石一道街店")}>牙克石一道街店</p>
                 </div>
                 {this.state.name === "海拉尔河东店" ? 
                     <div className = "location-detail" style = {this.state.isShowList ? {opacity: 0} : {opacity: 1}}>
@@ -74,6 +75,13 @@ class MapPage extends Component {
                         <b>牙克石光明南路店</b>
                         <a href = 'tel:+86-0470-7379457'>联系电话：0470-7379457</a>
                         <p>地址：牙克石光明南路民生B区26号楼9号门市</p>
+                    </div>
+                : ""}
+                {this.state.name === "牙克石一道街店" ? 
+                    <div className = "location-detail" style = {this.state.isShowList ? {opacity: 0} : {opacity: 1}}>
+                        <b>牙克石一道街店</b>
+                        <a href = 'tel:+86-13088520439'>联系电话：130 8852 0439</a>
+                        <p>地址：牙克石市一道街西润泽园小区门市（原铁路中学）</p>
                     </div>
                 : ""}
                 <Link to = "/"><button className = "admin-page-btn">返回首页</button></Link>
