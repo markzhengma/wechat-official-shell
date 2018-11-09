@@ -40,7 +40,7 @@ class MapPage extends Component {
                     <p className = "location-list-single" onClick = {() => this.setLocation({lng: 117.503674, lat: 49.58917}, "满洲里粮库综合楼店")}>满洲里粮库综合楼店</p>
                     <b>牙克石</b>
                     <p className = "location-list-single" onClick = {() => this.setLocation({lng: 120.718067, lat: 49.285365}, "牙克石光明南路店")}>牙克石光明南路店</p>
-                    <p className = "location-list-single" onClick = {() => this.setLocation({lng: 120.723473, lat: 49.285071}, "牙克石一道街店")}>牙克石一道街店</p>
+                    <p className = "location-list-single" onClick = {() => this.setLocation({lng: 120.726413, lat: 49.285677}, "牙克石一道街店")}>牙克石一道街店</p>
                 </div>
                 {this.state.name === "海拉尔河东店" ? 
                     <div className = "location-detail" style = {this.state.isShowList ? {opacity: 0} : {opacity: 1}}>
