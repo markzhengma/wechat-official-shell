@@ -60,11 +60,13 @@ footer div{
   margin: 10px;
 }
 .footer-btn{
-  width: 100px;
+  min-width: 100px;
+  width: fit-content;
   background-color: #FBE18D;
   border-radius: 8px;
   border-width: 4px;
-  height: 30px;
+  min-height: 30px;
+  height: fit-content;
   font-size: 14px;
 }
 .footer-btn:hover{
@@ -114,11 +116,14 @@ input:hover{
   font-size: 16px;
 }
 .home-content form button{
-  width: 100px;
+  min-width: 100px;
+  width: fit-content;
   background-color: #FBE18D;
-  height: 40px;
+  min-height: 40px;
+  height: fit-content;
   font-size: 16px;
   border-radius: 8px;
+  border-width: 4px;
 }
 .home-content form button:hover{
   background-color: #E93224;
@@ -189,11 +194,13 @@ input:hover{
   height: 50px;
 }
 .back-btn{
-  width: 100px;
+  min-width: 100px;
+  width: fit-content;
   background-color: #FBE18D;
   border-radius: 8px;
   border-width: 4px;
-  height: 40px;
+  min-height: 40px;
+  height: fit-content;
   font-size: 16px;
 }
 .back-btn:hover{
@@ -216,11 +223,13 @@ input:hover{
   text-align: center;
 }
 .login-btn{
-  width: 100px;
+  min-width: 100px;
+  width: fit-content;
   background-color: #FBE18D;
   border-radius: 8px;
   border-width: 4px;
-  height: 30px;
+  min-height: 30px;
+  height: fit-content;
   font-size: 12px;
 }
 .login-btn:hover{
