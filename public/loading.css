@@ -1,0 +1,54 @@
+body{
+    margin: 0;
+}
+.loading-page{
+    text-align: center;
+    background-color: #F9D148;
+    height: 100vh;
+    color: #E93224;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loading-header{
+    height: fit-content;
+    max-height: 300px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+.loading-logo{
+    height: 80px;
+    width: 80px;
+    background: url('./shell_logo.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    /* animation-direction: alternate; */
+    transition: linear all;
+}
+@keyframes shrink-enlarge{
+    from{
+        background-size: 100%;
+    }
+    to{
+        background-size: 5%;
+    }
+}
+@keyframes spin{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
