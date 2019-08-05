@@ -40,7 +40,8 @@ class RecentRecords extends Component {
             <div className = "recent-record-box">
                 <select className = "admin-select" name = "recordSelection" value = {this.state.recordSelection} onChange = {this.handleInputChange}>
                     <option value = "">-请选择门店地区-</option>
-                    <option value = "H">海拉尔</option>
+                    <option value = "HD">海拉尔河东</option>
+                    <option value = "H">海拉尔河西</option>
                     <option value = "M">满洲里</option>
                     <option value = "Y">牙克石</option>
                 </select>

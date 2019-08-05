@@ -182,12 +182,22 @@ Record.getRecordBetweenDates = (start_date, end_date, location_char) => {
 }
 
 Record.getRecentRecords = (location_char) => {
-    return db.any(`
-        SELECT * from users_records
-        WHERE record_id LIKE $1
-        ORDER BY id DESC
-        LIMIT 10
-    `, [location_char])
+    if(location_char != 'H%'){
+        return db.any(`
+            SELECT * from users_records
+            WHERE record_id LIKE $1
+            ORDER BY id DESC
+            LIMIT 10
+        `, [location_char])
+    }else{
+        return db.any(`
+            SELECT * from users_records
+            WHERE record_id LIKE $1
+            AND record_id NOT LIKE 'HD%'
+            ORDER BY id DESC
+            LIMIT 10
+        `, [location_char])
+    }
 }
 
 module.exports = Record;
