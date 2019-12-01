@@ -102,6 +102,7 @@ class BrowseAndExport extends Component {
             {label: '表示里程', key: 'record_milage'},
             {label: '操作人', key: 'record_operator'},
             {label: '赠品情况', key: 'record_gift'},
+            {label: '积分备注', key: 'record_detail'},
             {label: '换油证号', key: 'record_id'}
         ];
         const userHeaders = [
