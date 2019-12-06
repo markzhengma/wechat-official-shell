@@ -96,22 +96,23 @@ class BrowseAndExport extends Component {
     }
     render(){
         const recordHeaders = [
-            {label: '序号', key: 'id'},
-            {label: '日期', key: 'record_time'},
-            {label: '产品名称', key: 'record_name'},
-            {label: '表示里程', key: 'record_milage'},
-            {label: '操作人', key: 'record_operator'},
-            {label: '赠品情况', key: 'record_gift'},
-            {label: '积分备注', key: 'record_detail'},
-            {label: '换油证号', key: 'record_id'}
+            {label: 'webid', key: 'id'},
+            {label: 'date', key: 'record_time'},
+            {label: 'product_name', key: 'record_name'},
+            {label: 'milage', key: 'record_milage'},
+            {label: 'operator', key: 'record_operator'},
+            {label: 'gift', key: 'record_gift'},
+            {label: 'detail', key: 'record_detail'},
+            {label: 'record_num', key: 'record_id'}
         ];
         const userHeaders = [
-            {label: '序号', key: 'id'},
-            {label: '换油证号', key: 'service_num'},
-            {label: '车型', key: 'make'},
-            {label: '车牌号码', key: 'plate'},
-            {label: '车主姓名', key: 'driver_name'},
-            {label: '联系方式', key: 'phone_num'}
+            {label: 'id', key: 'id'},
+            {label: 'record_num', key: 'service_num'},
+            {label: 'make', key: 'make'},
+            {label: 'plate', key: 'plate'},
+            {label: 'user_name', key: 'driver_name'},
+            {label: 'phone', key: 'phone_num'},
+            {label: 'detail', key: 'detail'}
         ];
 
         const recordData = this.state.dataToBeExported;
@@ -144,6 +145,7 @@ class BrowseAndExport extends Component {
                                     <div className = "record-table-head-single-admin">车牌号码</div>
                                     <div className = "record-table-head-single-admin">车主姓名</div>
                                     <div className = "record-table-head-single-admin">联系方式</div>
+                                    <div className = "record-table-head-single-admin">备注</div>
                                 </div>
                                 {this.state.userToBeExported.map(user => {
                                     if(this.state.userToBeExported.indexOf(user) >= (this.state.userToBeExported.length - 11))
@@ -154,6 +156,7 @@ class BrowseAndExport extends Component {
                                             <div className = "browse-single-detail">{user.plate}</div>
                                             <div className = "browse-single-detail">{user.driver_name}</div>
                                             <div className = "browse-single-detail">{user.phone_num}</div>
+                                            <div className = "browse-single-detail">{user.detail}</div>
                                         </div>
                                     );
                                     else
