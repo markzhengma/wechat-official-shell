@@ -34,7 +34,7 @@ Record.findUserByService = service_num => {
 Record.findUserByLocation = location_char => {
     return db.query(`
         SELECT 
-        id, service_num, make, plate, driver_name, phone_num
+        id, service_num, make, plate, driver_name, phone_num, detail
         FROM users
         WHERE service_num LIKE $1
         ORDER BY service_num
